@@ -1,0 +1,31 @@
+export var OPERATION;
+(function (OPERATION) {
+  OPERATION["ADD"] = "add";
+  OPERATION["DISPLAY"] = "display";
+  OPERATION["EDIT"] = "edit";
+})(OPERATION || (OPERATION = {}));
+export var FORMTYPE;
+(function (FORMTYPE) {
+  FORMTYPE["CASCADER"] = "CASCADER";
+  FORMTYPE["CYCLESELECT"] = "cycleSelect";
+  FORMTYPE["CRON"] = "cron";
+  FORMTYPE["DATERANGE"] = "dataRange";
+  FORMTYPE["EXCEPTION"] = "exception";
+  FORMTYPE["INPUT"] = "input";
+  FORMTYPE["JSON"] = "json";
+  FORMTYPE["MODEL"] = "selectModel";
+  FORMTYPE["METRIC"] = "selectMetric";
+  FORMTYPE["RADIO"] = "radio";
+  FORMTYPE["SEARCHINPUT"] = "searchInput";
+  FORMTYPE["SELECT"] = "select";
+  FORMTYPE["SWITCH"] = "switch";
+  FORMTYPE["TAGLIST"] = "tagList";
+  FORMTYPE["TEXTAREA"] = "textArea";
+  FORMTYPE["TIMERANGE"] = "timeRange";
+  FORMTYPE["TIMESELECT"] = "timeSelect";
+  FORMTYPE["UPLOAD"] = "uplaod";
+  FORMTYPE["INSPECTION"] = "inspection";
+  FORMTYPE["STRATEGY"] = "strategy";
+  FORMTYPE["TEMPLATE"] = "template";
+  FORMTYPE["RULETEMPLATE"] = "ruleTemplate";
+})(FORMTYPE || (FORMTYPE = {}));
