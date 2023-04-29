@@ -1,7 +1,16 @@
+---
+nav:
+  title: 组件
+title: ETable 表格
+path: /components
+group: 基础组件
+---
 ```jsx
-import { RaeTable } from 'raetable';
+import { ETable } from 'raetable';
 
-export default () => <RaeTable title="Hello dumi!" />
+export default () => <ETable affairName="Hello dumi!" />
 ```
-This is an RaeTable component.
+This is an ETable component.
+
+<API id="ETable"></API>
 

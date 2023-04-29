@@ -3,18 +3,18 @@ hero:
   title: RAETable
   description: react antd easy table
   actions:
-    - text: Hello
-      link: /
-    - text: World
-      link: /
+    - text: 快速开始
+      link: /components/rae-table
+    - text: 示例
+      link: /components/rae-table
 features:
-  - title: Hello
+  - title: 继承性配置
     emoji: 💎
-    description: Put hello description here
-  - title: World
+    description: 所有配置项继承自antd
+  - title: 简易开发
     emoji: 🌈
-    description: Put world description here
-  - title: '!'
+    description: 降低开发成本
+  - title: '开箱即用'
     emoji: 🚀
-    description: Put ! description here
+    description: 开箱即用
 ---
