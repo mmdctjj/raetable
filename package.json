@@ -15,7 +15,8 @@
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "prepublishOnly": "father doctor && npm run build"
+    "prepublishOnly": "father doctor && npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "authors": [],
   "license": "MIT",
@@ -64,6 +65,7 @@
     "dumi": "^2.1.22",
     "eslint": "^8.39.0",
     "father": "^4.2.0",
+    "gh-pages": "^5.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
