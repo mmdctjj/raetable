@@ -13,7 +13,7 @@ export interface SelectProps {
 	children?: SelectProps[]
 }
 
-export type RaeTableColumnProps<T> = ColumnType<T> & {
+export type ETableColumnProps<T> = ColumnType<T> & {
 	hiddenInTable?: boolean,
 	copyed?: boolean,
 	conditionType?: string,
@@ -29,10 +29,10 @@ export type RaeTableColumnProps<T> = ColumnType<T> & {
 	formatOptions?: (data: any[]) => SelectProps[]
 }
 
-export interface RaeTableProps<Record> {
+export interface ETableProps<Record> {
 	affairName: string | undefined
 	affairWidth?: number
-	columns: RaeTableColumnProps<Record>[],
+	columns: ETableColumnProps<Record>[],
 	dataSource?: Record[]
 	addLoading?: boolean,
 	deleteLoading?: boolean,

@@ -7,9 +7,26 @@ title: EAnimation 动画
 path: /components
 group: 基础组件
 ---
+### 基础用法
 ```jsx
 /**
- * title: 从底部进入
+ * title: EAnimation组件
+ * description: EAnimation 组件是包装组件，可以使用`direction`属性定义方向，默认为`BT`，底层组件为`BottomToTop`，其余可选值为`LR`（`LeftToRight`组件）、`RL`（`RightToLeft`组件）
+ */
+import { EAnimation } from 'raetable';
+import { Button, Space } from 'antd'
+
+export default () => <Space>
+  {
+    new Array(5).fill(null).map((_, idx) => <EAnimation key={idx} index={idx}>
+      <Button>btn{idx + 1}</Button>
+    </EAnimation>)
+  }
+</Space>
+```
+```jsx
+/**
+ * title: BottomToTop
  */
 import { BottomToTop } from 'raetable';
 import { Button, Space } from 'antd'
@@ -24,7 +41,7 @@ export default () => <Space>
 ```
 ```jsx
 /**
- * title: 从右边进入
+ * title: RightToLeft
  */
 import { RightToLeft } from 'raetable';
 import { Button, Row, Space } from 'antd'
@@ -39,7 +56,7 @@ export default () => <Row justify="end"><Space>
 ```
 ```jsx
 /**
- * title: 从左边进入
+ * title: LeftToRight
  */
 import { LeftToRight } from 'raetable';
 import { Button, Row, Space } from 'antd'
@@ -52,6 +69,6 @@ export default () => <Space>
   }
 </Space>
 ```
-
+### API
 <API id="EForm"></API>
 

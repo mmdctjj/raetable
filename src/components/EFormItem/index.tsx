@@ -1,15 +1,15 @@
 import React from 'react';
 import { Cascader, Input, Radio, Select, Switch } from "antd"
-import type { RaeFormProps } from './interface';
+import type { EFormItemProps } from './interface';
 import { FORMTYPE, OPERATION } from './constants';
 
-export function RaeForm<T> ({
+export function RaeFormItem<T> ({
   content,
   value,
   onChange,
   type,
   typeKey
-}: RaeFormProps<T>) {
+}: EFormItemProps<T>) {
 
   if (!content?.[typeKey]) return <></>
 
@@ -32,4 +32,4 @@ export function RaeForm<T> ({
   return RaeFormEditRender[content[typeKey] as string] ?? <>暂无匹配项</>
 };
 
-export default RaeForm;
+export default RaeFormItem;

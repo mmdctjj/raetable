@@ -1,3 +1,4 @@
+import React, { FC, ReactNode } from "react";
 import styled, { keyframes } from "styled-components";
 
 const rightToLeft = keyframes`
@@ -41,7 +42,13 @@ const bottomToTop = keyframes`
   }
 `
 
-export interface EAnimationProps {index?: number, duration?: number, delay?: number}
+export interface EAnimationProps {
+  index?: number
+  children?: ReactNode
+  duration?: number
+  delay?: number
+  direction?: 'BT' | 'RL' | 'LR'
+}
 
 export const RightToLeft = styled.div<EAnimationProps>`
   transform: translateX(50%);
@@ -69,8 +76,15 @@ export const BottomToTop = styled.div<EAnimationProps>`
   animation-delay: ${props => (props.index ?? 0) * (props.delay ?? 130)}ms
 `
 
-export default {
-  BottomToTop,
-  RightToLeft,
-  LeftToRight
+export const EAnimation: FC<EAnimationProps> = ({direction = 'BT', ...eAnimationProps}) => {
+
+  const Animation: {[key in string]: JSX.Element} = {
+    'BT': <BottomToTop {...eAnimationProps} />,
+    'RL': <RightToLeft {...eAnimationProps} />,
+    'LR': <LeftToRight {...eAnimationProps} />
+  }
+
+  return Animation[direction]
 }
+
+export default EAnimation
