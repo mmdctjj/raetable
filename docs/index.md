@@ -1,7 +1,7 @@
 ---
 hero:
-  title: RAETable
-  description: react antd easy table
+  title: raETable
+  description: react antd Easy Table
   actions:
     - text: 快速开始
       link: /components/rae-table

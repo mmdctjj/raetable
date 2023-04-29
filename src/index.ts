@@ -3,3 +3,8 @@ export type { RaeTableProps, RaeTableColumnProps } from './components/RaeTable/i
 
 export { default as EForm } from './components/RaeForm';
 export type { RaeFormProps } from './components/RaeForm/interface'
+
+// export { default as EForm}
+
+export { default as EAnimation, BottomToTop, RightToLeft, LeftToRight  } from './components/EAnimation'
+export type { EAnimationProps  } from './components/EAnimation'

@@ -58,6 +58,7 @@
     "@types/antd": "^1.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
+    "@types/styled-components": "^5.1.26",
     "@umijs/lint": "^4.0.67",
     "antd": "^5.4.6",
     "dumi": "^2.1.22",
@@ -70,6 +71,7 @@
     "prettier-plugin-packagejson": "^2.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "styled-components": "^5.3.10",
     "stylelint": "^15.6.0"
   }
 }
