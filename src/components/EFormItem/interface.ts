@@ -1,4 +1,4 @@
-import { ETableColumnProps } from "../ETable/interface";
+import { ETableColumnProps } from "raetable";
 
 
 export interface EFormItemProps<T> {

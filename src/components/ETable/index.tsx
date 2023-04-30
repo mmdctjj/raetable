@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import type { ETableColumnProps, ETableProps } from './interface';
-import Table from 'antd/es/table';
+import type { ETableColumnProps, ETableProps } from 'raetable';
 import ECondition from '../ECondition';
-import { Button, Space } from 'antd';
+import { Button, Space, Table } from 'antd';
 
 export function RaeTable<T> ({
   columns,

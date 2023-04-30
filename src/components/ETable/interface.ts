@@ -14,18 +14,51 @@ export interface ESelectProps {
 }
 
 export type ETableColumnProps<T> = ColumnType<T> & {
+	/**
+	 * 是否在表格中隐藏
+	 * @default false
+	 */
 	hiddenInTable?: boolean,
-	copyed?: boolean,
+	/**
+	 * 作为条件栏目时的类型
+	 * @default ""
+	 */
 	conditionType?: string,
+	/**
+	 * 作为业务栏目时的类型
+	 * @default ""
+	 */
 	affairType?: string,
+	/**
+	 * 栏目类型为select时，下拉框内容，也会在表格中作为render依据
+	 */
 	select?: ESelectProps[],
+	/**
+	 * 表单规则
+	 */
 	rules?: Rule[],
-	fetch?: (a?: any) => Promise<any>,
+	/**
+	 * 这个栏目是否联动
+	 * @default false
+	 */
 	linked?: boolean,
-	isFature?: boolean,
-	step?: string
+	/**
+	 * 监听栏目变化回调函数
+	 * @param val 
+	 * @returns 
+	 */
 	onChange?: (val: unknown) => void
+	/**
+	 * Cascader的loadData属性
+	 * @param selectedOptions 
+	 * @returns 
+	 */
 	loadData?: (selectedOptions: DefaultOptionType[]) => void
+	/**
+	 * 栏目类型为select时，下拉框内容格式化函数
+	 * @param data 
+	 * @returns 
+	 */
 	formatOptions?: (data: any[]) => ESelectProps[]
 }
 
