@@ -15,7 +15,7 @@ export type { EAnimationProps  } from './components/EAnimation'
 
 export { default as ETableColumn} from './components/EtableColumn'
 export { default as ESelect} from './components/ESelect'
-export { default as ETablePropsType} from './components/ETableProps'
+export { default as ETablePropsType} from './components/ETablePropsType'
 
 export { OPERATION, FORMTYPE } from './enum'
 
