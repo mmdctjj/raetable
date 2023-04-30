@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import type { ETableColumnProps, ETableProps } from 'raetable';
+import type { ETableColumnProps, ETableProps } from './interface';
 import ECondition from '../ECondition';
 import { Button, Space, Table } from 'antd';
 
