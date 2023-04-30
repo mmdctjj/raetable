@@ -13,7 +13,7 @@ export type { EFormProps } from './components/EForm'
 export { default as EAnimation, BottomToTop, RightToLeft, LeftToRight  } from './components/EAnimation'
 export type { EAnimationProps  } from './components/EAnimation'
 
-export { default as ETableColumn} from './components/ETableColumn'
+export { default as ETableColumn} from './components/EtableColumn'
 export { default as ESelect} from './components/ESelect'
 export { default as ETablePropsType} from './components/ETableProps'
 
