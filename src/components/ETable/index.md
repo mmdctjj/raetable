@@ -104,4 +104,6 @@ export default () => {
 ```
 ### API
 <API id="ETable"></API>
+<API id="ETableColumn"></API>
+<API id="ESelect"></API>
 
