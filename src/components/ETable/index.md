@@ -103,7 +103,7 @@ export default () => {
 
 ```
 ### API
-<API id="ETableProps_"></API>
+<API id="ETablePropsType"></API>
 <API id="ETableColumn"></API>
 <API id="ESelect"></API>
 

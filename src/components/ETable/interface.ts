@@ -13,7 +13,7 @@ export interface ESelectProps {
 	children?: ESelectProps[]
 }
 
-export type ETableColumnProps<T> = ColumnType<T> & {
+export type ETableColumnProps<T> = {
 	/**
 	 * 是否在表格中隐藏
 	 * @default false
@@ -60,7 +60,7 @@ export type ETableColumnProps<T> = ColumnType<T> & {
 	 * @returns 
 	 */
 	formatOptions?: (data: any[]) => ESelectProps[]
-}
+} & ColumnType<T>
 
 export type ETablePropsTmp<Record> = {
 	/**
