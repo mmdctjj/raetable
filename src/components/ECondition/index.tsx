@@ -4,9 +4,24 @@ import EAnimation from "../EAnimation"
 import { EFormItem, ETableColumnProps } from "raetable"
 
 export interface EConditionProps<T> {
+  /**
+   * 条件
+   */
   condition: object
+  /**
+   * 栏目
+   */
   columns: ETableColumnProps<T>[]
+  /**
+   * 组件尺寸
+   * @default middle
+   */
   size?: 'large' | 'middle' | 'small'
+  /**
+   * 条件改变触发条件
+   * @param value 
+   * @returns 
+   */
   onConditionChange: (value: object) => void
 }
 

@@ -22,7 +22,7 @@ export interface EFormProps<T> {
   /**
    * 栏目数据
    */
-  data: ETableColumnProps<T>[]
+  columns: ETableColumnProps<T>[]
   /**
    * 扩展表单 Form.Item
    */
@@ -51,7 +51,7 @@ export interface EFormProps<T> {
 
 export function EForm<T>({
   // col = 1,
-  data = [],
+  columns = [],
   affairData = {},
   affairWidth,
   extendForm,
@@ -91,7 +91,7 @@ export function EForm<T>({
 
       <Form.Item style={{ display: 'none' }} name="id"><Input type="hidden" /></Form.Item>
 
-      {data?.map((item: ETableColumnProps<T>, idx: number) => <BottomToTop key={item.key} index={idx}>
+      {columns?.map((item: ETableColumnProps<T>, idx: number) => <BottomToTop key={item.key} index={idx}>
         <Form.Item
           key={item.key}
           label={<>{hiddenLabels.includes(item.title as string) ? '' : item.title}</>}
@@ -107,15 +107,15 @@ export function EForm<T>({
         </Form.Item>
       </BottomToTop>)}
 
-      <BottomToTop index={data.length + 1}>{extendForm}</BottomToTop>
+      <BottomToTop index={columns.length + 1}>{extendForm}</BottomToTop>
 
       {
         isShowSumbit
 
-          ? <BottomToTop index={extendForm ? data.length + 2 : data.length + 1}>
+          ? <BottomToTop index={extendForm ? columns.length + 2 : columns.length + 1}>
               <Form.Item
                 wrapperCol={{
-                  offset: data.filter(item => hiddenLabels.includes(item.title as string)).length
+                  offset: columns.filter(item => hiddenLabels.includes(item.title as string)).length
                     ? 0
                     : affairWidth && affairWidth > 900
                     ? 2

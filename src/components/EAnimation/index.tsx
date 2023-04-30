@@ -43,10 +43,28 @@ const bottomToTop = keyframes`
 `
 
 export interface EAnimationProps {
+  /**
+   * 渲染顺序
+   */
   index?: number
+  /**
+   * 子组件，可以忽略这个属性
+   */
   children?: ReactNode
+  /**
+   * 动画持续时间
+   * @default 300ms
+   */
   duration?: number
+  /**
+   * 动画延时执行时间
+   * @default 130ms
+   */
   delay?: number
+  /**
+   * 动画的方向
+   * @default BT
+   */
   direction?: 'BT' | 'RL' | 'LR'
 }
 

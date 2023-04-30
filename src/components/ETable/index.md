@@ -103,5 +103,7 @@ export default () => {
 
 ```
 ### API
-<API hideTitle></API>
+<API id="ETableProps"></API>
+<API id="ETableColumnProps"></API>
+<API id="SelectProps"></API>
 

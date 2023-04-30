@@ -70,5 +70,5 @@ export default () => <Space>
 </Space>
 ```
 ### API
-<API id="EForm"></API>
+<API hideTitle></API>
 
