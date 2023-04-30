@@ -29,7 +29,7 @@ export type ETableColumnProps<T> = ColumnType<T> & {
 	formatOptions?: (data: any[]) => SelectProps[]
 }
 
-export interface ETableProps<Record> extends TableProps<Record> {
+export type ETableProps<Record> = {
 	/**
 	 * 业务名称，弹出框title
 	 * @default ""
@@ -102,4 +102,4 @@ export interface ETableProps<Record> extends TableProps<Record> {
 	 */
 	showBack?: boolean
 	// title?: string,
-}
+} & TableProps<Record>

@@ -6,14 +6,46 @@ import { useTrigger } from "./useTrigger"
 import { NamePath } from "antd/es/form/interface"
 
 export interface EFormProps<T> {
+  /**
+   * 业务数据
+   */
   affairData: object
+  /**
+   * 业务弹出层的宽度
+   * @default 700
+   */
   affairWidth?: number
+  /**
+   * 分栏布局
+   */
   col?: number
+  /**
+   * 栏目数据
+   */
   data: ETableColumnProps<T>[]
+  /**
+   * 扩展表单 Form.Item
+   */
   extendForm: ReactNode
+  /**
+   * 需要隐藏label的key
+   * @default []
+   */
   hiddenLabels?: string[]
+  /**
+   * 是否显示提交按钮
+   * @default true
+   */
   isShowSumbit?: boolean
+  /**
+   * 操作类型
+   */
   type: string,
+  /**
+   * 业务执行成功回调
+   * @param values T
+   * @returns Promise
+   */
   onAffairSuccess: (values: T) => Promise<any>
 }
 

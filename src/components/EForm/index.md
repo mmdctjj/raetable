@@ -183,5 +183,5 @@ export default () => {
 ```
 
 ### API
-<API id="EFormItem"></API>
+<API hideTitle></API>
 
