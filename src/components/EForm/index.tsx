@@ -1,6 +1,6 @@
 import { Button, Form, Input } from "antd"
 import React, { ReactNode, useCallback, useEffect } from "react"
-import { EFormItem, ETableColumnProps } from "raetable"
+import { EFormItem, ETableColumnProps, OPERATION } from "raetable"
 import { BottomToTop } from "raetable"
 import { useTrigger } from "raetable"
 import { NamePath } from "antd/es/form/interface"
@@ -9,7 +9,7 @@ export interface EFormProps<T> {
   /**
    * 业务数据
    */
-  affairData: object
+  affairData?: T
   /**
    * 业务弹出层的宽度
    * @default 700
@@ -26,7 +26,7 @@ export interface EFormProps<T> {
   /**
    * 扩展表单 Form.Item
    */
-  extendForm: ReactNode
+  extendForm?: ReactNode
   /**
    * 需要隐藏label的key
    * @default []
@@ -40,22 +40,22 @@ export interface EFormProps<T> {
   /**
    * 操作类型
    */
-  type: string,
+  type?: string,
   /**
    * 业务执行成功回调
    * @param values T
    * @returns Promise
    */
-  onAffairSuccess: (values: T) => Promise<any>
+  onAffairSuccess?: (values: T) => Promise<any>
 }
 
 export function EForm<T>({
   // col = 1,
   columns = [],
-  affairData = {},
+  affairData = {} as T,
   affairWidth,
   extendForm,
-  type,
+  type = OPERATION.ADD,
   isShowSumbit = true,
   hiddenLabels = [],
   onAffairSuccess,
@@ -63,18 +63,18 @@ export function EForm<T>({
 
   const [form] = Form.useForm()
 
-  const [loading, setLoading] = useTrigger(false)
+  const [loading, setLoading] = useTrigger()
 
   const onSumbit = useCallback(() => {
     form.validateFields()
-      .then(() => {
+      .then((value: T) => {
         setLoading(true)
-        form.submit()
+        onAffairSuccess?.(value).then(() => setLoading(false))
       })
   }, [form])
 
   // eslint-disable-next-line
-  useEffect(() => Object.keys(affairData).length === 0
+  useEffect(() => Object.keys(affairData as object).length === 0
     ? form.resetFields()
     : form.setFieldsValue({ enabled: 0, ...affairData })
   , [affairData])
@@ -86,7 +86,6 @@ export function EForm<T>({
       labelAlign="right"
       labelCol={{ span: affairWidth && affairWidth > 900 ? 2 : 5 }}
       labelWrap={true}
-      onFinish={values => onAffairSuccess(values)}
     >
 
       <Form.Item style={{ display: 'none' }} name="id"><Input type="hidden" /></Form.Item>

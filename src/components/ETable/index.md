@@ -89,13 +89,31 @@ const useMockData = () => {
 export default () => {
 
   const [dataSource, loading, fetch] = useMockData()
+  const [deleteRes, deleteLoading, deleteFetch] = useMockData()
+  const [addRes, addLoading, addFetch] = useMockData()
+
+  const onClickDeleteButton = useCallback((keys) => console.log(keys))
+
+  const onAffairSuccess = useCallback((value) => {
+    console.log(value)
+    addFetch()
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({})
+        fetch()
+      }, 1000)
+    })
+  }, [])
 
   return (
     <ETable
       columns={columns}
       dataSource={dataSource}
       loading={loading}
+      deleteLoading={deleteLoading}
+      onAffairSuccess={onAffairSuccess}
       onConditionChange={fetch}
+      onClickDeleteButton={onClickDeleteButton}
       rowKey="name"
     />
   )
@@ -103,7 +121,7 @@ export default () => {
 
 ```
 ### API
-<API id="ETablePropsType"></API>
+<API></API>
 <API id="ETableColumn"></API>
 <API id="ESelect"></API>
 

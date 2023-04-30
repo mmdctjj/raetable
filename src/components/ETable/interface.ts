@@ -2,6 +2,7 @@ import { Rule } from "antd/es/form"
 import type { DefaultOptionType } from "antd/es/select"
 import type { ColumnType, TableProps } from "antd/es/table"
 import type { Dispatch, ReactNode } from "react"
+import { CSSProperties } from "styled-components"
 
 export interface ESelectProps {
 	value: string | number,
@@ -62,7 +63,7 @@ export type ETableColumnProps<T> = {
 	formatOptions?: (data: any[]) => ESelectProps[]
 } & ColumnType<T>
 
-export type ETablePropsTmp<Record> = {
+export interface ETableProps<Record> extends TableProps<Record> {
 	/**
 	 * 业务名称，弹出框title
 	 * @default ""
@@ -78,6 +79,15 @@ export type ETablePropsTmp<Record> = {
 	 * @default []
 	 */
 	columns: ETableColumnProps<Record>[],
+	/**
+	 * 条件容器类名
+	 */
+	conditionContainerClass?: string
+	/**
+	 * 条件容器样式
+	 */
+	conditionContainerStyle?: CSSProperties
+	
 	/**
 	 * 表格数据源dataSource
 	 * @default []
@@ -99,7 +109,7 @@ export type ETablePropsTmp<Record> = {
 	 */
 	extendForm?: ReactNode,
 	formatAffairData?: (data: Record) => Record,
-	onAffairSuccess?: (values: unknown, type: string) => Promise<any>,
+	onAffairSuccess?: (values: Record, type: string) => Promise<any>,
 	/**
 	 * 条件触发时回调
 	 */
@@ -135,6 +145,12 @@ export type ETablePropsTmp<Record> = {
 	 */
 	showBack?: boolean
 	// title?: string,
+	/**
+	 * 表格容器类名
+	 */
+	tableContainerClass?: string
+	/**
+	 * 表格容器样式
+	 */
+	tableContainerStyle?: CSSProperties
 }
-
-export type ETableProps<Record> = ETablePropsTmp<Record> & TableProps<Record>
