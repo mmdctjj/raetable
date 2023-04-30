@@ -1,7 +1,7 @@
 import React from 'react';
 import { Cascader, Input, Radio, Select, Switch } from "antd"
 import type { EFormItemProps } from './interface';
-import { FORMTYPE, OPERATION } from './constants';
+import { FORMTYPE, OPERATION } from 'raetable';
 
 export function RaeFormItem<T> ({
   content,

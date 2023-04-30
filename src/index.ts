@@ -12,3 +12,13 @@ export type { EFormProps } from './components/EForm'
 
 export { default as EAnimation, BottomToTop, RightToLeft, LeftToRight  } from './components/EAnimation'
 export type { EAnimationProps  } from './components/EAnimation'
+
+export { OPERATION, FORMTYPE } from './enum'
+
+export { useTrigger } from './hooks'
+
+export {
+  formatSearch,
+  objectIsQqual,
+  objectToString
+} from './utils'

@@ -2,7 +2,7 @@ import { Button, Form, Input } from "antd"
 import React, { ReactNode, useCallback, useEffect } from "react"
 import { EFormItem, ETableColumnProps } from "raetable"
 import { BottomToTop } from "raetable"
-import { useTrigger } from "./useTrigger"
+import { useTrigger } from "raetable"
 import { NamePath } from "antd/es/form/interface"
 
 export interface EFormProps<T> {

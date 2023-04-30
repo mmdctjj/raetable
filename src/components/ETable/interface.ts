@@ -3,14 +3,14 @@ import type { DefaultOptionType } from "antd/es/select"
 import type { ColumnType, TableProps } from "antd/es/table"
 import type { Dispatch, ReactNode } from "react"
 
-export interface SelectProps {
+export interface ESelectProps {
 	value: string | number,
 	label: string,
 	isLeaf?: boolean
 	loading?: boolean
 	key: string | number,
 	type?: string,
-	children?: SelectProps[]
+	children?: ESelectProps[]
 }
 
 export type ETableColumnProps<T> = ColumnType<T> & {
@@ -18,7 +18,7 @@ export type ETableColumnProps<T> = ColumnType<T> & {
 	copyed?: boolean,
 	conditionType?: string,
 	affairType?: string,
-	select?: SelectProps[],
+	select?: ESelectProps[],
 	rules?: Rule[],
 	fetch?: (a?: any) => Promise<any>,
 	linked?: boolean,
@@ -26,7 +26,7 @@ export type ETableColumnProps<T> = ColumnType<T> & {
 	step?: string
 	onChange?: (val: unknown) => void
 	loadData?: (selectedOptions: DefaultOptionType[]) => void
-	formatOptions?: (data: any[]) => SelectProps[]
+	formatOptions?: (data: any[]) => ESelectProps[]
 }
 
 export type ETableProps<Record> = {
