@@ -62,7 +62,7 @@ export type ETableColumnProps<T> = ColumnType<T> & {
 	formatOptions?: (data: any[]) => ESelectProps[]
 }
 
-export type ETableProps_<Record> = {
+export type ETablePropsTmp<Record> = {
 	/**
 	 * 业务名称，弹出框title
 	 * @default ""
@@ -137,4 +137,4 @@ export type ETableProps_<Record> = {
 	// title?: string,
 }
 
-export type ETableProps<Record> = ETableProps_<Record> & TableProps<Record>
+export type ETableProps<Record> = ETablePropsTmp<Record> & TableProps<Record>

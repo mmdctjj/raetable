@@ -1,8 +1,8 @@
 import React from "react"
-import { ETableProps_ } from "../ETable/interface"
-export function ETableProps<T> (props: ETableProps_<T>) {
+import { ETablePropsTmp } from "../ETable/interface"
+export function ETablePropsType<T> (props: ETablePropsTmp<T>) {
   console.log(props)
   return <></>
 }
 
-export default ETableProps
+export default ETablePropsType
