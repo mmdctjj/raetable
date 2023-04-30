@@ -5,14 +5,16 @@ import { EFormItem, ETableColumnProps } from "raetable"
 
 export interface EConditionProps<T> {
   condition: object
-  onConditionChange: (value: object) => void
   columns: ETableColumnProps<T>[]
+  size?: 'large' | 'middle' | 'small'
+  onConditionChange: (value: object) => void
 }
 
 export function ECondition<T> ({
   onConditionChange,
   condition,
-  columns
+  columns,
+  size
 }: EConditionProps<T>) {
 
   const [form] = Form.useForm()
@@ -33,6 +35,7 @@ export function ECondition<T> ({
       labelCol={{span: 6}}
       layout="inline"
       onValuesChange={onChange}
+      size={size}
       style={{ margin: 15, marginBottom: 0 }}
     >
 
@@ -45,7 +48,7 @@ export function ECondition<T> ({
 
               <EAnimation index={idx}>
                 <Form.Item key={item.key} name={item.dataIndex as any} label={item.title as string}>
-                  <EFormItem content={item} typeKey="conditionType" type="" value="" />
+                  <EFormItem content={item} size={size} typeKey="conditionType" type="" value="" />
                 </Form.Item>
               </EAnimation>
 

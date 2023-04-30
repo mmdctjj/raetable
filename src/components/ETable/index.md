@@ -103,5 +103,5 @@ export default () => {
 
 ```
 ### API
-<API id="ETable"></API>
+<API hideTitle></API>
 

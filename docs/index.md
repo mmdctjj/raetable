@@ -4,9 +4,9 @@ hero:
   description: react antd Easy Table
   actions:
     - text: 快速开始
-      link: /components/rae-table
-    - text: 示例
-      link: /components/rae-table
+      link: /guide
+    - text: 组件
+      link: /components/e-table
 features:
   - title: 继承性配置
     emoji: 💎
