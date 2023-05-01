@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { ETableProps } from "../ETable/interface"
 import { ETable, OPERATION, formatSearch } from "raetable"
 import { useFetch } from "raetable"
@@ -25,8 +25,8 @@ export interface EPageProps<Record> extends ETableProps<Record> {
   // title?: string,
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function initPromise<T> (data?: Params): Promise<Responsed<T>> {
-  console.log(data)
   return new Promise((resolve) => {resolve({data: [] as any, code: 200, msg: ''})})
 }
 
@@ -40,14 +40,26 @@ export function Epage<T> ({
   ...props
 }: EPageProps<T>) {
 
-  const [, addLoading, addFn] = useFetch<Params, T>(addAffair)
-  const [, delLoading, delFn] = useFetch<Params, T>(delAffair)
-  const [, editLoading, editFn] = useFetch<Params, T>(editAffair)
-  const [getRes, getLoading, getFn] = useFetch<Params, T[]>(getLists)
+  const [params, setParams] = useState(() => formatSearch(window.location.href))
 
-  const params = useMemo(() => formatSearch(window.location.href), [window.location.href])
+  const [addLoading, addFn] = useFetch(addAffair)
 
-  const dataSource = useMemo(() => formatList?.(getRes.data) ?? [], [getRes])
+  const [delLoading, delFn] = useFetch(delAffair)
+
+  const [editLoading, editFn] = useFetch(editAffair)
+
+  const [getLoading, getFn, getRes] = useFetch<Responsed<T[]>, any>(getLists, {
+    refreshDeps: [params],
+    debounceWait: 400,
+    manual: true
+  })
+
+  const dataSource = useMemo(() => formatList?.(getRes?.data ?? []), [getRes])
+
+  const onConditionChange = useCallback((params: any) => {
+    console.log(params)
+    setParams(params)
+  }, [])
 
   const FN = {
     [OPERATION.ADD]: addFn,
@@ -62,9 +74,8 @@ export function Epage<T> ({
   // 点击确认删除的请求处理
   const onClickDeleteButton = useCallback((keys: any[]) => delFn(keys), [])
 
-  // useEffect((): any => console.log(params), [params])
   useEffect((): any => getFn(params), [params])
-  useEffect((): any => console.log(getRes), [getRes])
+  useEffect(() => console.log(params), [params])
 
   return (
     <ETable
@@ -75,6 +86,7 @@ export function Epage<T> ({
       loading={getLoading}
       onAffairSuccess={onAffairSuccess}
       onClickDeleteButton={onClickDeleteButton}
+      onConditionChange={onConditionChange}
       {...props}
     />
   )

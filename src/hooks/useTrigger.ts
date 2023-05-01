@@ -1,10 +1,11 @@
-import { Dispatch, useCallback, useState } from "react"
+import { useBoolean } from "ahooks"
 
-export const useTrigger: (initValue?: boolean) => [state: boolean, trigger: Dispatch<boolean>] = (initValue) => {
+export const useTrigger = (): [
+  boolean,
+  () =>void
+] => {
 
-  const [state, setState] = useState(initValue !== undefined ? initValue : false)
+  const [bool, { toggle }] = useBoolean()
 
-  const trigger: Dispatch<boolean> = useCallback((bool?: boolean) => setState(curr => bool !== undefined ? bool : !curr), [])
-
-  return [state, trigger]
+  return [bool, toggle]
 }

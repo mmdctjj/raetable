@@ -59,13 +59,13 @@ export function RaeTable<T> ({
   const onClickEdit = useCallback((recard: T) => {
     setOperationType(OPERATION.EDIT)
     setOperationData(recard)
-    setOpen(true)
+    setOpen()
   }, [])
 
   const onClickDetail = useCallback((recard: T) => {
     setOperationType(OPERATION.DISPLAY)
     setOperationData(recard)
-    setOpen(true)
+    setOpen()
   }, [])
 
   const onClickDelte = useCallback((keys: any[]) => {
@@ -75,7 +75,7 @@ export function RaeTable<T> ({
   const onClickAdd = useCallback(() => {
     setOperationType(OPERATION.ADD)
     setOperationData({} as T)
-    setOpen(true)
+    setOpen()
   }, [])
 
   const [condition, onConditionChange] = useState(formatSearch(window.location.href))
@@ -128,12 +128,12 @@ export function RaeTable<T> ({
   // 过滤没有affairType属性的栏目
   const affairColumns = useMemo(() => columns.filter(column => column.affairType), [columns])
 
-  const onCloseAffair = useCallback(() => setOpen(false), [])
-  const onFinishAffair = useCallback(() => setOpen(false), [])
+  const onCloseAffair = useCallback(() => setOpen(), [])
+  const onFinishAffair = useCallback(() => setOpen(), [])
   const onSuccessAffair = useCallback((value: T) =>  operationType === OPERATION.DISPLAY
-    ? new Promise((resolve) => {setOpen(false); resolve({})})
+    ? new Promise((resolve) => {setOpen(); resolve({})})
     : onAffairSuccess(value, operationType)
-      .then(() => setOpen(false))
+      .then(() => setOpen())
       .catch((err) => {throw new Error(err)})
   , [operationType])
   

@@ -68,8 +68,8 @@ export function EForm<T>({
   const onSumbit = useCallback(() => {
     form.validateFields()
       .then((value: T) => {
-        setLoading(true)
-        onAffairSuccess?.(value).then(() => setLoading(false))
+        setLoading()
+        onAffairSuccess?.(value).then(() => setLoading())
       })
   }, [form])
 

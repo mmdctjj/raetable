@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useRequest } from "ahooks"
 
 export interface Params {
   [key: string]: string | number | boolean | object
@@ -10,30 +10,12 @@ export interface Responsed<T> {
   msg?: string
 }
 
-export function useFetch<ParamsProps, ResultProps> (
-  fn: (data?: ParamsProps) => Promise<Responsed<ResultProps>>
-): [
-  res: Responsed<ResultProps>,
-  loading: boolean,
-  callback: (...args: any) => Promise<Responsed<ResultProps>>
-] {
+export function useFetch<TData, TParams extends any[]> (
+  fn: any,
+  option?: any
+): [loading: boolean, run: (...params: TParams) => Promise<any>,  data?: TData] {
 
-  const [res, setRes] = useState<any>({})
+  const { data, run, loading } = useRequest<TData, TParams>(fn, option ?? {})
 
-  const [loading, setLoading] = useState(false)
-
-  const callback: (...args: any) => Promise<Responsed<ResultProps>> = useCallback((...args: any) => {
-    setLoading(true)
-    return new Promise((resolve, reject) => {
-      fn(args)
-        .then(res => {
-          setRes(res)
-          resolve(res)
-        })
-        .catch(err => reject(err))
-        .finally(() => setLoading(false))
-    })
-  }, [fn])
-
-  return [res, loading, callback]
+  return [loading, run as any, data]
 }
