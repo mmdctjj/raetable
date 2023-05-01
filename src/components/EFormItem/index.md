@@ -68,7 +68,7 @@ export default () => {
       columns.map((column, idx) => (
         <EAnimation key={column.key} index={idx}>
           <Form.Item label={column.title} name={column.key}>
-            <EFormItem content={column} typeKey="affairType" />
+            <EFormItem content={column} type="edit" typeKey="affairType" />
           </Form.Item>
         </EAnimation>
       ))

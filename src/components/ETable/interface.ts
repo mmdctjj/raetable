@@ -1,6 +1,7 @@
 import { Rule } from "antd/es/form"
 import type { DefaultOptionType } from "antd/es/select"
 import type { ColumnType, TableProps } from "antd/es/table"
+import { OPERATION } from "raetable/enum"
 import type { Dispatch, ReactNode } from "react"
 import { CSSProperties } from "styled-components"
 
@@ -12,6 +13,13 @@ export interface ESelectProps {
 	key: string | number,
 	type?: string,
 	children?: ESelectProps[]
+}
+
+export interface ExtendType {
+  title: string,
+  action: (target: unknown, recard: unknown) => void,
+  target: string,
+  loading: boolean
 }
 
 export type ETableColumnProps<T> = {
@@ -68,12 +76,17 @@ export interface ETableProps<Record> extends TableProps<Record> {
 	 * 业务名称，弹出框title
 	 * @default ""
 	 */
-	affairName: string | undefined
+	affairName?: string | undefined
 	/**
 	 * 业务宽度
 	 * @default 700
 	 */
 	affairWidth?: number
+	/**
+   * 返回按钮连接，如果没有，则不会显示返回按钮
+   * @default ""
+   */
+  backPath?: string
 	/**
 	 * 表格栏目columns
 	 * @default []
@@ -99,7 +112,7 @@ export interface ETableProps<Record> extends TableProps<Record> {
 	/**
 	 * 表格编辑栏扩展
 	 */
-	extend?: any[],
+	extend?: ExtendType[],
 	/**
 	 * 业务扩展
 	 */
@@ -109,7 +122,7 @@ export interface ETableProps<Record> extends TableProps<Record> {
 	 */
 	extendForm?: ReactNode,
 	formatAffairData?: (data: Record) => Record,
-	onAffairSuccess?: (values: Record, type: string) => Promise<any>,
+	onAffairSuccess?: (values: Record, type: OPERATION.ADD | OPERATION.EDIT) => Promise<any>,
 	/**
 	 * 条件触发时回调
 	 */
@@ -119,6 +132,7 @@ export interface ETableProps<Record> extends TableProps<Record> {
 	onClickDeleteButton?: (keys: unknown[]) => Promise<any>,
 	// onClickEditButton : () => any,
 	onRowSelect?: (data: any[]) => void,
+	pageTitle?: string,
 	/**
 	 * 组件尺寸
 	 * @default middle
@@ -153,4 +167,12 @@ export interface ETableProps<Record> extends TableProps<Record> {
 	 * 表格容器样式
 	 */
 	tableContainerStyle?: CSSProperties
+	/**
+	 * 标题容器类名
+	 */
+	titleContainerClass?: string
+	/**
+	 * 标题容器样式
+	 */
+	titleContainerStyle?: CSSProperties
 }

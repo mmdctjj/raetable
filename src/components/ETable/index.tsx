@@ -5,16 +5,42 @@ import ECondition from '../ECondition';
 import { Button, Modal, Popconfirm, Space, Table } from 'antd';
 import styled from 'styled-components';
 import { EForm, OPERATION, formatSearch, useTrigger } from 'raetable';
+import { ETitle } from '../ETitle';
 
-const ConditionContainer = styled.div``
+const ConditionContainer = styled.div`
+  background-color: @primary-color
+`
 
-const TableContainer = styled.div``
+const TableContainer = styled.div`
+  background-color: @primary-color
+`
+
+const TitleContainer = styled.div`
+  background-color: @primary-color
+`
+const titleStyle = {
+  background: '#fff',
+  padding: 15,
+}
+
+const style = {
+  background: '#fff',
+  padding: 15,
+  margin: 15
+}
 
 export function RaeTable<T> ({
+  affairName = '',
+  backPath = '',
   columns,
+  extendAffair,
   size = 'middle',
+  pageTitle = '',
   onAffairSuccess = () => new Promise(() => {}),
   onConditionChange: onCondChange,
+  conditionContainerStyle = {},
+  tableContainerStyle = {},
+  titleContainerStyle = {},
   ...props
 }: ETableProps<T>) {
 
@@ -46,6 +72,12 @@ export function RaeTable<T> ({
     props.onClickDeleteButton?.(keys)
   }, [])
 
+  const onClickAdd = useCallback(() => {
+    setOperationType(OPERATION.ADD)
+    setOperationData({} as T)
+    setOpen(true)
+  }, [])
+
   const [condition, onConditionChange] = useState(formatSearch(window.location.href))
 
   const actionColumn: ETableColumnProps<T> = useMemo(() => (
@@ -60,7 +92,7 @@ export function RaeTable<T> ({
           <Button size={size} onClick={() => onClickEdit(recard)} type="primary">编辑</Button>
           <Popconfirm
             title="删除"
-            description="您确认删除这条数据吗？"
+            description={`您确认删除这条${affairName}数据吗？`}
             okText="确定"
             cancelText="取消"
             onConfirm={() => onClickDelte([recard[props.rowKey as any]])}
@@ -98,23 +130,64 @@ export function RaeTable<T> ({
 
   const onCloseAffair = useCallback(() => setOpen(false), [])
   const onFinishAffair = useCallback(() => setOpen(false), [])
-  const onSuccessAffair = useCallback((value: T) => onAffairSuccess(value, operationType).then(() => setOpen(false)), [operationType])
+  const onSuccessAffair = useCallback((value: T) =>  operationType === OPERATION.DISPLAY
+    ? new Promise((resolve) => {setOpen(false); resolve({})})
+    : onAffairSuccess(value, operationType)
+      .then(() => setOpen(false))
+      .catch((err) => {throw new Error(err)})
+  , [operationType])
   
   useEffect(() => onCondChange && onCondChange(condition), [condition])
   
   return (
     <>
 
-      <ConditionContainer className={props.conditionContainerClass} style={props.conditionContainerStyle}>
-        <ECondition columns={conditionColumns} condition={condition} size={size} onConditionChange={onConditionChange} />
+      <TitleContainer
+        className={props.titleContainerClass}
+        style={{...titleStyle, ...titleContainerStyle}}
+      >
+        <ETitle
+          affairName={affairName}
+          backPath={backPath}
+          extendAffair={extendAffair}
+          onClickAdd={onClickAdd}
+          pageTitle={pageTitle}
+        />
+      </TitleContainer>
+
+      <ConditionContainer
+        className={props.conditionContainerClass}
+        style={{...style, ...conditionContainerStyle}}
+      >
+        <ECondition
+          columns={conditionColumns}
+          condition={condition}
+          size={size}
+          onConditionChange={onConditionChange}
+        />
       </ConditionContainer>
 
-      <TableContainer className={props.tableContainerClass} style={props.tableContainerStyle}>
+      <TableContainer
+        className={props.tableContainerClass}
+        style={{...style, ...tableContainerStyle}}
+      >
         <Table columns={tableColumns as any} size={size} {...props as any} />
       </TableContainer>
 
-      <Modal open={open} onCancel={onCloseAffair} onOk={onFinishAffair} title={TITLE[operationType]} footer={false}>
-        <EForm columns={affairColumns} affairData={operationData} onAffairSuccess={onSuccessAffair} />
+      <Modal
+        open={open}
+        onCancel={onCloseAffair}
+        onOk={onFinishAffair}
+        title={TITLE[operationType] + affairName}
+        footer={false}
+      >
+        <EForm
+          affairWidth={700}
+          columns={affairColumns}
+          affairData={operationData}
+          type={operationType}
+          onAffairSuccess={onSuccessAffair}
+        />
       </Modal>
     
     </>

@@ -13,12 +13,16 @@ export type { EFormProps } from './components/EForm'
 export { default as EAnimation, BottomToTop, RightToLeft, LeftToRight  } from './components/EAnimation'
 export type { EAnimationProps  } from './components/EAnimation'
 
-export { default as ETableColumn} from './components/EtableColumn'
-export { default as ESelect} from './components/ESelect'
+export { default as ETitle} from './components/ETitle'
+export type { ETitleProps } from './components/ETitle'
+
+export { default as EPage} from './components/EPage'
+export type { EPageProps } from './components/EPage'
 
 export { OPERATION, FORMTYPE } from './enum'
 
-export { useTrigger } from './hooks'
+export { useFetch, useTrigger } from './hooks'
+export type { Params, Responsed } from './hooks'
 
 export {
   formatSearch,

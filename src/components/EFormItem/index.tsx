@@ -29,8 +29,30 @@ export function RaeFormItem<T> ({
 
     [FORMTYPE.TEXTAREA]: <Input.TextArea size={size} disabled={type === OPERATION.DISPLAY} placeholder={`请输入${content.title}`} onChange={onChange} rows={5} value={value} />
   }
+
+  const RaeFormDisplayRender: {[key in string]: JSX.Element} = {
+
+    [FORMTYPE.CASCADER]: <Cascader size={size} placeholder={`请输入${content.title}`} value={value} onChange={onChange} options={content.select} loadData={content.loadData} />,
+    
+    [FORMTYPE.INPUT]: <>{value}</>,
+    
+    [FORMTYPE.RADIO]: <Radio.Group size={size} options={content.select} value={value} onChange={onChange} disabled={type === OPERATION.DISPLAY} {...content} />,
+
+    [FORMTYPE.SWITCH]: <Switch onChange={val => onChange?.(val === true ? 1 : 0)} checked={typeof value === 'undefined' ? true : Boolean(value)} disabled={type === OPERATION.DISPLAY} />,
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    [FORMTYPE.SELECT]: <>{content.select?.find(opt => opt.value === value)?.label}</>,
+
+    [FORMTYPE.TEXTAREA]: <>{value}</>
+  }
+
+  const render: {[key in string]: {[key in string]: JSX.Element}} = {
+    [OPERATION.ADD]: RaeFormEditRender,
+    [OPERATION.EDIT]: RaeFormEditRender,
+    [OPERATION.DISPLAY]: RaeFormDisplayRender
+  }
   
-  return RaeFormEditRender[content[typeKey] as string] ?? <>暂无匹配项</>
+  return render[type]?.[content?.[typeKey] as string] ?? <>暂无匹配项</>
 };
 
 export default RaeFormItem;

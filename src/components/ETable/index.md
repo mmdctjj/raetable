@@ -5,8 +5,13 @@ title: ETable 表格
 path: /components
 group: 进阶组件
 ---
-### 基本用法
+<!-- ### 基本用法 -->
 ```jsx
+/**
+ * background: '#eee'
+ * compact: true
+ */
+
 import { useState, useCallback } from 'react';
 import { ETable } from 'raetable';
 
@@ -95,7 +100,6 @@ export default () => {
   const onClickDeleteButton = useCallback((keys) => console.log(keys))
 
   const onAffairSuccess = useCallback((value) => {
-    console.log(value)
     addFetch()
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -107,6 +111,8 @@ export default () => {
 
   return (
     <ETable
+      affairName="靓仔"
+      backPath="/hhh"
       columns={columns}
       dataSource={dataSource}
       loading={loading}
@@ -114,6 +120,10 @@ export default () => {
       onAffairSuccess={onAffairSuccess}
       onConditionChange={fetch}
       onClickDeleteButton={onClickDeleteButton}
+      pageTitle="靓仔管理"
+      rowSelection={{
+        type: 'checkbox',
+      }}
       rowKey="name"
     />
   )
@@ -122,6 +132,6 @@ export default () => {
 ```
 ### API
 <API></API>
-<API id="ETableColumn"></API>
-<API id="ESelect"></API>
+<!-- <API id="ETableColumn"></API> -->
+<!-- <API id="ESelect"></API> -->
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react"
-import { Button, Col, Form, Row } from "antd"
+import { Button, Col, Form, Row, Space } from "antd"
 import EAnimation from "../EAnimation"
-import { EFormItem, ETableColumnProps } from "raetable"
+import { EFormItem, ETableColumnProps, OPERATION } from "raetable"
 
 export interface EConditionProps<T> {
   /**
@@ -12,6 +12,11 @@ export interface EConditionProps<T> {
    * 栏目
    */
   columns: ETableColumnProps<T>[]
+  /**
+   * 是否展示条件模块确定按钮，不展示时自动提交表单，否则只有点击确定按钮才会提交表单
+   * @default false
+   */
+  showConditionOkBtn?: boolean
   /**
    * 组件尺寸
    * @default middle
@@ -26,9 +31,10 @@ export interface EConditionProps<T> {
 }
 
 export function ECondition<T> ({
-  onConditionChange,
   condition,
   columns,
+  onConditionChange,
+  showConditionOkBtn = false,
   size
 }: EConditionProps<T>) {
 
@@ -49,21 +55,20 @@ export function ECondition<T> ({
       form={form}
       labelCol={{span: 6}}
       layout="inline"
-      onValuesChange={onChange}
+      onValuesChange={ !showConditionOkBtn ? onChange : () => {}}
       size={size}
-      style={{ margin: 15, marginBottom: 0 }}
     >
 
       <Row style={{ width: '100%' }}>
 
-        <Col span={23}>
+        <Col span={20}>
 
-          <Row style={{ width: '90%', maxWidth: 1920 }}>
-            {columns?.map((item, idx) =><Col key={item.key} span={columns.length === 4 ? 6 : 6} style={{ marginBottom: 15 }}>
+          <Row>
+            {columns?.map((item, idx) =><Col key={item.key} span={columns.length === 4 ? 6 : 6}>
 
               <EAnimation index={idx}>
                 <Form.Item key={item.key} name={item.dataIndex as any} label={item.title as string}>
-                  <EFormItem content={item} size={size} typeKey="conditionType" type="" value="" />
+                  <EFormItem content={item} size={size} typeKey="conditionType" type={OPERATION.EDIT} value="" />
                 </Form.Item>
               </EAnimation>
 
@@ -72,11 +77,14 @@ export function ECondition<T> ({
 
         </Col>
 
-        <Col span={1} style={{ display: 'flex', flexDirection: 'column-reverse', marginBottom: 15 }}>
+        <Col span={4} style={{textAlign: 'right'}}>
           
           <Form.Item>
             <EAnimation index={columns?.length ?? 5}>
-              <Button onClick={() => clearCondition()} type="link">清空</Button>
+              <Space>
+                {showConditionOkBtn ? <Button onClick={() => onConditionChange(form.getFieldsValue())} type="primary">确定</Button> : ''}
+                <Button onClick={() => clearCondition()} danger>清空</Button>
+              </Space>
             </EAnimation>
           </Form.Item>
         

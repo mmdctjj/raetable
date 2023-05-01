@@ -53,6 +53,7 @@
     "react-dom": ">=16.9.0"
   },
   "devDependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@babel/runtime": "^7.21.0",
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",

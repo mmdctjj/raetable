@@ -51,9 +51,9 @@ export interface EFormProps<T> {
 
 export function EForm<T>({
   // col = 1,
-  columns = [],
   affairData = {} as T,
   affairWidth,
+  columns = [],
   extendForm,
   type = OPERATION.ADD,
   isShowSumbit = true,
@@ -123,7 +123,7 @@ export function EForm<T>({
               >
                 <>
                   <Button loading={loading} type="primary" onClick={onSumbit}>确认</Button>
-                  {type !== 'display' ? <Button type="link" onClick={() => form.resetFields()}>清空</Button> : ''}
+                  {type !== OPERATION.DISPLAY ? <Button type="link" onClick={() => form.resetFields()}>清空</Button> : ''}
                 </>
               </Form.Item>
             </BottomToTop>
