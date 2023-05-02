@@ -59,7 +59,64 @@ const columns = [
 
 export default () => <EForm affairData={data} columns={columns} />
 ```
+### useForm用法
+```jsx
+import { useForm } from 'raetable';
+import { useEffect } from 'react'
 
+const affairData = {
+  name: 'mmdctjj',
+  age: 18,
+  admin: true,
+  eat: 1
+}
+
+const columns = [
+  {
+    dataIndex: 'name',
+    key: 'name',
+    title: 'name',
+    affairType: 'input'
+  },
+  {
+    dataIndex: 'age',
+    key: 'age',
+    title: 'age',
+    affairType: 'input'
+  },
+  {
+    dataIndex: 'admin',
+    key: 'admin',
+    title: 'admin',
+    affairType: 'switch'
+  },
+  {
+    dataIndex: 'eat',
+    key: 'eat',
+    title: 'eat',
+    affairType: 'select',
+    select: [
+      {
+        value: 1,
+        label: '牛肉',
+        key: 1
+      },
+      {
+        value: 2,
+        label: '鸡蛋',
+        key: 2
+      },
+    ]
+  },
+]
+
+export default () => {
+
+  const [opt, setOpt, EForm] = useForm({ affairData, columns })
+
+  return <EForm />
+}
+```
 ### API
 <API hideTitle></API>
 

@@ -95,11 +95,17 @@ export default () => (
     columns={columns}
     getLists={getData}
     pageTitle="靓仔管理"
+    rowKey="name"
   />
 )
 ```
-### usePage
+### usePage用法
 ```jsx
+/**
+ * background: '#eee'
+ * compact: true
+ */
+ 
 import { usePage } from 'raetable';
 import { Form } from 'antd';
 import { useEffect, useState } from 'react'
@@ -182,7 +188,8 @@ export default () => {
     affairName: "靓仔",
     columns: columns,
     getLists: getData,
-    pageTitle: "靓仔管理"
+    pageTitle: "靓仔管理",
+    rowKey: "name"
   })
 
   return <Dom />

@@ -5,7 +5,7 @@ title: ETable 表格
 path: /components
 group: 进阶组件
 ---
-<!-- ### 基本用法 -->
+### 基本用法
 ```jsx
 /**
  * background: '#eee'

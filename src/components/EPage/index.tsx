@@ -75,7 +75,6 @@ export function Epage<T> ({
   const onClickDeleteButton = useCallback((keys: any[]) => delFn(keys), [])
 
   useEffect((): any => getFn(params), [params])
-  useEffect(() => console.log(params), [params])
 
   return (
     <ETable
