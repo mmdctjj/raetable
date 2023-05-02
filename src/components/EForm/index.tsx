@@ -71,7 +71,7 @@ export function EForm<T>({
         setLoading()
         onAffairSuccess?.(value).then(() => setLoading())
       })
-  }, [form])
+  }, [form, type])
 
   // eslint-disable-next-line
   useEffect(() => Object.keys(affairData as object).length === 0

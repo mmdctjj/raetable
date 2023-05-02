@@ -89,10 +89,46 @@ const getData = () => {
   })
 }
 
+const addData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        msg: 'ok',
+        code: 200
+      })
+    }, 1000)
+  })
+}
+
+const delData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        msg: 'ok',
+        code: 200
+      })
+    }, 1000)
+  })
+}
+
+const editData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        msg: 'ok',
+        code: 200
+      })
+    }, 1000)
+  })
+}
+
 export default () => (
   <EPage
     affairName="靓仔"
+    addAffair={addData}
     columns={columns}
+    delAffair={delData}
+    editAffair={editData}
     getLists={getData}
     pageTitle="靓仔管理"
     rowKey="name"

@@ -13,9 +13,9 @@ export interface Responsed<T> {
 export function useFetch<TData, TParams extends any[]> (
   fn: any,
   option?: any
-): [loading: boolean, run: (...params: TParams) => Promise<any>,  data?: TData] {
+): [loading: boolean, runAsync: (...params: TParams) => Promise<any>,  data?: TData] {
 
-  const { data, run, loading } = useRequest<TData, TParams>(fn, option ?? {})
+  const { data, runAsync, loading } = useRequest<TData, TParams>(fn, option ? {manual: true, ...option} : {manual: true})
 
-  return [loading, run as any, data]
+  return [loading, runAsync, data]
 }

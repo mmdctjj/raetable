@@ -68,8 +68,11 @@ export function RaeTable<T> ({
     setOpen()
   }, [])
 
-  const onClickDelte = useCallback((keys: any[]) => {
+  const onClickDelte = useCallback((keys: number[] | string[]) => {
+    window.localStorage.setItem('deleteKeys', keys.join(','))
     props.onClickDeleteButton?.(keys)
+      .then(() => window.localStorage.removeItem('deleteKeys'))
+      .catch(() => window.localStorage.removeItem('deleteKeys'))
   }, [])
 
   const onClickAdd = useCallback(() => {
@@ -80,8 +83,7 @@ export function RaeTable<T> ({
 
   const [condition, onConditionChange] = useState(formatSearch(window.location.href))
 
-  const actionColumn: ETableColumnProps<T> = useMemo(() => (
-    {
+  const actionColumn: ETableColumnProps<T> = {
       title: '操作',
       dataIndex: 'action',
       key: 'action',
@@ -89,21 +91,29 @@ export function RaeTable<T> ({
       fixed: 'right',
       render: (_, recard: any) => (
         <Space>
-          <Button size={size} onClick={() => onClickEdit(recard)} type="primary">编辑</Button>
-          <Popconfirm
-            title="删除"
-            description={`您确认删除这条${affairName}数据吗？`}
-            okText="确定"
-            cancelText="取消"
-            onConfirm={() => onClickDelte([recard[props.rowKey as any]])}
-          >
-            <Button danger size={size}>删除</Button>
-          </Popconfirm>
+          {
+            props.editLoading !== undefined
+              ? <Button size={size} onClick={() => onClickEdit(recard)} type="primary">编辑</Button>
+              : ''
+          }
+          {
+            props.deleteLoading !== undefined
+              ? <Popconfirm
+                  cancelText="取消"
+                  description={`您确认删除这条${affairName}数据吗？`}
+                  okText="确定"
+                  okButtonProps={{loading: props.deleteLoading}}
+                  onConfirm={() => onClickDelte([recard[props.rowKey as any]])}
+                  title="删除"
+                >
+                  <Button danger loading={window.localStorage.getItem('deleteKeys')?.split(',')?.includes(recard[props.rowKey as any])} size={size}>删除</Button>
+                </Popconfirm>
+              : ''
+          }
           <Button size={size} onClick={() => onClickDetail(recard)}>详情</Button>
         </Space>
       )
     }
-  ), [])
 
   // 过滤掉需要在表格隐藏的栏目
   const tableColumns = useMemo(() => {
@@ -129,14 +139,16 @@ export function RaeTable<T> ({
   const affairColumns = useMemo(() => columns.filter(column => column.affairType), [columns])
 
   const onCloseAffair = useCallback(() => setOpen(), [])
+
   const onFinishAffair = useCallback(() => setOpen(), [])
-  const onSuccessAffair = useCallback((value: T) =>  operationType === OPERATION.DISPLAY
+
+  const onSuccessAffair = (value: T) => {
+    return operationType === OPERATION.DISPLAY
     ? new Promise((resolve) => {setOpen(); resolve({})})
     : onAffairSuccess(value, operationType)
       .then(() => setOpen())
       .catch((err) => {throw new Error(err)})
-  , [operationType])
-  
+  }
   useEffect(() => onCondChange && onCondChange(condition), [condition])
   
   return (
@@ -171,7 +183,7 @@ export function RaeTable<T> ({
         className={props.tableContainerClass}
         style={{...style, ...tableContainerStyle}}
       >
-        <Table columns={tableColumns as any} size={size} {...props as any} />
+        <Table columns={tableColumns} size={size} {...props as any} />
       </TableContainer>
 
       <Modal

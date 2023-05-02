@@ -31,9 +31,9 @@ function initPromise<T> (data?: Params): Promise<Responsed<T>> {
 }
 
 export function Epage<T> ({
-  addAffair = initPromise<T>,
-  delAffair = initPromise<T>,
-  editAffair = initPromise<T>,
+  addAffair,
+  delAffair,
+  editAffair,
   formatList = (data: T[]) => data,
   getLists,
   // formatList,
@@ -42,24 +42,20 @@ export function Epage<T> ({
 
   const [params, setParams] = useState(() => formatSearch(window.location.href))
 
-  const [addLoading, addFn] = useFetch(addAffair)
+  const [addLoading, addFn, addRes] = useFetch(addAffair ?? initPromise<T>)
 
-  const [delLoading, delFn] = useFetch(delAffair)
+  const [delLoading, delFn] = useFetch(delAffair ?? initPromise<T>)
 
-  const [editLoading, editFn] = useFetch(editAffair)
+  const [editLoading, editFn, editRes] = useFetch(editAffair ?? initPromise<T>)
 
   const [getLoading, getFn, getRes] = useFetch<Responsed<T[]>, any>(getLists, {
     refreshDeps: [params],
     debounceWait: 400,
-    manual: true
   })
 
   const dataSource = useMemo(() => formatList?.(getRes?.data ?? []), [getRes])
 
-  const onConditionChange = useCallback((params: any) => {
-    console.log(params)
-    setParams(params)
-  }, [])
+  const onConditionChange = useCallback((params: any) => setParams(params), [])
 
   const FN = {
     [OPERATION.ADD]: addFn,
@@ -69,18 +65,22 @@ export function Epage<T> ({
   const onAffairSuccess = useCallback((
     value: T,
     type: OPERATION.ADD | OPERATION.EDIT
-  ) => FN[type](value).then(() => getFn(params)), [getFn, params])
+  ) => FN[type](value), [getFn, params])
 
   // 点击确认删除的请求处理
-  const onClickDeleteButton = useCallback((keys: any[]) => delFn(keys), [])
+  const onClickDeleteButton = useCallback((keys: any[]) => delFn(keys).then(res => console.log(res)), [])
 
-  useEffect((): any => getFn(params), [params])
+  useEffect(() => {getFn(params)}, [params])
+
+  useEffect(() => {
+    if (addRes || editRes) getFn(params)
+  }, [addRes, editRes])
 
   return (
     <ETable
-      addLoading={addLoading}
-      deleteLoading={delLoading}
-      editLoading={editLoading}
+      addLoading={addAffair ? addLoading : undefined}
+      deleteLoading={delAffair ? delLoading : undefined}
+      editLoading={editAffair ? editLoading : undefined}
       dataSource={dataSource}
       loading={getLoading}
       onAffairSuccess={onAffairSuccess}
