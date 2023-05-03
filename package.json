@@ -2,27 +2,26 @@
   "name": "raetable",
   "version": "0.0.1",
   "description": "react antd easy table",
+  "license": "MIT",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "npm run dev",
-    "dev": "dumi dev",
     "build": "father build",
     "build:watch": "father dev",
+    "deploy": "gh-pages -d dist",
+    "dev": "dumi dev",
     "docs:build": "dumi build",
-    "prepare": "husky install && dumi setup",
     "doctor": "father doctor",
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "prepare": "husky install && dumi setup",
     "prepublishOnly": "father doctor && npm run build",
-    "deploy": "gh-pages -d dist"
+    "start": "npm run dev"
   },
-  "authors": [],
-  "license": "MIT",
-  "files": [
-    "dist"
-  ],
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -45,15 +44,13 @@
       "prettier --parser=typescript --write"
     ]
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "ahooks": "^3.7.7",
+    "antd": "^5.4.6",
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
-    "@ant-design/icons": "^5.0.1",
     "@babel/runtime": "^7.21.0",
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
@@ -62,8 +59,6 @@
     "@types/react-dom": "^18.2.1",
     "@types/styled-components": "^5.1.26",
     "@umijs/lint": "^4.0.67",
-    "ahooks": "^3.7.7",
-    "antd": "^5.4.6",
     "dumi": "^2.1.22",
     "eslint": "^8.39.0",
     "father": "^4.2.0",
@@ -75,7 +70,14 @@
     "prettier-plugin-packagejson": "^2.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.10",
     "stylelint": "^15.6.0"
-  }
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "authors": []
 }
