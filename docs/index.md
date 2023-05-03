@@ -4,7 +4,7 @@ hero:
   description: react antd Easy Table
   actions:
     - text: 快速开始
-      link: /guide
+      link: /guide/start
     - text: 组件
       link: /components/e-page
 features:

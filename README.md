@@ -6,13 +6,15 @@
 react antd easy table
 
 ## Usage
-
-TODO
-
-## Options
-
-TODO
-
+To view more online examples and docs, please visit [site](src="https://mmdctjj.github.io/raetable/").
+```js
+// 下载
+npm instanll raetable -D
+// 引入
+import { EPage } from 'raetable';
+// 使用
+export default () => <EPage {...props}/>
+```
 ## Development
 
 ```bash

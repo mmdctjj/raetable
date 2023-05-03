@@ -19,6 +19,8 @@ export type { ETitleProps } from './components/ETitle'
 export { default as EPage} from './components/EPage'
 export type { EPageProps } from './components/EPage'
 
+export { default as EtableColumn} from './components/EtableColumn'
+
 export { OPERATION, FORMTYPE } from './enum'
 
 export {
