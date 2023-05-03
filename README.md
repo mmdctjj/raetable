@@ -6,7 +6,9 @@
 react antd easy table
 
 ## Usage
-To view more online examples and docs, please visit [site](src="https://mmdctjj.github.io/raetable/").
+
+To view more online examples and docs, please visit [site](https://mmdctjj.github.io/raetable).
+
 ```js
 // 下载
 npm instanll raetable -D
@@ -15,6 +17,7 @@ import { EPage } from 'raetable';
 // 使用
 export default () => <EPage {...props}/>
 ```
+
 ## Development
 
 ```bash
