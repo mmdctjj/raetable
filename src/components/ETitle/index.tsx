@@ -1,13 +1,22 @@
 import { Button, Space } from "antd";
 import React, { FC, ReactNode, useCallback } from "react";
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 import { ArrowLeftOutlined } from "@ant-design/icons"
+
+const TitleContainer = styled.div`
+  background-color: @primary-color
+`
 
 export const SpaceBetween = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
+
+const titleStyle = {
+  background: '#fff',
+  padding: 15,
+}
 
 const Div = styled.div``
 
@@ -38,14 +47,24 @@ export interface ETitleProps {
    * @default ""
    */
   backPath?: string
+  /**
+	 * 标题容器类名
+	 */
+	titleContainerClass?: string
+	/**
+	 * 标题容器样式
+	 */
+	titleContainerStyle?: CSSProperties
   
 }
 export const ETitle:FC<ETitleProps> = ({
   affairName = '',
   backPath = '',
   extendAffair,
-  onClickAdd = () => {},
-  pageTitle = ''
+  onClickAdd,
+  pageTitle = '',
+  titleContainerStyle,
+  titleContainerClass
 }) => {
 
   const onBack = useCallback(() => {
@@ -56,22 +75,28 @@ export const ETitle:FC<ETitleProps> = ({
   }, [backPath])
 
   return (
-    <SpaceBetween>
-      <Div>
-        {
-          backPath && backPath !== ''
-            ? <Button icon={<ArrowLeftOutlined />} onClick={onBack} type="link"></Button>
-            : ''
-        }
-        {pageTitle}
-      </Div>
-      <Div>
-        <Space>
-          {extendAffair}
-          <Button onClick={onClickAdd} type="primary">+ 新增{affairName}</Button>
-        </Space>
-      </Div>
-    </SpaceBetween>
+    <TitleContainer className={titleContainerClass} style={{...titleStyle, ...titleContainerStyle}}>
+      <SpaceBetween>
+        <Div>
+          {
+            backPath && backPath !== ''
+              ? <Button icon={<ArrowLeftOutlined />} onClick={onBack} type="link"></Button>
+              : ''
+          }
+          {pageTitle}
+        </Div>
+        <Div>
+          <Space>
+            {extendAffair}
+            {
+              onClickAdd
+                ? <Button onClick={onClickAdd} type="primary">+ 新增{affairName}</Button>
+                : ''
+            }
+          </Space>
+        </Div>
+      </SpaceBetween>
+    </TitleContainer>
   )
 }
 

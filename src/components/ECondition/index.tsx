@@ -2,6 +2,18 @@ import React, { useCallback, useEffect } from "react"
 import { Button, Col, Form, Row, Space } from "antd"
 import EAnimation from "../EAnimation"
 import { EFormItem, ETableColumnProps, OPERATION } from "raetable"
+import styled, { CSSProperties } from "styled-components"
+
+const ConditionContainer = styled.div`
+  background-color: @primary-color
+`
+
+const style = {
+  background: '#fff',
+  padding: 15,
+  margin: 15
+}
+
 
 export interface EConditionProps<T> {
   /**
@@ -27,11 +39,21 @@ export interface EConditionProps<T> {
    * @param value 
    * @returns 
    */
-  onConditionChange: (value: object) => void
+  onConditionChange: (value: object) => void,
+  /**
+	 * 条件容器类名
+	 */
+	conditionContainerClass?: string
+	/**
+	 * 条件容器样式
+	 */
+	conditionContainerStyle?: CSSProperties
 }
 
 export function ECondition<T> ({
   condition,
+  conditionContainerClass,
+  conditionContainerStyle,
   columns,
   onConditionChange,
   showConditionOkBtn = false,
@@ -50,7 +72,7 @@ export function ECondition<T> ({
   // eslint-disable-next-line
   useEffect(() => form.setFieldsValue(condition), [condition])
 
-  return (
+  return (<ConditionContainer style={{...style, ...conditionContainerStyle}} className={conditionContainerClass}>
     <Form
       form={form}
       labelCol={{span: 6}}
@@ -93,7 +115,7 @@ export function ECondition<T> ({
       </Row>
       
     </Form>
-  )
+  </ConditionContainer>)
 }
 
 export default ECondition

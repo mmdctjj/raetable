@@ -4,6 +4,7 @@ import type { ColumnType, TableProps } from "antd/es/table"
 import { OPERATION } from "raetable/enum"
 import type { Dispatch, ReactNode } from "react"
 import { CSSProperties } from "styled-components"
+import { ETitleProps } from "../ETitle"
 
 export interface ESelectProps {
 	value: string | number,
@@ -71,12 +72,12 @@ export type ETableColumnProps<T> = {
 	formatOptions?: (data: any[]) => ESelectProps[]
 } & ColumnType<T>
 
-export interface ETableProps<Record> extends TableProps<Record> {
+export interface ETableProps<Record> extends TableProps<Record>, ETitleProps {
 	/**
 	 * 业务名称，弹出框title
 	 * @default ""
 	 */
-	affairName?: string | undefined
+	// affairName?: string | undefined
 	/**
 	 * 业务宽度
 	 * @default 700
@@ -86,7 +87,7 @@ export interface ETableProps<Record> extends TableProps<Record> {
    * 返回按钮连接，如果没有，则不会显示返回按钮
    * @default ""
    */
-  backPath?: string
+  // backPath?: string
 	/**
 	 * 表格栏目columns
 	 * @default []
@@ -167,12 +168,5 @@ export interface ETableProps<Record> extends TableProps<Record> {
 	 * 表格容器样式
 	 */
 	tableContainerStyle?: CSSProperties
-	/**
-	 * 标题容器类名
-	 */
-	titleContainerClass?: string
-	/**
-	 * 标题容器样式
-	 */
-	titleContainerStyle?: CSSProperties
+
 }

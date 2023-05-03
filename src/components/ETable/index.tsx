@@ -7,21 +7,9 @@ import styled from 'styled-components';
 import { EForm, OPERATION, formatSearch, useTrigger } from 'raetable';
 import { ETitle } from '../ETitle';
 
-const ConditionContainer = styled.div`
-  background-color: @primary-color
-`
-
 const TableContainer = styled.div`
   background-color: @primary-color
 `
-
-const TitleContainer = styled.div`
-  background-color: @primary-color
-`
-const titleStyle = {
-  background: '#fff',
-  padding: 15,
-}
 
 const style = {
   background: '#fff',
@@ -38,7 +26,6 @@ export function RaeTable<T> ({
   pageTitle = '',
   onAffairSuccess = () => new Promise(() => {}),
   onConditionChange: onCondChange,
-  conditionContainerStyle = {},
   tableContainerStyle = {},
   titleContainerStyle = {},
   ...props
@@ -154,30 +141,24 @@ export function RaeTable<T> ({
   return (
     <>
 
-      <TitleContainer
-        className={props.titleContainerClass}
-        style={{...titleStyle, ...titleContainerStyle}}
-      >
-        <ETitle
-          affairName={affairName}
-          backPath={backPath}
-          extendAffair={extendAffair}
-          onClickAdd={onClickAdd}
-          pageTitle={pageTitle}
-        />
-      </TitleContainer>
+      <ETitle
+        affairName={affairName}
+        backPath={backPath}
+        extendAffair={extendAffair}
+        onClickAdd={props.addLoading !== undefined ? onClickAdd : undefined}
+        pageTitle={pageTitle}
+        titleContainerClass={props.titleContainerClass}
+        titleContainerStyle={titleContainerStyle}
+      />
 
-      <ConditionContainer
-        className={props.conditionContainerClass}
-        style={{...style, ...conditionContainerStyle}}
-      >
-        <ECondition
-          columns={conditionColumns}
-          condition={condition}
-          size={size}
-          onConditionChange={onConditionChange}
-        />
-      </ConditionContainer>
+      <ECondition
+        columns={conditionColumns}
+        conditionContainerClass={props.conditionContainerClass}
+        conditionContainerStyle={props.conditionContainerStyle}
+        condition={condition}
+        size={size}
+        onConditionChange={onConditionChange}
+      />
 
       <TableContainer
         className={props.tableContainerClass}

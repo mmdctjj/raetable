@@ -5,8 +5,21 @@ title: ECondition 条件
 path: /components
 group: 基础组件
 ---
+:::warning
+`ECondition`的默认样式如下
+```js
+const style = {
+  background: '#fff',
+  padding: 15,
+  margin: 15
+}
+```
+:::
 ### 基本用法
 ```jsx
+/**
+ * compact: true
+ */
 import { ECondition } from 'raetable';
 import { Form } from 'antd';
 import { useEffect, useState } from 'react'
@@ -82,6 +95,9 @@ export default () => {
 ```
 ### useCondition用法
 ```jsx
+/**
+ * compact: true
+ */
 import { useCondition } from 'raetable';
 import { Form } from 'antd';
 import { useEffect, useState } from 'react'
