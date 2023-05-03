@@ -4,7 +4,6 @@ export default defineConfig({
   outputPath: 'docs-dist',
   apiParser: {},
   base: 'raetable',
-  logo: '/logo.png',
   resolve: {
     docDirs: ['docs'],
     atomDirs: [{ type: 'component', dir: 'src/components' }],
@@ -12,6 +11,7 @@ export default defineConfig({
   },
   publicPath: process.env.NODE_ENV === 'production' ? '/raetable/' : '/',
   themeConfig: {
+    logo: process.env.NODE_ENV === 'production' ? '/raetable/logo.png' : '/logo.png',
     name: 'raetable',
     prefersColor: { default: 'auto' },
     footer: '@raetable',
