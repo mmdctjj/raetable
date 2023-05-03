@@ -28,6 +28,12 @@ export interface ETitleProps {
   affairName?: string
 
   /**
+   * 页面描述
+   * @default <></>
+   */
+  decription?: ReactNode
+
+  /**
    * 扩展业务，ReactNode类型
    * @default <></>
    */
@@ -60,6 +66,7 @@ export interface ETitleProps {
 export const ETitle:FC<ETitleProps> = ({
   affairName = '',
   backPath = '',
+  decription,
   extendAffair,
   onClickAdd,
   pageTitle = '',
@@ -77,14 +84,15 @@ export const ETitle:FC<ETitleProps> = ({
   return (
     <TitleContainer className={titleContainerClass} style={{...titleStyle, ...titleContainerStyle}}>
       <SpaceBetween>
-        <Div>
+        <Space>
           {
             backPath && backPath !== ''
               ? <Button icon={<ArrowLeftOutlined />} onClick={onBack} type="link"></Button>
               : ''
           }
           {pageTitle}
-        </Div>
+          {decription}
+        </Space>
         <Div>
           <Space>
             {extendAffair}

@@ -4,6 +4,7 @@ export default defineConfig({
   outputPath: 'docs-dist',
   apiParser: {},
   base: 'raetable',
+  logo: '/logo.png',
   resolve: {
     docDirs: ['docs'],
     atomDirs: [{ type: 'component', dir: 'src/components' }],

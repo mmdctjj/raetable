@@ -67,7 +67,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     affairType: 'select',
-    // conditionType: 'select',
+    conditionType: 'select',
     select: [
       {
         value: 1,
@@ -81,6 +81,46 @@ const columns = [
       },
     ]
   },
+  {
+    dataIndex: 'gender',
+    key: 'gender',
+    title: 'gender',
+    conditionType: 'select',
+    more: true,
+    select: [
+      {
+        value: 1,
+        label: '男',
+        key: 1
+      },
+      {
+        value: 2,
+        label: '女',
+        key: 2
+      },
+    ]
+  },
+  {
+    dataIndex: 'test',
+    key: 'test',
+    title: 'test',
+    more: true,
+    conditionType: 'input'
+  },
+  {
+    dataIndex: 'test1',
+    key: 'test1',
+    title: 'test1',
+    more: true,
+    conditionType: 'input'
+  },
+  {
+    dataIndex: 'test2',
+    key: 'test2',
+    title: 'test2',
+    more: true,
+    conditionType: 'input'
+  }
 ]
 
 const datas = [

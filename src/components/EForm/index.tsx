@@ -1,11 +1,11 @@
-import { Button, Form, Input } from "antd"
+import { Button, Form, FormItemProps, FormProps, Input } from "antd"
 import React, { ReactNode, useCallback, useEffect } from "react"
 import { EFormItem, ETableColumnProps, OPERATION } from "raetable"
 import { BottomToTop } from "raetable"
 import { useTrigger } from "raetable"
 import { NamePath } from "antd/es/form/interface"
 
-export interface EFormProps<T> {
+export interface EFormProps<T> extends FormItemProps, FormProps {
   /**
    * 业务数据
    */
@@ -26,7 +26,7 @@ export interface EFormProps<T> {
   /**
    * 扩展表单 Form.Item
    */
-  extendForm?: ReactNode
+  extendFormItem?: ReactNode
   /**
    * 需要隐藏label的key
    * @default []
@@ -47,6 +47,18 @@ export interface EFormProps<T> {
    * @returns Promise
    */
   onAffairSuccess?: (values: T) => Promise<any>
+  /**
+ * 不需要配置的字段
+ */
+  name?: string
+  /**
+  * 不需要配置的字段
+  */
+  children?: ReactNode
+  /**
+  * 不需要配置的字段
+  */
+  onReset?: undefined
 }
 
 export function EForm<T>({
@@ -54,11 +66,12 @@ export function EForm<T>({
   affairData = {} as T,
   affairWidth,
   columns = [],
-  extendForm,
+  extendFormItem,
   type = OPERATION.ADD,
   isShowSumbit = true,
   hiddenLabels = [],
   onAffairSuccess,
+  ...props
 }: EFormProps<T>) {
 
   const [form] = Form.useForm()
@@ -84,8 +97,9 @@ export function EForm<T>({
       form={form}
       layout="horizontal"
       labelAlign="right"
-      labelCol={{ span: affairWidth && affairWidth > 900 ? 2 : 5 }}
+      labelCol={{ span: affairWidth && affairWidth > 900 ? 2 : 3 }}
       labelWrap={true}
+      {...props}
     >
 
       <Form.Item style={{ display: 'none' }} name="id"><Input type="hidden" /></Form.Item>
@@ -94,31 +108,33 @@ export function EForm<T>({
         <Form.Item
           key={item.key}
           label={<>{hiddenLabels.includes(item.title as string) ? '' : item.title}</>}
-          name={item.dataIndex as NamePath} rules={item.rules ?? []}
+          name={item.dataIndex as NamePath}
+          rules={item.rules ?? []}
         >
           <EFormItem
             value
-            content={item}
+            content={item as any}
             onChange={item.onChange}
             type={type}
             typeKey="affairType"
+            {...props}
           />
         </Form.Item>
       </BottomToTop>)}
 
-      <BottomToTop index={columns.length + 1}>{extendForm}</BottomToTop>
+      <BottomToTop index={columns.length + 1}>{extendFormItem}</BottomToTop>
 
       {
         isShowSumbit
 
-          ? <BottomToTop index={extendForm ? columns.length + 2 : columns.length + 1}>
+          ? <BottomToTop index={extendFormItem ? columns.length + 2 : columns.length + 1}>
               <Form.Item
                 wrapperCol={{
                   offset: columns.filter(item => hiddenLabels.includes(item.title as string)).length
                     ? 0
                     : affairWidth && affairWidth > 900
                     ? 2
-                    : 5 
+                    : 3
                 }}
               >
                 <>

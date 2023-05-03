@@ -23,7 +23,13 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     title: 'name',
-    affairType: 'input'
+    affairType: 'input',
+    rules: [
+      {
+        required: true,
+        message: 'Please input your name!',
+      },
+    ]
   },
   {
     dataIndex: 'age',

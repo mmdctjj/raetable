@@ -6,12 +6,12 @@ path: /components
 group: 进阶组件
 ---
 ### 基本用法
+`ETable`组件是由上述基础组件组合而成的，大多数情况下，你无需关注基础组件
 ```jsx
 /**
  * background: '#eee'
  * compact: true
  */
-
 import { useState, useCallback } from 'react';
 import { ETable } from 'raetable';
 
@@ -67,6 +67,45 @@ const columns = [
       },
     ]
   },
+  {
+    dataIndex: 'gender',
+    key: 'gender',
+    title: 'gender',
+    conditionType: 'select',
+    select: [
+      {
+        value: 1,
+        label: '男',
+        key: 1
+      },
+      {
+        value: 2,
+        label: '女',
+        key: 2
+      },
+    ]
+  },
+  {
+    dataIndex: 'test',
+    key: 'test',
+    title: 'test',
+    more: true,
+    conditionType: 'input'
+  },
+  {
+    dataIndex: 'test1',
+    key: 'test1',
+    title: 'test1',
+    more: true,
+    conditionType: 'input'
+  },
+  {
+    dataIndex: 'test2',
+    key: 'test2',
+    title: 'test2',
+    more: true,
+    conditionType: 'input'
+  },
 ]
 
 const datas = [
@@ -112,7 +151,10 @@ export default () => {
   return (
     <ETable
       affairName="靓仔"
-      backPath="/hhh"
+      affairWidth={900}
+      affairContainerType="drawer"
+      addLoading={addLoading}
+      backPath="/raetable/guide"
       columns={columns}
       dataSource={dataSource}
       loading={loading}
@@ -131,6 +173,10 @@ export default () => {
 
 ```
 ### API
+|属性|描述|类型|默认值|
+| ---- | ---- | ---- | ---- |
+|affairContainerType|业务弹出框类型|'drawer'、 'modal'|modal|
+
 <API></API>
 <API id="ETableColumn"></API>
 <API id="ESelect"></API>

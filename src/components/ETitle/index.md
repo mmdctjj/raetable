@@ -1,7 +1,7 @@
 ---
 nav:
   title: 组件
-title: ETitle 表格
+title: ETitle 标题
 path: /components
 group: 基础组件
 ---
@@ -23,12 +23,12 @@ const titleStyle = {
  * description: 提供`onClickAdd`属性就说明你想展示新增按钮。
  */
 import { ETitle } from 'raetable';
-import { Button } from "antd";
+import { Breadcrumb, Button } from "antd";
 
 export default () => (
   <ETitle
     affairName="靓仔"
-    backPath="/liangmei"
+    decription={<Breadcrumb items={[{ title: 'Home'}, { title: 'An Application'}]} />}
     extendAffair={(
       <>
         <Button>上传</Button>
@@ -58,6 +58,38 @@ import { Button } from "antd";
 export default () => (
   <ETitle pageTitle="靓仔管理" />
 )
+
+```
+
+### useTitle用法
+```jsx
+/**
+ * background: '#eee'
+ * compact: true
+ * title: useTitle用法
+ */
+import { useTitle } from 'raetable';
+import { Button, Breadcrumb } from "antd";
+
+
+export default () => {
+
+  const [opt, setOpt, ETitle] = useTitle({
+    affairName: "靓仔",
+    backPath: "/raetable/guide",
+    decription: <Breadcrumb items={[{ title: 'Home'}, { title: 'An Application'}]} />,
+    extendAffair: (
+      <>
+        <Button>上传</Button>
+        <Button>下载</Button>
+      </>
+    ),
+    pageTitle: "靓仔管理",
+    onClickAdd: () => console.log('你点击新增了'),
+  })
+  
+  return <ETitle pageTitle="靓仔管理" />
+}
 
 ```
 ### API

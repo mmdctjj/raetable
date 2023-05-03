@@ -6,7 +6,7 @@ hero:
     - text: 快速开始
       link: /guide
     - text: 组件
-      link: /components/e-table
+      link: /components/e-page
 features:
   - title: 继承性配置
     emoji: 💎
@@ -17,8 +17,14 @@ features:
   - title: 支持使用hook生成component
     emoji: 🚀
     description: 所有组件支持使用对应的hook生成
-  - title: 开箱即用
+  - title: 内置动画
     emoji: 🎨
+    description: 内置多种动画组件
+  - title: 高扩展性
+    emoji: 🚥
+    description: 支持自定义组件
+  - title: 开箱即用
+    emoji: 💡
     description: 大量默认配置，开箱即用
 
 ---

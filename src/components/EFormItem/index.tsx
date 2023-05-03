@@ -20,7 +20,7 @@ export function RaeFormItem<T> ({
     
     [FORMTYPE.INPUT]: <Input size={size} value={value} placeholder={`请输入${content.title}`} onChange={onChange} />,
     
-    [FORMTYPE.RADIO]: <Radio.Group size={size} options={content.select} value={value} onChange={onChange} disabled={type === OPERATION.DISPLAY} {...content} />,
+    [FORMTYPE.RADIO]: <Radio.Group size={size} options={content.select} value={value} onChange={onChange} disabled={type === OPERATION.DISPLAY} {...content as any} />,
 
     [FORMTYPE.SWITCH]: <Switch onChange={val => onChange?.(val === true ? 1 : 0)} checked={typeof value === 'undefined' ? true : Boolean(value)} disabled={type === OPERATION.DISPLAY} />,
 
@@ -36,7 +36,7 @@ export function RaeFormItem<T> ({
     
     [FORMTYPE.INPUT]: <>{value}</>,
     
-    [FORMTYPE.RADIO]: <Radio.Group size={size} options={content.select} value={value} onChange={onChange} disabled={type === OPERATION.DISPLAY} {...content} />,
+    [FORMTYPE.RADIO]: <Radio.Group size={size} options={content.select} value={value} onChange={onChange} disabled={type === OPERATION.DISPLAY} {...content as any} />,
 
     [FORMTYPE.SWITCH]: <Switch onChange={val => onChange?.(val === true ? 1 : 0)} checked={typeof value === 'undefined' ? true : Boolean(value)} disabled={type === OPERATION.DISPLAY} />,
 

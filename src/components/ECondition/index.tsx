@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useCallback, useEffect, useMemo } from "react"
 import { Button, Col, Form, Row, Space } from "antd"
 import EAnimation from "../EAnimation"
-import { EFormItem, ETableColumnProps, OPERATION } from "raetable"
+import { EFormItem, ETableColumnProps, OPERATION, useTrigger } from "raetable"
 import styled, { CSSProperties } from "styled-components"
+import { DownOutlined, UpOutlined } from "@ant-design/icons"
 
 const ConditionContainer = styled.div`
   background-color: @primary-color
@@ -13,6 +14,11 @@ const style = {
   padding: 15,
   margin: 15
 }
+
+const ERow = styled(Row)`
+  width: 100%;
+  margin: 10px 0px;
+`
 
 
 export interface EConditionProps<T> {
@@ -62,6 +68,10 @@ export function ECondition<T> ({
 
   const [form] = Form.useForm()
 
+  const [more, togger] = useTrigger()
+
+  const columns_ = useMemo(() => columns?.filter(column => more || !column.more), [columns, more])
+
   // 监听动态条件
   const onChange = useCallback((_: any, data: object) => onConditionChange((curr: object) => ({ ...curr, ...data})), [onConditionChange])
 
@@ -81,29 +91,29 @@ export function ECondition<T> ({
       size={size}
     >
 
-      <Row style={{ width: '100%' }}>
+      <ERow>
+        {columns_?.map((item, idx) =><Col key={item.key} span={columns_.length < 4 ? (24 / columns_.length) : 6}>
 
-        <Col span={20}>
+          <EAnimation index={idx}>
+            <Form.Item key={item.key} name={item.dataIndex as any} label={item.title as string} style={{margin: '10px 0'}}>
+              <EFormItem content={item} size={size} typeKey="conditionType" type={OPERATION.EDIT} value="" />
+            </Form.Item>
+          </EAnimation>
 
-          <Row>
-            {columns?.map((item, idx) =><Col key={item.key} span={columns.length === 4 ? 6 : 6}>
+        </Col>)}
+      </ERow>
 
-              <EAnimation index={idx}>
-                <Form.Item key={item.key} name={item.dataIndex as any} label={item.title as string}>
-                  <EFormItem content={item} size={size} typeKey="conditionType" type={OPERATION.EDIT} value="" />
-                </Form.Item>
-              </EAnimation>
-
-            </Col>)}
-          </Row>
-
-        </Col>
-
-        <Col span={4} style={{textAlign: 'right'}}>
+      <ERow justify="space-between">
+        <Col></Col>
+        <Col>
           
           <Form.Item>
             <EAnimation index={columns?.length ?? 5}>
-              <Space>
+              <Space style={{marginRight: -15}}>
+                {columns.find(column => column.more)
+                  ? <Button icon={more ? <DownOutlined /> : <UpOutlined />} onClick={togger} type="link">更多条件</Button>
+                  : ''
+                }
                 {showConditionOkBtn ? <Button onClick={() => onConditionChange(form.getFieldsValue())} type="primary">确定</Button> : ''}
                 <Button onClick={() => clearCondition()} danger>清空</Button>
               </Space>
@@ -112,7 +122,7 @@ export function ECondition<T> ({
         
         </Col>
 
-      </Row>
+      </ERow>
       
     </Form>
   </ConditionContainer>)

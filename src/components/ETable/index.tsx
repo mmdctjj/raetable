@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import type { ETableColumnProps, ETableProps } from './interface';
 import ECondition from '../ECondition';
-import { Button, Modal, Popconfirm, Space, Table } from 'antd';
+import { Button, Drawer, Modal, Popconfirm, Space, Table } from 'antd';
 import styled from 'styled-components';
 import { EForm, OPERATION, formatSearch, useTrigger } from 'raetable';
 import { ETitle } from '../ETitle';
@@ -18,6 +18,7 @@ const style = {
 }
 
 export function RaeTable<T> ({
+  affairContainerType = 'modal',
   affairName = '',
   backPath = '',
   columns,
@@ -144,6 +145,7 @@ export function RaeTable<T> ({
       <ETitle
         affairName={affairName}
         backPath={backPath}
+        decription={props.decription}
         extendAffair={extendAffair}
         onClickAdd={props.addLoading !== undefined ? onClickAdd : undefined}
         pageTitle={pageTitle}
@@ -157,6 +159,7 @@ export function RaeTable<T> ({
         conditionContainerStyle={props.conditionContainerStyle}
         condition={condition}
         size={size}
+        showConditionOkBtn={props.showConditionOkBtn}
         onConditionChange={onConditionChange}
       />
 
@@ -167,21 +170,41 @@ export function RaeTable<T> ({
         <Table columns={tableColumns} size={size} {...props as any} />
       </TableContainer>
 
-      <Modal
-        open={open}
-        onCancel={onCloseAffair}
-        onOk={onFinishAffair}
-        title={TITLE[operationType] + affairName}
-        footer={false}
-      >
-        <EForm
-          affairWidth={700}
-          columns={affairColumns}
-          affairData={operationData}
-          type={operationType}
-          onAffairSuccess={onSuccessAffair}
-        />
-      </Modal>
+      {
+        affairContainerType === 'modal'
+          ? <Modal
+          open={open}
+          width={props.affairWidth}
+          onCancel={onCloseAffair}
+          onOk={onFinishAffair}
+          title={TITLE[operationType] + affairName}
+          footer={false}
+        >
+          <EForm
+            affairWidth={700}
+            columns={affairColumns}
+            affairData={operationData}
+            type={operationType}
+            onAffairSuccess={onSuccessAffair}
+          />
+        </Modal>
+        : <Drawer
+          open={open}
+          width={props.affairWidth}
+          onClose={onCloseAffair}
+          title={TITLE[operationType] + affairName}
+          footer={false}
+        >
+          <EForm
+            affairWidth={700}
+            columns={affairColumns}
+            affairData={operationData}
+            type={operationType}
+            onAffairSuccess={onSuccessAffair}
+          />
+        </Drawer>
+      }
+      
     
     </>
     

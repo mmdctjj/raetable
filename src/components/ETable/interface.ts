@@ -1,4 +1,4 @@
-import { Rule } from "antd/es/form"
+import { FormItemProps, FormProps, Rule } from "antd/es/form"
 import type { DefaultOptionType } from "antd/es/select"
 import type { ColumnType, TableProps } from "antd/es/table"
 import { OPERATION } from "raetable/enum"
@@ -52,6 +52,10 @@ export type ETableColumnProps<T> = {
 	 * @default false
 	 */
 	linked?: boolean,
+	 /**
+   * 
+   */
+	 more?: true
 	/**
 	 * 监听栏目变化回调函数
 	 * @param val 
@@ -70,14 +74,14 @@ export type ETableColumnProps<T> = {
 	 * @returns 
 	 */
 	formatOptions?: (data: any[]) => ESelectProps[]
-} & ColumnType<T>
+} & ColumnType<T> & FormItemProps & FormProps
 
 export interface ETableProps<Record> extends TableProps<Record>, ETitleProps {
 	/**
-	 * 业务名称，弹出框title
-	 * @default ""
+	 * 业务弹出框类型
+	 * @default modal
 	 */
-	// affairName?: string | undefined
+	affairContainerType?: 'drawer' | 'modal'
 	/**
 	 * 业务宽度
 	 * @default 700
@@ -87,7 +91,6 @@ export interface ETableProps<Record> extends TableProps<Record>, ETitleProps {
    * 返回按钮连接，如果没有，则不会显示返回按钮
    * @default ""
    */
-  // backPath?: string
 	/**
 	 * 表格栏目columns
 	 * @default []
@@ -107,8 +110,20 @@ export interface ETableProps<Record> extends TableProps<Record>, ETitleProps {
 	 * @default []
 	 */
 	dataSource?: Record[]
+	/**
+	 * 新增时加载状态，如果缺失布尔类型时，则不会显示新增按钮
+	 * @default undefined
+	 */
 	addLoading?: boolean,
+	/**
+	 * 编辑时加载状态，如果缺失布尔类型时，则不会显示编辑按钮
+	 * @default undefined
+	 */
 	deleteLoading?: boolean,
+	/**
+	 * 删除时加载状态，如果缺失布尔类型时，则不会显示删除按钮
+	 * @default undefined
+	 */
 	editLoading?: boolean,
 	/**
 	 * 表格编辑栏扩展
@@ -122,23 +137,43 @@ export interface ETableProps<Record> extends TableProps<Record>, ETitleProps {
 	 * 业务表单扩展
 	 */
 	extendForm?: ReactNode,
+	/**
+	 * 格式化业务数据函数，点击每行弹出业务层时调用
+	 * @param data 
+	 * @returns 
+	 */
 	formatAffairData?: (data: Record) => Record,
+	/**
+	 * 业务执行成功时回调函数
+	 * @param values 
+	 * @param type 
+	 * @returns Promise类型
+	 */
 	onAffairSuccess?: (values: Record, type: OPERATION.ADD | OPERATION.EDIT) => Promise<any>,
 	/**
 	 * 条件触发时回调
 	 */
 	onConditionChange?: Dispatch<any>,
-	// visible,
-	// onDrawerClose : () => any,
+	/**
+	 * 点击确认删除回调函数
+	 * @param keys 
+	 * @returns Promise类型
+	 */
 	onClickDeleteButton?: (keys: unknown[]) => Promise<any>,
-	// onClickEditButton : () => any,
-	onRowSelect?: (data: any[]) => void,
+	/**
+	 * 页面标题
+	 */
 	pageTitle?: string,
 	/**
 	 * 组件尺寸
 	 * @default middle
 	 */
 	size?: 'large' | 'middle' | 'small'
+	/**
+   * 是否展示条件模块确定按钮，不展示时自动提交表单，否则只有点击确定按钮才会提交表单
+   * @default false
+   */
+  showConditionOkBtn?: boolean
 	/**
 	 * 是否显示新增按钮
 	 * @default true

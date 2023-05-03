@@ -22,11 +22,13 @@ export type { EPageProps } from './components/EPage'
 export { OPERATION, FORMTYPE } from './enum'
 
 export {
+  useAnimation,
   useCondition,
   useFetch,
   useForm,
   useFormItem,
   useTable,
+  useTitle,
   usePage,
   useTrigger
 } from './hooks'
