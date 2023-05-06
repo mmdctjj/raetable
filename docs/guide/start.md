@@ -2,11 +2,12 @@
 nav:
   title: 指南
   path: /guide/start
-  group:
-    title: 开始
 title: 快速开始
+order: 2
 ---
+
 ### 下载
+
 ```
 npm instanll raetable -D
 or
@@ -14,155 +15,11 @@ pnpm install raetable -D
 or
 yarn add raetable -D
 ```
+
 ### 使用
+
 ```js
 import { EPage } from 'raetable';
-
-const columns = [
-  {
-    dataIndex: 'name',
-    key: 'name',
-    title: 'name',
-    affairType: 'input',
-    conditionType: 'input',
-  },
-  {
-    dataIndex: 'age',
-    key: 'age',
-    title: 'age',
-    affairType: 'input',
-    conditionType: 'input'
-  },
-  {
-    dataIndex: 'admin',
-    key: 'admin',
-    title: 'admin',
-    affairType: 'select',
-    conditionType: 'select',
-    select: [
-      {
-        key: 1,
-        value: true,
-        label: '是'
-      },
-      {
-        key: 2,
-        value: false,
-        label: '否'
-      },
-    ]
-  },
-  {
-    dataIndex: 'eat',
-    key: 'eat',
-    title: 'eat',
-    affairType: 'select',
-    conditionType: 'select',
-    select: [
-      {
-        value: 1,
-        label: '牛肉',
-        key: 1
-      },
-      {
-        value: 2,
-        label: '鸡蛋',
-        key: 2
-      },
-    ]
-  },
-  {
-    dataIndex: 'gender',
-    key: 'gender',
-    title: 'gender',
-    conditionType: 'select',
-    more: true,
-    select: [
-      {
-        value: 1,
-        label: '男',
-        key: 1
-      },
-      {
-        value: 2,
-        label: '女',
-        key: 2
-      },
-    ]
-  },
-  {
-    dataIndex: 'test',
-    key: 'test',
-    title: 'test',
-    more: true,
-    conditionType: 'input'
-  },
-  {
-    dataIndex: 'test1',
-    key: 'test1',
-    title: 'test1',
-    more: true,
-    conditionType: 'input'
-  },
-  {
-    dataIndex: 'test2',
-    key: 'test2',
-    title: 'test2',
-    more: true,
-    conditionType: 'input'
-  }
-]
-
-const datas = [
-  {name: 'mmdctjj', age: 18, eat: 1, admin: true},
-  {name: 'xiaofeng', age: 28, eat:2, admin: false},
-  {name: 'zhuming', age: 12, eat: 1, admin: false}
-]
-
-const getData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: datas,
-        msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
-
-const addData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
-
-const delData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
-
-const editData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
 
 export default () => (
   <EPage
@@ -175,9 +32,11 @@ export default () => (
     pageTitle="靓仔管理"
     rowKey="name"
   />
-)
+);
 ```
-### 页面渲染如下
+
+### 完整的例子
+
 ```jsx
 /**
  * background: '#eee'
@@ -185,7 +44,7 @@ export default () => (
  */
 import { EPage } from 'raetable';
 import { Form } from 'antd';
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 const columns = [
   {
@@ -200,7 +59,7 @@ const columns = [
     key: 'age',
     title: 'age',
     affairType: 'input',
-    conditionType: 'input'
+    conditionType: 'input',
   },
   {
     dataIndex: 'admin',
@@ -212,14 +71,14 @@ const columns = [
       {
         key: 1,
         value: true,
-        label: '是'
+        label: '是',
       },
       {
         key: 2,
         value: false,
-        label: '否'
+        label: '否',
       },
-    ]
+    ],
   },
   {
     dataIndex: 'eat',
@@ -231,14 +90,14 @@ const columns = [
       {
         value: 1,
         label: '牛肉',
-        key: 1
+        key: 1,
       },
       {
         value: 2,
         label: '鸡蛋',
-        key: 2
+        key: 2,
       },
-    ]
+    ],
   },
   {
     dataIndex: 'gender',
@@ -250,43 +109,73 @@ const columns = [
       {
         value: 1,
         label: '男',
-        key: 1
+        key: 1,
       },
       {
         value: 2,
         label: '女',
-        key: 2
+        key: 2,
       },
-    ]
+    ],
   },
   {
     dataIndex: 'test',
     key: 'test',
     title: 'test',
     more: true,
-    conditionType: 'input'
+    conditionType: 'input',
   },
   {
     dataIndex: 'test1',
     key: 'test1',
     title: 'test1',
     more: true,
-    conditionType: 'input'
+    conditionType: 'input',
   },
   {
     dataIndex: 'test2',
     key: 'test2',
     title: 'test2',
     more: true,
-    conditionType: 'input'
-  }
-]
+    conditionType: 'input',
+  },
+];
 
 const datas = [
-  {name: 'mmdctjj', age: 18, eat: 1, admin: true, gender: 1, test: 'test', test1: 'test1', test2: 'test2', test: 'test3'},
-  {name: 'xiaofeng', age: 28, eat:2, admin: false, gender: 1, test: 'test', test1: 'test1', test2: 'test2', test: 'test3'},
-  {name: 'zhuming', age: 12, eat: 1, admin: false, gender: 1, test: 'test', test1: 'test1', test2: 'test2', test: 'test3'}
-]
+  {
+    name: 'mmdctjj',
+    age: 18,
+    eat: 1,
+    admin: true,
+    gender: 1,
+    test: 'test',
+    test1: 'test1',
+    test2: 'test2',
+    test: 'test3',
+  },
+  {
+    name: 'xiaofeng',
+    age: 28,
+    eat: 2,
+    admin: false,
+    gender: 1,
+    test: 'test',
+    test1: 'test1',
+    test2: 'test2',
+    test: 'test3',
+  },
+  {
+    name: 'zhuming',
+    age: 12,
+    eat: 1,
+    admin: false,
+    gender: 1,
+    test: 'test',
+    test1: 'test1',
+    test2: 'test2',
+    test: 'test3',
+  },
+];
 
 const getData = () => {
   return new Promise((resolve, reject) => {
@@ -294,44 +183,44 @@ const getData = () => {
       resolve({
         data: datas,
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 const addData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 const delData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 const editData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 export default () => (
   <EPage
@@ -344,5 +233,5 @@ export default () => (
     pageTitle="靓仔管理"
     rowKey="name"
   />
-)
+);
 ```

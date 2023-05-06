@@ -5,6 +5,7 @@ nav:
   group:
     title: 开始
 title: 全局概述
+order: 1
 ---
 
 ### `raETable`的由来
