@@ -18,6 +18,7 @@ export { default as ETable } from './components/ETable';
 export type {
   ESelectProps,
   ETableColumnProps,
+  ETableColumnProps_,
   ETableProps,
   _ETableProps,
 } from './components/ETable/interface';

@@ -8,16 +8,37 @@ import { CSSProperties } from 'styled-components';
 import { ETitleProps } from '../ETitle';
 
 export interface ESelectProps {
+  /**
+   * 下拉框value
+   */
   value: string | number;
+  /**
+   * 下拉框名称
+   */
   label: string;
+  /**
+   * 是否为叶子节点
+   */
   isLeaf?: boolean;
+  /**
+   * 异步加载状态
+   */
   loading?: boolean;
+  /**
+   * 下拉框的key
+   */
   key: string | number;
+  /**
+   * 下拉框类型
+   */
   type?: string;
+  /**
+   * 不是叶子节点时的子节点
+   */
   children?: ESelectProps[];
 }
 
-export type ETableColumnProps<T> = {
+export interface ETableColumnProps_ {
   /**
    * 是否在表格中隐藏
    * @default false
@@ -68,7 +89,10 @@ export type ETableColumnProps<T> = {
    * @returns
    */
   formatOptions?: (data: any[]) => ESelectProps[];
-} & ColumnType<T> &
+}
+
+export type ETableColumnProps<T> = ETableColumnProps_ &
+  ColumnType<T> &
   FormItemProps &
   FormProps;
 
