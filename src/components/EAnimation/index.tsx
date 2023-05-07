@@ -89,7 +89,10 @@ export const RightToLeft = styled.div<EAnimationProps>`
     ${(props) => props.duration ?? 300}ms;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-  animation-delay: ${(props) => (props.index ?? 0) * (props.delay ?? 130)}ms;
+  animation-delay: ${(props) =>
+    props.animation === false
+      ? 0
+      : (props.index ?? 0) * (props.delay ?? 130)}ms;
 `;
 
 export const LeftToRight = styled.div<EAnimationProps>`
@@ -101,7 +104,10 @@ export const LeftToRight = styled.div<EAnimationProps>`
     ${(props) => props.duration ?? 300}ms;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-  animation-delay: ${(props) => (props.index ?? 0) * (props.delay ?? 130)}ms;
+  animation-delay: ${(props) =>
+    props.animation === false
+      ? 0
+      : (props.index ?? 0) * (props.delay ?? 130)}ms;
 `;
 export const BottomToTop = styled.div<EAnimationProps>`
   transform: ${(props) =>
@@ -112,7 +118,10 @@ export const BottomToTop = styled.div<EAnimationProps>`
     ${(props) => props.duration ?? 300}ms;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-  animation-delay: ${(props) => (props.index ?? 0) * (props.delay ?? 130)}ms;
+  animation-delay: ${(props) =>
+    props.animation === false
+      ? 0
+      : (props.index ?? 0) * (props.delay ?? 130)}ms;
 `;
 
 export const EAnimation: FC<EAnimationProps> = ({

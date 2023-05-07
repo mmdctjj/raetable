@@ -397,6 +397,7 @@ export default () => {
 `EPageProps`继承了`ETableProps`，它独有的属性如下
 |属性|描述|类型|
 |---|---|---|
+|animation|是否开启动画，默认开启， false 才会关闭|boolean|
 |addAffair|新增业务接口|(data?: Params) => Promise<Responsed<any>>|
 |delAffair|删除业务接口|(data?: Params) => Promise<Responsed<any>>|
 |editAffair|编辑业务接口|(data?: Params) => Promise<Responsed<any>>|

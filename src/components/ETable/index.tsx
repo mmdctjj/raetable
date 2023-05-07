@@ -187,6 +187,7 @@ export function RaeTable<T>({
   return (
     <>
       <ETitle
+        animation={props.animation}
         affairName={affairName}
         backPath={backPath}
         decription={props.decription}
@@ -198,6 +199,7 @@ export function RaeTable<T>({
       />
 
       <ECondition
+        animation={props.animation}
         columns={conditionColumns}
         conditionContainerClass={props.conditionContainerClass}
         conditionContainerStyle={props.conditionContainerStyle}
@@ -224,6 +226,7 @@ export function RaeTable<T>({
           footer={false}
         >
           <EForm
+            animation={props.animation}
             affairWidth={700}
             columns={affairColumns}
             affairData={operationData}
@@ -240,6 +243,7 @@ export function RaeTable<T>({
           footer={false}
         >
           <EForm
+            animation={props.animation}
             affairWidth={700}
             columns={affairColumns}
             affairData={operationData}

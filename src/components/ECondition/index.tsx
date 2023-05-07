@@ -22,6 +22,11 @@ const ERow = styled(Row)`
 
 export interface EConditionProps<T> {
   /**
+   * 是否开启动画
+   * @default true
+   */
+  animation?: boolean;
+  /**
    * 条件
    */
   condition: object;
@@ -63,6 +68,7 @@ export function ECondition<T>({
   onConditionChange,
   showConditionOkBtn = false,
   size,
+  ...props
 }: EConditionProps<T>) {
   const [form] = Form.useForm();
 
@@ -110,7 +116,7 @@ export function ECondition<T>({
                 key={item.key}
                 span={columns_.length < 4 ? 24 / columns_.length : 6}
               >
-                <EAnimation index={idx}>
+                <EAnimation animation={props.animation} index={idx}>
                   <Form.Item
                     key={item.key}
                     name={item.dataIndex as any}
@@ -137,7 +143,7 @@ export function ECondition<T>({
                   key={item.key}
                   span={columns_.length < 4 ? 24 / columns_.length : 6}
                 >
-                  <EAnimation index={idx}>
+                  <EAnimation animation={props.animation} index={idx}>
                     <Form.Item
                       key={item.key}
                       name={item.dataIndex as any}
@@ -161,7 +167,10 @@ export function ECondition<T>({
           <Col></Col>
           <Col>
             <Form.Item>
-              <EAnimation index={columns?.length ?? 5}>
+              <EAnimation
+                animation={props.animation}
+                index={columns?.length ?? 5}
+              >
                 <Space style={{ marginRight: -15 }}>
                   {columns.find((column) => column.more) ? (
                     <Button

@@ -98,6 +98,11 @@ export type ETableColumnProps<T> = _ETableColumnProps &
 
 export interface _ETableProps<Record> {
   /**
+   * 是否开启动画
+   * @default true
+   */
+  animation?: boolean;
+  /**
    * 业务弹出框类型
    * @default modal
    */
