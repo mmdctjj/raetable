@@ -5,17 +5,22 @@ title: EPage 业务
 path: /components
 group: 业务组件
 ---
+
 ### 说明
+
 `Epage`组件是在`ETable`组件的基础上，对业务的封装组件，你只需要提供`fetch`或者`axios`增删改查请求函数函数即可
+
 ```js
 // 如下
 export const getLists = () => {
   return axios({
-    url: '/api/v1/fetch/list'
-  })
-}
+    url: '/api/v1/fetch/list',
+  });
+};
 ```
+
 ### 基本用法
+
 ```jsx
 /**
  * background: '#eee'
@@ -26,7 +31,7 @@ export const getLists = () => {
 
 import { EPage } from 'raetable';
 import { Form } from 'antd';
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 const columns = [
   {
@@ -41,7 +46,7 @@ const columns = [
     key: 'age',
     title: 'age',
     affairType: 'input',
-    conditionType: 'input'
+    conditionType: 'input',
   },
   {
     dataIndex: 'admin',
@@ -53,14 +58,14 @@ const columns = [
       {
         key: 1,
         value: true,
-        label: '是'
+        label: '是',
       },
       {
         key: 2,
         value: false,
-        label: '否'
+        label: '否',
       },
-    ]
+    ],
   },
   {
     dataIndex: 'eat',
@@ -72,14 +77,14 @@ const columns = [
       {
         value: 1,
         label: '牛肉',
-        key: 1
+        key: 1,
       },
       {
         value: 2,
         label: '鸡蛋',
-        key: 2
+        key: 2,
       },
-    ]
+    ],
   },
   {
     dataIndex: 'gender',
@@ -91,43 +96,43 @@ const columns = [
       {
         value: 1,
         label: '男',
-        key: 1
+        key: 1,
       },
       {
         value: 2,
         label: '女',
-        key: 2
+        key: 2,
       },
-    ]
+    ],
   },
   {
     dataIndex: 'test',
     key: 'test',
     title: 'test',
     more: true,
-    conditionType: 'input'
+    conditionType: 'input',
   },
   {
     dataIndex: 'test1',
     key: 'test1',
     title: 'test1',
     more: true,
-    conditionType: 'input'
+    conditionType: 'input',
   },
   {
     dataIndex: 'test2',
     key: 'test2',
     title: 'test2',
     more: true,
-    conditionType: 'input'
-  }
-]
+    conditionType: 'input',
+  },
+];
 
 const datas = [
-  {name: 'mmdctjj', age: 18, eat: 1, admin: true},
-  {name: 'xiaofeng', age: 28, eat:2, admin: false},
-  {name: 'zhuming', age: 12, eat: 1, admin: false}
-]
+  { name: 'mmdctjj', age: 18, eat: 1, admin: true },
+  { name: 'xiaofeng', age: 28, eat: 2, admin: false },
+  { name: 'zhuming', age: 12, eat: 1, admin: false },
+];
 
 const getData = () => {
   return new Promise((resolve, reject) => {
@@ -135,44 +140,44 @@ const getData = () => {
       resolve({
         data: datas,
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 const addData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 const delData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 const editData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 export default () => (
   <EPage
@@ -185,12 +190,15 @@ export default () => (
     pageTitle="靓仔管理"
     rowKey="name"
   />
-)
+);
 ```
+
 :::warning
 `addAffair`、`delAffair`、`editAffair`属性分别对应页面中的`新增按钮`、`删除按钮`、`编辑按钮`
 :::
+
 ### 仅显示列表
+
 ```jsx
 /**
  * background: '#eee'
@@ -201,7 +209,7 @@ export default () => (
 
 import { EPage } from 'raetable';
 import { Form } from 'antd';
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 const columns = [
   {
@@ -216,7 +224,7 @@ const columns = [
     key: 'age',
     title: 'age',
     affairType: 'input',
-    conditionType: 'input'
+    conditionType: 'input',
   },
   {
     dataIndex: 'admin',
@@ -228,14 +236,14 @@ const columns = [
       {
         key: 1,
         value: true,
-        label: '是'
+        label: '是',
       },
       {
         key: 2,
         value: false,
-        label: '否'
+        label: '否',
       },
-    ]
+    ],
   },
   {
     dataIndex: 'eat',
@@ -247,22 +255,22 @@ const columns = [
       {
         value: 1,
         label: '牛肉',
-        key: 1
+        key: 1,
       },
       {
         value: 2,
         label: '鸡蛋',
-        key: 2
+        key: 2,
       },
-    ]
+    ],
   },
-]
+];
 
 const datas = [
-  {name: 'mmdctjj', age: 18, eat: 1, admin: true},
-  {name: 'xiaofeng', age: 28, eat:2, admin: false},
-  {name: 'zhuming', age: 12, eat: 1, admin: false}
-]
+  { name: 'mmdctjj', age: 18, eat: 1, admin: true },
+  { name: 'xiaofeng', age: 28, eat: 2, admin: false },
+  { name: 'zhuming', age: 12, eat: 1, admin: false },
+];
 
 const getData = () => {
   return new Promise((resolve, reject) => {
@@ -270,11 +278,11 @@ const getData = () => {
       resolve({
         data: datas,
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 export default () => (
   <EPage
@@ -284,9 +292,11 @@ export default () => (
     pageTitle="靓仔管理"
     rowKey="name"
   />
-)
+);
 ```
-### usePage用法
+
+### usePage 用法
+
 ```jsx
 /**
  * background: '#eee'
@@ -294,7 +304,7 @@ export default () => (
  */
 import { usePage } from 'raetable';
 import { Form } from 'antd';
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 const columns = [
   {
@@ -309,7 +319,7 @@ const columns = [
     key: 'age',
     title: 'age',
     affairType: 'input',
-    conditionType: 'input'
+    conditionType: 'input',
   },
   {
     dataIndex: 'admin',
@@ -321,14 +331,14 @@ const columns = [
       {
         key: 1,
         value: true,
-        label: '是'
+        label: '是',
       },
       {
         key: 2,
         value: false,
-        label: '否'
+        label: '否',
       },
-    ]
+    ],
   },
   {
     dataIndex: 'eat',
@@ -340,22 +350,22 @@ const columns = [
       {
         value: 1,
         label: '牛肉',
-        key: 1
+        key: 1,
       },
       {
         value: 2,
         label: '鸡蛋',
-        key: 2
+        key: 2,
       },
-    ]
+    ],
   },
-]
+];
 
 const datas = [
-  {name: 'mmdctjj', age: 18, eat: 1, admin: true},
-  {name: 'xiaofeng', age: 28, eat:2, admin: false},
-  {name: 'zhuming', age: 12, eat: 1, admin: false}
-]
+  { name: 'mmdctjj', age: 18, eat: 1, admin: true },
+  { name: 'xiaofeng', age: 28, eat: 2, admin: false },
+  { name: 'zhuming', age: 12, eat: 1, admin: false },
+];
 
 const getData = () => {
   return new Promise((resolve, reject) => {
@@ -363,24 +373,32 @@ const getData = () => {
       resolve({
         data: datas,
         msg: 'ok',
-        code: 200
-      })
-    }, 1000)
-  })
-}
+        code: 200,
+      });
+    }, 1000);
+  });
+};
 
 export default () => {
   const [opt, setOpt, Dom] = usePage({
-    affairName: "靓仔",
+    affairName: '靓仔',
     columns: columns,
     getLists: getData,
-    pageTitle: "靓仔管理",
-    rowKey: "name"
-  })
+    pageTitle: '靓仔管理',
+    rowKey: 'name',
+  });
 
-  return <Dom />
-}
+  return <Dom />;
+};
 ```
-### API
-<API></API>
 
+### API
+
+`EPageProps`继承了`ETableProps`，它独有的属性如下
+|属性|描述|类型|
+|---|---|---|
+|addAffair|新增业务接口|(data?: Params) => Promise<Responsed<any>>|
+|delAffair|删除业务接口|(data?: Params) => Promise<Responsed<any>>|
+|editAffair|编辑业务接口|(data?: Params) => Promise<Responsed<any>>|
+|formatList|格式化列表函数|(data: any[]) => []|
+|getLists|获取列表接口|(data?: Params) => Promise<Responsed<any[]>>|

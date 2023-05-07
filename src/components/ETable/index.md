@@ -57,7 +57,7 @@ const style = {
 
 #### ETableColumnProps
 
-<API id="_ETableColumn"></API>
+<API id="ETableColumn"></API>
 
 #### ESelectProps
 

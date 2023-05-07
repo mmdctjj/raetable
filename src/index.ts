@@ -25,7 +25,7 @@ export type {
 export { default as __ETableProps } from './components/ETableProps';
 export { default as ETitle } from './components/ETitle';
 export type { ETitleProps } from './components/ETitle';
-export { default as _ETableColumn } from './components/EtableColumn';
+export { default as ETableColumn } from './components/EtableColumn';
 export { FORMTYPE, OPERATION } from './enum';
 export {
   useAnimation,
