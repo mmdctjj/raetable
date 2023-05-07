@@ -72,7 +72,7 @@ export type ETableColumnProps<T> = {
   FormItemProps &
   FormProps;
 
-export interface ETableProps<Record> extends TableProps<Record>, ETitleProps {
+export interface _ETableProps<Record> {
   /**
    * 业务弹出框类型
    * @default modal
@@ -203,3 +203,7 @@ export interface ETableProps<Record> extends TableProps<Record>, ETitleProps {
    */
   tableContainerStyle?: CSSProperties;
 }
+
+export type ETableProps<Record> = _ETableProps<Record> &
+  TableProps<Record> &
+  ETitleProps;

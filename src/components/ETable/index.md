@@ -51,6 +51,6 @@ const style = {
 
 ### API
 
-<API></API>
-<API id="ETableColumn"></API>
-<API id="ESelect"></API>
+<API id="__ETableProps"></API>
+<API id="_ETableColumn"></API>
+<API id="_ESelect"></API>
