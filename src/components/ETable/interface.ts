@@ -38,7 +38,7 @@ export interface ESelectProps {
   children?: ESelectProps[];
 }
 
-export interface ETableColumnProps_ {
+export interface _ETableColumnProps {
   /**
    * 是否在表格中隐藏
    * @default false
@@ -91,7 +91,7 @@ export interface ETableColumnProps_ {
   formatOptions?: (data: any[]) => ESelectProps[];
 }
 
-export type ETableColumnProps<T> = ETableColumnProps_ &
+export type ETableColumnProps<T> = _ETableColumnProps &
   ColumnType<T> &
   FormItemProps &
   FormProps;
@@ -111,8 +111,9 @@ export interface _ETableProps<Record> {
    * 返回按钮连接，如果没有，则不会显示返回按钮
    * @default ""
    */
+  backPath?: string;
   /**
-   * 表格栏目columns
+   * 表格栏目columns，ETableColumnProps[]
    * @default []
    */
   columns: ETableColumnProps<Record>[];

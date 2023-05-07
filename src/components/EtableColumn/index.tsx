@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { ETableColumnProps_ } from '../ETable/interface';
+import { _ETableColumnProps } from '../ETable/interface';
 
-export const ETableColumn: FC<ETableColumnProps_> = () => <></>;
+export const ETableColumn: FC<_ETableColumnProps> = () => <></>;
 
 export default ETableColumn;

@@ -51,6 +51,14 @@ const style = {
 
 ### API
 
+#### ETableProps
+
 <API id="__ETableProps"></API>
+
+#### ETableColumnProps
+
 <API id="_ETableColumn"></API>
+
+#### ESelectProps
+
 <API id="_ESelect"></API>
