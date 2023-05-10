@@ -1,50 +1,5 @@
----
-nav:
-  title: 指南
-  path: /guide/start
-title: 快速开始
-order: 2
----
-
-### 下载
-
-```
-npm instanll raetable -D
-or
-pnpm install raetable -D
-or
-yarn add raetable -D
-```
-
-### 使用
-
-```js
-import { EPage } from 'raetable';
-
-export default () => (
-  <EPage
-    affairName="靓仔"
-    addAffair={addData}
-    columns={columns}
-    delAffair={delData}
-    editAffair={editData}
-    getLists={getData}
-    pageTitle="靓仔管理"
-    rowKey="name"
-  />
-);
-```
-
-### 完整的例子
-
-```jsx
-/**
- * background: '#eee'
- * compact: true
- */
-import { EPage } from 'raetable';
-import { Form } from 'antd';
-import { useEffect, useState } from 'react';
+import { ETable } from 'raetable';
+import { useCallback, useState } from 'react';
 
 const columns = [
   {
@@ -65,7 +20,7 @@ const columns = [
     dataIndex: 'admin',
     key: 'admin',
     title: 'admin',
-    affairType: 'select',
+    affairType: 'switch',
     conditionType: 'select',
     select: [
       {
@@ -85,7 +40,6 @@ const columns = [
     key: 'eat',
     title: 'eat',
     affairType: 'select',
-    conditionType: 'select',
     select: [
       {
         value: 1,
@@ -104,7 +58,6 @@ const columns = [
     key: 'gender',
     title: 'gender',
     conditionType: 'select',
-    more: true,
     select: [
       {
         value: 1,
@@ -177,61 +130,68 @@ const datas = [
   },
 ];
 
-const getData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: datas,
-        msg: 'ok',
-        code: 200,
-      });
-    }, 1000);
-  });
-};
+const useMockData = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-const addData = () => {
-  return new Promise((resolve, reject) => {
+  const getData = useCallback(() => {
+    setLoading(true);
+    setData([]);
     setTimeout(() => {
-      resolve({
-        msg: 'ok',
-        code: 200,
-      });
-    }, 1000);
-  });
-};
+      setData(datas);
+      setLoading(false);
+    }, 1500);
+  }, []);
 
-const delData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        msg: 'ok',
-        code: 200,
-      });
-    }, 1000);
-  });
+  return [data, loading, getData];
 };
+export default () => {
+  const [dataSource, loading, fetch] = useMockData();
+  const [deleteRes, deleteLoading, deleteFetch] = useMockData();
+  const [addRes, addLoading, addFetch] = useMockData();
+  const [editRes, editLoading, editFetch] = useMockData();
 
-const editData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        msg: 'ok',
-        code: 200,
-      });
-    }, 1000);
-  });
+  const onClickDeleteButton = useCallback(
+    (keys) =>
+      new Promise((resolve) => {
+        deleteFetch(keys);
+        setTimeout(() => {
+          resolve({});
+          fetch();
+        }, 1000);
+      }),
+  );
+
+  const onAffairSuccess = useCallback((value) => {
+    addFetch();
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({});
+        fetch();
+      }, 1000);
+    });
+  }, []);
+
+  return (
+    <ETable
+      affairName="靓仔"
+      affairWidth={900}
+      affairContainerType="modal"
+      addLoading={addLoading}
+      backPath="/raetable/guide"
+      columns={columns}
+      dataSource={dataSource}
+      editLoading={editLoading}
+      loading={loading}
+      deleteLoading={deleteLoading}
+      onAffairSuccess={onAffairSuccess}
+      onConditionChange={fetch}
+      onClickDeleteButton={onClickDeleteButton}
+      pageTitle="靓仔管理"
+      rowSelection={{
+        type: 'checkbox',
+      }}
+      rowKey="name"
+    />
+  );
 };
-
-export default () => (
-  <EPage
-    affairName="靓仔"
-    addAffair={addData}
-    columns={columns}
-    delAffair={delData}
-    editAffair={editData}
-    getLists={getData}
-    pageTitle="靓仔管理"
-    rowKey="name"
-  />
-);
-```

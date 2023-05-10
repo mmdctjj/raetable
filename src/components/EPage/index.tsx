@@ -1,36 +1,31 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
-import { ETableProps } from "../ETable/interface"
-import { ETable, OPERATION, formatSearch } from "raetable"
-import { useFetch } from "raetable"
-import { Params, Responsed } from "raetable"
+import {
+  ETable,
+  OPERATION,
+  Params,
+  Responsed,
+  formatSearch,
+  useFetch,
+} from 'raetable';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { ETableProps } from '../ETable/interface';
 
 export interface EPageProps<Record> extends ETableProps<Record> {
-  // affairName?: string
-  // affairWidth?: number
-  reflash?: number
-  // columns: ETableColumnProps<Record>
-  delAffair?: (data?: Params) => Promise<Responsed<Record>>
-  addAffair?: (data?: Params) => Promise<Responsed<Record>>
-  editAffair?: (data?: Params) => Promise<Responsed<Record>>
-  // extend?: ExtendType[]
-  // extendAffair?: ReactNode
-  // extendForm?: ReactNode
-  formatList?: (data: Record[]) => Record[]
-  getLists: (data?: Params) => Promise<Responsed<Record[]>>
-  onRowSelect?: (data: any[]) => void,
-  // showAffair?: boolean
-  // showDelete?: boolean
-  // showAdd?: boolean
-  // showBack?: boolean
-  // title?: string,
+  reflash?: number;
+  delAffair?: (data?: Params) => Promise<Responsed<Record>>;
+  addAffair?: (data?: Params) => Promise<Responsed<Record>>;
+  editAffair?: (data?: Params) => Promise<Responsed<Record>>;
+  formatList?: (data: Record[]) => Record[];
+  getLists: (data?: Params) => Promise<Responsed<Record[]>>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function initPromise<T> (data?: Params): Promise<Responsed<T>> {
-  return new Promise((resolve) => {resolve({data: [] as any, code: 200, msg: ''})})
+function initPromise<T>(data?: Params): Promise<Responsed<T>> {
+  return new Promise((resolve) => {
+    resolve({ data: [] as any, code: 200, msg: '' });
+  });
 }
 
-export function Epage<T> ({
+export function Epage<T>({
   addAffair,
   delAffair,
   editAffair,
@@ -39,42 +34,48 @@ export function Epage<T> ({
   // formatList,
   ...props
 }: EPageProps<T>) {
+  const [params, setParams] = useState(() =>
+    formatSearch(window.location.href),
+  );
 
-  const [params, setParams] = useState(() => formatSearch(window.location.href))
+  const [addLoading, addFn, addRes] = useFetch(addAffair ?? initPromise<T>);
 
-  const [addLoading, addFn, addRes] = useFetch(addAffair ?? initPromise<T>)
+  const [delLoading, delFn] = useFetch(delAffair ?? initPromise<T>);
 
-  const [delLoading, delFn] = useFetch(delAffair ?? initPromise<T>)
-
-  const [editLoading, editFn, editRes] = useFetch(editAffair ?? initPromise<T>)
+  const [editLoading, editFn, editRes] = useFetch(editAffair ?? initPromise<T>);
 
   const [getLoading, getFn, getRes] = useFetch<Responsed<T[]>, any>(getLists, {
     refreshDeps: [params],
     debounceWait: 400,
-  })
+  });
 
-  const dataSource = useMemo(() => formatList?.(getRes?.data ?? []), [getRes])
+  const dataSource = useMemo(() => formatList?.(getRes?.data ?? []), [getRes]);
 
-  const onConditionChange = useCallback((params: any) => setParams(params), [])
+  const onConditionChange = useCallback((params: any) => setParams(params), []);
 
   const FN = {
     [OPERATION.ADD]: addFn,
-    [OPERATION.EDIT]: editFn
-  }
+    [OPERATION.EDIT]: editFn,
+  };
   // 新增、编辑点击确认后的请求处理
-  const onAffairSuccess = useCallback((
-    value: T,
-    type: OPERATION.ADD | OPERATION.EDIT
-  ) => FN[type](value), [getFn, params])
+  const onAffairSuccess = useCallback(
+    (value: T, type: OPERATION.ADD | OPERATION.EDIT) => FN[type](value),
+    [getFn, params],
+  );
 
   // 点击确认删除的请求处理
-  const onClickDeleteButton = useCallback((keys: any[]) => delFn(keys).then(res => console.log(res)), [])
-
-  useEffect(() => {getFn(params)}, [params])
+  const onClickDeleteButton = useCallback(
+    (keys: any[]) => delFn(keys).then((res) => console.log(res)),
+    [],
+  );
 
   useEffect(() => {
-    if (addRes || editRes) getFn(params)
-  }, [addRes, editRes])
+    getFn(params);
+  }, [params]);
+
+  useEffect(() => {
+    if (addRes || editRes) getFn(params);
+  }, [addRes, editRes]);
 
   return (
     <ETable
@@ -88,7 +89,7 @@ export function Epage<T> ({
       onConditionChange={onConditionChange}
       {...props}
     />
-  )
+  );
 }
 
-export default Epage
+export default Epage;

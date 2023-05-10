@@ -5,179 +5,60 @@ title: ETable 表格
 path: /components
 group: 进阶组件
 ---
-### 基本用法
+
 `ETable`组件是由上述基础组件组合而成的，大多数情况下，你无需关注基础组件
-```jsx
-/**
- * background: '#eee'
- * compact: true
- */
-import { useState, useCallback } from 'react';
-import { ETable } from 'raetable';
 
-const columns = [
-  {
-    dataIndex: 'name',
-    key: 'name',
-    title: 'name',
-    affairType: 'input',
-    conditionType: 'input',
-  },
-  {
-    dataIndex: 'age',
-    key: 'age',
-    title: 'age',
-    affairType: 'input',
-    conditionType: 'input'
-  },
-  {
-    dataIndex: 'admin',
-    key: 'admin',
-    title: 'admin',
-    affairType: 'switch',
-    conditionType: 'select',
-    select: [
-      {
-        key: 1,
-        value: true,
-        label: '是'
-      },
-      {
-        key: 2,
-        value: false,
-        label: '否'
-      },
-    ]
-  },
-  {
-    dataIndex: 'eat',
-    key: 'eat',
-    title: 'eat',
-    affairType: 'select',
-    select: [
-      {
-        value: 1,
-        label: '牛肉',
-        key: 1
-      },
-      {
-        value: 2,
-        label: '鸡蛋',
-        key: 2
-      },
-    ]
-  },
-  {
-    dataIndex: 'gender',
-    key: 'gender',
-    title: 'gender',
-    conditionType: 'select',
-    select: [
-      {
-        value: 1,
-        label: '男',
-        key: 1
-      },
-      {
-        value: 2,
-        label: '女',
-        key: 2
-      },
-    ]
-  },
-  {
-    dataIndex: 'test',
-    key: 'test',
-    title: 'test',
-    more: true,
-    conditionType: 'input'
-  },
-  {
-    dataIndex: 'test1',
-    key: 'test1',
-    title: 'test1',
-    more: true,
-    conditionType: 'input'
-  },
-  {
-    dataIndex: 'test2',
-    key: 'test2',
-    title: 'test2',
-    more: true,
-    conditionType: 'input'
-  },
-]
+:::warning
+`Table`的默认样式如下
 
-const datas = [
-  {name: 'mmdctjj', age: 18, eat: 1, admin: true},
-  {name: 'xiaofeng', age: 28, eat:2, admin: false},
-  {name: 'zhuming', age: 12, eat: 1, admin: false}
-]
-
-const useMockData = () => {
-  
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-
-  const getData = useCallback(() => {
-    setLoading(true)
-    setData([])
-    setTimeout(() => {
-      setData(datas)
-      setLoading(false)
-    }, 1500)
-  }, [])
-
-  return [data, loading, getData]
-}
-export default () => {
-
-  const [dataSource, loading, fetch] = useMockData()
-  const [deleteRes, deleteLoading, deleteFetch] = useMockData()
-  const [addRes, addLoading, addFetch] = useMockData()
-
-  const onClickDeleteButton = useCallback((keys) => console.log(keys))
-
-  const onAffairSuccess = useCallback((value) => {
-    addFetch()
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({})
-        fetch()
-      }, 1000)
-    })
-  }, [])
-
-  return (
-    <ETable
-      affairName="靓仔"
-      affairWidth={900}
-      affairContainerType="drawer"
-      addLoading={addLoading}
-      backPath="/raetable/guide"
-      columns={columns}
-      dataSource={dataSource}
-      loading={loading}
-      deleteLoading={deleteLoading}
-      onAffairSuccess={onAffairSuccess}
-      onConditionChange={fetch}
-      onClickDeleteButton={onClickDeleteButton}
-      pageTitle="靓仔管理"
-      rowSelection={{
-        type: 'checkbox',
-      }}
-      rowKey="name"
-    />
-  )
-}
-
+```js
+const style = {
+  background: '#fff',
+  padding: 15,
+  margin: 15,
+};
 ```
+
+:::
+
+### 基本用法
+
+<code background="#eee" compact="true" src="./demo/all.jsx"></code>
+:::warning
+`colomns`详细配置请看这里：[columns 配置说明](https://mmdctjj.github.io/raetable/guide/columns#columns%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
+:::
+
+### 业务弹窗类型
+
+`affairContainerType`可以切换业务弹窗类型，默认值为`modal`，可选值为`drawer`
+<code compact="true" src="./demo/drawer.jsx"></code>
+
+### 隐藏对应按钮
+
+当你不提供对应的`loading`时，会隐藏对应的按钮，`loading`除外。
+`addLoading`对应新增按钮，`editLoading`对应编辑按钮，`deleteLoading`对应删除按钮
+<code compact="true" src="./demo/loading.jsx"></code>
+
+### 扩展表格
+
+`extend`属性可以扩展表格的操作
+<code compact="true" src="./demo/extend.jsx"></code>
+
+### 接管操作栏
+
+如果你不满意默认的操作栏，可以在`columns`里增加`titile`为操作的栏目
+<code compact="true" src="./demo/action.jsx"></code>
+
 ### API
-|属性|描述|类型|默认值|
-| ---- | ---- | ---- | ---- |
-|affairContainerType|业务弹出框类型|'drawer'、 'modal'|modal|
 
-<API></API>
+#### ETableProps
+
+<API id="__ETableProps"></API>
+
+#### ETableColumnProps
+
 <API id="ETableColumn"></API>
-<API id="ESelect"></API>
 
+#### ESelectProps
+
+<API id="_ESelect"></API>
