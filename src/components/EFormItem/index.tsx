@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cascader, Input, Radio, Select, Switch } from "antd"
+import { Cascader, Checkbox, Input, Radio, Select, Switch } from "antd"
 import type { EFormItemProps } from './interface';
 import { FORMTYPE, OPERATION } from 'raetable';
 
@@ -18,6 +18,8 @@ export function RaeFormItem<T> ({
 
     [FORMTYPE.CASCADER]: <Cascader size={size} placeholder={`请输入${content.title}`} value={value} onChange={onChange} options={content.select} loadData={content.loadData} />,
     
+    [FORMTYPE.CHECKBOX]: <Checkbox.Group options={content.select} value={value} onChange={onChange} />,
+
     [FORMTYPE.INPUT]: <Input size={size} value={value} placeholder={`请输入${content.title}`} onChange={onChange} />,
     
     [FORMTYPE.RADIO]: <Radio.Group size={size} options={content.select} value={value} onChange={onChange} disabled={type === OPERATION.DISPLAY} {...content as any} />,
@@ -34,6 +36,8 @@ export function RaeFormItem<T> ({
 
     [FORMTYPE.CASCADER]: <Cascader size={size} placeholder={`请输入${content.title}`} value={value} onChange={onChange} options={content.select} loadData={content.loadData} />,
     
+    [FORMTYPE.CHECKBOX]: <Checkbox.Group options={content.select} disabled={true} value={value} onChange={onChange} />,
+
     [FORMTYPE.INPUT]: <>{value}</>,
     
     [FORMTYPE.RADIO]: <Radio.Group size={size} options={content.select} value={value} onChange={onChange} disabled={type === OPERATION.DISPLAY} {...content as any} />,
