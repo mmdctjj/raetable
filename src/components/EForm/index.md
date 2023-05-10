@@ -23,11 +23,11 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     title: 'name',
-    affairType: 'input',
+    affairType: 'Input',
     rules: [
       {
         required: true,
-        message: 'Please input your name!',
+        message: 'Please Input your name!',
       },
     ]
   },
@@ -35,19 +35,19 @@ const columns = [
     dataIndex: 'age',
     key: 'age',
     title: 'age',
-    affairType: 'input'
+    affairType: 'Input'
   },
   {
     dataIndex: 'admin',
     key: 'admin',
     title: 'admin',
-    affairType: 'switch'
+    affairType: 'Switch'
   },
   {
     dataIndex: 'eat',
     key: 'eat',
     title: 'eat',
-    affairType: 'select',
+    affairType: 'Select',
     select: [
       {
         value: 1,
@@ -82,25 +82,25 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     title: 'name',
-    affairType: 'input'
+    affairType: 'Input'
   },
   {
     dataIndex: 'age',
     key: 'age',
     title: 'age',
-    affairType: 'input'
+    affairType: 'Input'
   },
   {
     dataIndex: 'admin',
     key: 'admin',
     title: 'admin',
-    affairType: 'switch'
+    affairType: 'Switch'
   },
   {
     dataIndex: 'eat',
     key: 'eat',
     title: 'eat',
-    affairType: 'select',
+    affairType: 'Select',
     select: [
       {
         value: 1,

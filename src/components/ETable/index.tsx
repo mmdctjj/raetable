@@ -139,7 +139,7 @@ export function RaeTable<T>({
   const tableColumns = useMemo(() => {
     const initColumns = columns
       .filter((column) => !column.hiddenInTable)
-      // 处理select渲染
+      // 处理Select渲染
       .map((column) =>
         column.select
           ? {

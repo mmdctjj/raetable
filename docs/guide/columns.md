@@ -40,12 +40,12 @@ const columns = [
 
 ### 声明条件表单
 
-如果某个字段是需要在条件栏里显示，你只需要加上`conditionType`字段，可选值为`input`，`select`等表单类型，具体可以参照`FORMTYPE`[枚举类型](https://github.com/mmdctjj/raetable/blob/e52156087e6d381ca5941215cf4b2bb4e7bc3788/src/enum/index.tsx#L7)。
+如果某个字段是需要在条件栏里显示，你只需要加上`conditionType`字段，可选值为`Input`，`Select`等表单类型，具体可以参照`FORMTYPE`[枚举类型](https://github.com/mmdctjj/raetable/blob/e52156087e6d381ca5941215cf4b2bb4e7bc3788/src/enum/index.tsx#L7)。
 
 ```js {2-3}
 const columns = [
-  { dataIndex: 'name', title: '姓名', key: 'name', conditionType: 'input' },
-  { dataIndex: 'age', title: '年龄', key: 'age', conditionType: 'input' },
+  { dataIndex: 'name', title: '姓名', key: 'name', conditionType: 'Input' },
+  { dataIndex: 'age', title: '年龄', key: 'age', conditionType: 'Input' },
   { dataIndex: 'food', title: '食物', key: 'food' },
   { dataIndex: 'test', title: '测试字段', key: 'test' },
 ];
@@ -57,43 +57,43 @@ const columns = [
 
 ```js {3-5}
 const columns = [
-  { dataIndex: 'name', title: '姓名', key: 'name', conditionType: 'input' },
+  { dataIndex: 'name', title: '姓名', key: 'name', conditionType: 'Input' },
   {
     dataIndex: 'age',
     title: '年龄',
     key: 'age',
-    conditionType: 'input',
-    affairType: 'input',
+    conditionType: 'Input',
+    affairType: 'Input',
   },
-  { dataIndex: 'food', title: '食物', key: 'food', affairType: 'input' },
-  { dataIndex: 'test', title: '测试字段', key: 'test', affairType: 'input' },
+  { dataIndex: 'food', title: '食物', key: 'food', affairType: 'Input' },
+  { dataIndex: 'test', title: '测试字段', key: 'test', affairType: 'Input' },
 ];
 ```
 
-### `select`配置
+### `Select`配置
 
-如果表单类型是`select`，那么你还需要提供他的下拉框选项`select`。类型是`SelectProps`。
+如果表单类型是`Select`，那么你还需要提供他的下拉框选项`Select`。类型是`SelectProps`。
 
 ```js {5-8}
 const columns = [
-  { dataIndex: 'name', title: '姓名', key: 'name', conditionType: 'input' },
+  { dataIndex: 'name', title: '姓名', key: 'name', conditionType: 'Input' },
   {
     dataIndex: 'age',
     title: '年龄',
     key: 'age',
-    conditionType: 'input',
-    affairType: 'input',
+    conditionType: 'Input',
+    affairType: 'Input',
   },
   {
     dataIndex: 'food',
     title: '食物',
     key: 'food',
-    affairType: 'select',
+    affairType: 'Select',
     select: [
       { value: '1', lable: '牛肉', key: '1' },
       { value: '2', lable: '羊肉', key: '2' },
     ],
   },
-  { dataIndex: 'test', title: '测试字段', key: 'test', affairType: 'input' },
+  { dataIndex: 'test', title: '测试字段', key: 'test', affairType: 'Input' },
 ];
 ```

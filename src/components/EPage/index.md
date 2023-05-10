@@ -38,22 +38,22 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     title: 'name',
-    affairType: 'input',
-    conditionType: 'input',
+    affairType: 'Input',
+    conditionType: 'Input',
   },
   {
     dataIndex: 'age',
     key: 'age',
     title: 'age',
-    affairType: 'input',
-    conditionType: 'input',
+    affairType: 'Input',
+    conditionType: 'Input',
   },
   {
     dataIndex: 'admin',
     key: 'admin',
     title: 'admin',
-    affairType: 'select',
-    conditionType: 'select',
+    affairType: 'Select',
+    conditionType: 'Select',
     select: [
       {
         key: 1,
@@ -71,8 +71,8 @@ const columns = [
     dataIndex: 'eat',
     key: 'eat',
     title: 'eat',
-    affairType: 'select',
-    conditionType: 'select',
+    affairType: 'Select',
+    conditionType: 'Select',
     select: [
       {
         value: 1,
@@ -90,7 +90,7 @@ const columns = [
     dataIndex: 'gender',
     key: 'gender',
     title: 'gender',
-    conditionType: 'select',
+    conditionType: 'Select',
     more: true,
     select: [
       {
@@ -110,21 +110,21 @@ const columns = [
     key: 'test',
     title: 'test',
     more: true,
-    conditionType: 'input',
+    conditionType: 'Input',
   },
   {
     dataIndex: 'test1',
     key: 'test1',
     title: 'test1',
     more: true,
-    conditionType: 'input',
+    conditionType: 'Input',
   },
   {
     dataIndex: 'test2',
     key: 'test2',
     title: 'test2',
     more: true,
-    conditionType: 'input',
+    conditionType: 'Input',
   },
 ];
 
@@ -216,22 +216,22 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     title: 'name',
-    affairType: 'input',
-    conditionType: 'input',
+    affairType: 'Input',
+    conditionType: 'Input',
   },
   {
     dataIndex: 'age',
     key: 'age',
     title: 'age',
-    affairType: 'input',
-    conditionType: 'input',
+    affairType: 'Input',
+    conditionType: 'Input',
   },
   {
     dataIndex: 'admin',
     key: 'admin',
     title: 'admin',
-    affairType: 'select',
-    conditionType: 'select',
+    affairType: 'Select',
+    conditionType: 'Select',
     select: [
       {
         key: 1,
@@ -249,8 +249,8 @@ const columns = [
     dataIndex: 'eat',
     key: 'eat',
     title: 'eat',
-    affairType: 'select',
-    // conditionType: 'select',
+    affairType: 'Select',
+    // conditionType: 'Select',
     select: [
       {
         value: 1,
@@ -311,22 +311,22 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     title: 'name',
-    affairType: 'input',
-    conditionType: 'input',
+    affairType: 'Input',
+    conditionType: 'Input',
   },
   {
     dataIndex: 'age',
     key: 'age',
     title: 'age',
-    affairType: 'input',
-    conditionType: 'input',
+    affairType: 'Input',
+    conditionType: 'Input',
   },
   {
     dataIndex: 'admin',
     key: 'admin',
     title: 'admin',
-    affairType: 'select',
-    conditionType: 'select',
+    affairType: 'Select',
+    conditionType: 'Select',
     select: [
       {
         key: 1,
@@ -344,8 +344,8 @@ const columns = [
     dataIndex: 'eat',
     key: 'eat',
     title: 'eat',
-    affairType: 'select',
-    // conditionType: 'select',
+    affairType: 'Select',
+    // conditionType: 'Select',
     select: [
       {
         value: 1,

@@ -56,8 +56,18 @@ const style = {
 <API id="__ETableProps"></API>
 
 #### ETableColumnProps
-
-<API id="ETableColumn"></API>
+|属性|描述|类型|默认值|
+|---|---|---|---|
+|hiddenInTable|是否在表格中隐藏|`boolean`|`false`|
+|conditionType|作为条件栏目时的类型|`string`|`必选`|
+|affairType|作为业务栏目时的类型|`string`|`必选`|
+|Select|编辑业务接口|`ESelectProps[]`|`[]`|
+|rules|表单规则|`Rule[]`|`[]`|
+|linked|这个栏目是否联动|`boolan`|`false`|
+|more|是否为扩展条件|`boolan`|`false`|
+|onChange|监听栏目变化回调函数|`(value: unknow) => void`|`--`|
+|loadData|Cascader的loadData属性|`(SelectedOptions: DefaultOptionType[]) => void`|`--`|
+|formatOptions|栏目类型为Select时，下拉框内容格式化函数|`(data?: any[]) => ESelectProps[]`|`--`|
 
 #### ESelectProps
 

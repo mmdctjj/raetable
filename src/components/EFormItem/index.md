@@ -7,7 +7,7 @@ group: 基础组件
 ---
 ### 基本用法
 ```jsx
-import { EAnimation, EFormItem } from 'raetable';
+import { EAnimation, EFormItem, FORMTYPE, useExtendFormItem } from 'raetable';
 import { Form } from 'antd';
 import { useEffect } from 'react'
 
@@ -15,7 +15,7 @@ const data = {
   name: 'mmdctjj',
   age: 18,
   admin: true,
-  eat: 1
+  eat: [1, 2]
 }
 
 const columns = [
@@ -23,25 +23,25 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     title: 'name',
-    affairType: 'input'
+    affairType: 'data'
   },
   {
     dataIndex: 'age',
     key: 'age',
     title: 'age',
-    affairType: 'input'
+    affairType: 'Input'
   },
   {
     dataIndex: 'admin',
     key: 'admin',
     title: 'admin',
-    affairType: 'switch'
+    affairType: 'Switch'
   },
   {
     dataIndex: 'eat',
     key: 'eat',
     title: 'eat',
-    affairType: 'select',
+    affairType: FORMTYPE.Checkbox,
     select: [
       {
         value: 1,
@@ -62,6 +62,10 @@ export default () => {
   const [form] = Form.useForm()
 
   useEffect(() => form.setFieldsValue(data))
+
+  useExtendFormItem({
+    data: <input />
+  })
 
   return <Form form={form}>
     {

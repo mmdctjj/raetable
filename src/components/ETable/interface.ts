@@ -1,6 +1,6 @@
 import { ButtonProps } from 'antd/es/button';
 import { FormItemProps, FormProps, Rule } from 'antd/es/form';
-import type { DefaultOptionType } from 'antd/es/select';
+import type { DefaultOptionType } from 'antd/es/Select';
 import type { ColumnType, TableProps } from 'antd/es/table';
 import { OPERATION } from 'raetable/enum';
 import type { Dispatch, ReactNode } from 'react';
@@ -38,7 +38,7 @@ export interface ESelectProps {
   children?: ESelectProps[];
 }
 
-export interface _ETableColumnProps {
+export interface ETableColumnInterfaceProps {
   /**
    * 是否在表格中隐藏
    * @default false
@@ -55,7 +55,7 @@ export interface _ETableColumnProps {
    */
   affairType?: string;
   /**
-   * 栏目类型为select时，下拉框内容，也会在表格中作为render依据
+   * 栏目类型为Select时，下拉框内容，也会在表格中作为render依据
    */
   select?: ESelectProps[];
   /**
@@ -79,19 +79,19 @@ export interface _ETableColumnProps {
   onChange?: (val: unknown) => void;
   /**
    * Cascader的loadData属性
-   * @param selectedOptions
+   * @param SelectedOptions
    * @returns
    */
-  loadData?: (selectedOptions: DefaultOptionType[]) => void;
+  loadData?: (SelectedOptions: DefaultOptionType[]) => void;
   /**
-   * 栏目类型为select时，下拉框内容格式化函数
+   * 栏目类型为Select时，下拉框内容格式化函数
    * @param data
    * @returns
    */
   formatOptions?: (data: any[]) => ESelectProps[];
 }
 
-export type ETableColumnProps<T> = _ETableColumnProps &
+export type ETableColumnProps<T> = ETableColumnInterfaceProps &
   ColumnType<T> &
   FormItemProps &
   FormProps;
