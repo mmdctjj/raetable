@@ -9,9 +9,9 @@ export enum FORMTYPE {
   Checkbox = 'Checkbox',
   DATEPICKER = 'datePicker',
   Input = 'Input',
-  InputNUMBER = 'InputNumber',
+  InputNumber = 'InputNumber',
   Radio = 'Radio',
-  RATE = 'Rate',
+  Rate = 'Rate',
   RangePicker = 'RangePicker',
   SearchInput = 'SearchInput',
   Select = 'Select',
@@ -21,5 +21,5 @@ export enum FORMTYPE {
   TextArea = 'TextArea',
   TimePicker = 'TimePicker',
   Transfer = 'Transfer',
-  TreeSelect = 'TreeSelect'
+  TreeSelect = 'TreeSelect',
 }

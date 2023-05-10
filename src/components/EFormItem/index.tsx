@@ -1,47 +1,139 @@
-import React from 'react';
-import { Cascader, Checkbox, Input, Radio, Select, Switch } from "antd"
-import type { EFormItemProps } from './interface';
+import {
+  Cascader,
+  Checkbox,
+  Input,
+  InputNumber,
+  Radio,
+  Rate,
+  Select,
+  Slider,
+  Switch,
+  TimePicker,
+} from 'antd';
 import { FORMTYPE, OPERATION } from 'raetable';
+import React from 'react';
 import { useGetExtendFormItem } from '../../hooks/useExtendFormItem';
+import type { EFormItemProps } from './interface';
 
-export function RaeFormItem<T> ({
-  content,
-  value,
-  onChange,
-  size,
-  type,
-  typeKey
-}: EFormItemProps<T>) {
+export function RaeFormItem<T>(props: EFormItemProps<T>) {
+  const { content, value, onChange, size, type, typeKey } = props;
 
-  if (!content?.[typeKey]) return <></>
+  const disabled = type === OPERATION.DISPLAY;
 
-  const items = useGetExtendFormItem()
+  const render: { [key in string]: JSX.Element } = {
+    [FORMTYPE.Cascader]: (
+      <Cascader
+        disabled={disabled}
+        placeholder={`请输入${content.title}`}
+        {...props}
+        options={content.select}
+        {...(content as any)}
+      />
+    ),
 
-  console.log(items)
+    [FORMTYPE.Checkbox]: (
+      <Checkbox.Group
+        disabled={disabled}
+        options={content.select}
+        {...props}
+        {...(content as any)}
+      />
+    ),
 
-  const disabled = type === OPERATION.DISPLAY
+    [FORMTYPE.Input]: !disabled ? (
+      <Input
+        value={value}
+        placeholder={`请输入${content.title}`}
+        onChange={onChange}
+        {...(content as any)}
+      />
+    ) : (
+      <>{value}</>
+    ),
 
-  const render: {[key in string]: JSX.Element} = {
+    [FORMTYPE.InputNumber]: !disabled ? (
+      <InputNumber {...props} {...(content as any)} />
+    ) : (
+      <>{value}</>
+    ),
 
-    [FORMTYPE.Cascader]: <Cascader disabled={disabled} size={size} placeholder={`请输入${content.title}`} value={value} onChange={onChange} options={content.select} loadData={content.loadData} />,
-    
-    [FORMTYPE.Checkbox]: <Checkbox.Group disabled={disabled} options={content.select} value={value} onChange={onChange} />,
+    [FORMTYPE.Radio]: (
+      <Radio.Group
+        disabled={disabled}
+        options={content.select}
+        {...props}
+        {...(content as any)}
+      />
+    ),
 
-    [FORMTYPE.Input]: !disabled ? <Input size={size} value={value} placeholder={`请输入${content.title}`} onChange={onChange} /> : <>{value}</>,
-    
-    [FORMTYPE.Radio]: <Radio.Group disabled={disabled} size={size} options={content.select} value={value} onChange={onChange} {...content as any} />,
+    [FORMTYPE.Rate]: (
+      <Rate disabled={disabled} {...props} {...(content as any)} />
+    ),
 
-    [FORMTYPE.Switch]: <Switch onChange={val => onChange?.(val === true ? 1 : 0)} checked={typeof value === 'undefined' ? true : Boolean(value)} disabled={type === OPERATION.DISPLAY} />,
+    [FORMTYPE.Switch]: (
+      <Switch
+        onChange={(val) => onChange?.(val === true ? 1 : 0)}
+        checked={typeof value === 'undefined' ? true : Boolean(value)}
+        disabled={type === OPERATION.DISPLAY}
+        {...(content as any)}
+      />
+    ),
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    [FORMTYPE.Select]: <Select size={size} style={{minWidth: 100}} allowClear options={content.select} onChange={val => {content.linked ? localStorage.setItem(content.dataIndex as string, val) : '';(onChange?.(val))}} placeholder={`请选择${content.title}`} value={value}></Select>,
+    [FORMTYPE.Slider]: (
+      <Slider {...props} disabled={disabled} {...(content as any)} />
+    ),
 
-    [FORMTYPE.TextArea]: <Input.TextArea size={size} disabled={type === OPERATION.DISPLAY} placeholder={`请输入${content.title}`} onChange={onChange} rows={5} value={value} />,
-    
-    ...items
-  }
+    [FORMTYPE.Select]: !disabled ? (
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      <Select
+        style={{ minWidth: 100 }}
+        allowClear
+        options={content.select}
+        onChange={(val) => {
+          content.linked
+            ? localStorage.setItem(content.dataIndex as string, val)
+            : '';
+          onChange?.(val);
+        }}
+        placeholder={`请选择${content.title}`}
+        value={value}
+        {...(content as any)}
+      ></Select>
+    ) : (
+      <>{content.select?.find((item) => item.value === value)?.label}</>
+    ),
 
-  return render[content?.[typeKey] as string] ?? <>暂无匹配项</>
-};
+    [FORMTYPE.TimePicker]: (
+      <TimePicker disabled={disabled} {...props} {...(content as any)} />
+    ),
+
+    [FORMTYPE.TextArea]: !disabled ? (
+      <Input.TextArea
+        disabled={disabled}
+        placeholder={`请输入${content.title}`}
+        rows={5}
+        {...props}
+        {...(content as any)}
+      />
+    ) : (
+      <pre>{value}</pre>
+    ),
+  };
+
+  const items: { [key: string]: (data: EFormItemProps<T>) => React.ReactNode } =
+    useGetExtendFormItem();
+
+  Object.keys(items).forEach((key: string) => {
+    Object.defineProperty(render, key, {
+      get() {
+        return items[key]({ content, value, onChange, size, type, typeKey });
+      },
+    });
+  });
+
+  if (!content?.[typeKey]) return <></>;
+
+  return render[content?.[typeKey] as string] ?? <>暂无匹配项</>;
+}
 
 export default RaeFormItem;
