@@ -18,6 +18,11 @@ import type { EFormItemProps } from './interface';
 export function RaeFormItem<T>(props: EFormItemProps<T>) {
   const { content, value, onChange, size, type, typeKey } = props;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { conditionType, affairType, dataIndex, ...props__ } = content;
+
+  const props_ = { value, onChange, size, ...props__ };
+
   const disabled = type === OPERATION.DISPLAY;
 
   const render: { [key in string]: JSX.Element } = {
@@ -25,7 +30,6 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
       <Cascader
         disabled={disabled}
         placeholder={`请输入${content.title}`}
-        {...props}
         options={content.select}
         {...(content as any)}
       />
@@ -35,8 +39,7 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
       <Checkbox.Group
         disabled={disabled}
         options={content.select}
-        {...props}
-        {...(content as any)}
+        {...(props_ as any)}
       />
     ),
 
@@ -45,14 +48,14 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
         value={value}
         placeholder={`请输入${content.title}`}
         onChange={onChange}
-        {...(content as any)}
+        {...(props_ as any)}
       />
     ) : (
       <>{value}</>
     ),
 
     [FORMTYPE.InputNumber]: !disabled ? (
-      <InputNumber {...props} {...(content as any)} />
+      <InputNumber {...(props_ as any)} />
     ) : (
       <>{value}</>
     ),
@@ -61,27 +64,22 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
       <Radio.Group
         disabled={disabled}
         options={content.select}
-        {...props}
-        {...(content as any)}
+        {...(props_ as any)}
       />
     ),
 
-    [FORMTYPE.Rate]: (
-      <Rate disabled={disabled} {...props} {...(content as any)} />
-    ),
+    [FORMTYPE.Rate]: <Rate disabled={disabled} {...(props_ as any)} />,
 
     [FORMTYPE.Switch]: (
       <Switch
         onChange={(val) => onChange?.(val === true ? 1 : 0)}
         checked={typeof value === 'undefined' ? true : Boolean(value)}
         disabled={type === OPERATION.DISPLAY}
-        {...(content as any)}
+        {...(props_ as any)}
       />
     ),
 
-    [FORMTYPE.Slider]: (
-      <Slider {...props} disabled={disabled} {...(content as any)} />
-    ),
+    [FORMTYPE.Slider]: <Slider disabled={disabled} {...(props_ as any)} />,
 
     [FORMTYPE.Select]: !disabled ? (
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -90,6 +88,7 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
         allowClear
         options={content.select}
         onChange={(val) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           content.linked
             ? localStorage.setItem(content.dataIndex as string, val)
             : '';
@@ -97,14 +96,14 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
         }}
         placeholder={`请选择${content.title}`}
         value={value}
-        {...(content as any)}
+        {...(props_ as any)}
       ></Select>
     ) : (
       <>{content.select?.find((item) => item.value === value)?.label}</>
     ),
 
     [FORMTYPE.TimePicker]: (
-      <TimePicker disabled={disabled} {...props} {...(content as any)} />
+      <TimePicker disabled={disabled} {...(props_ as any)} />
     ),
 
     [FORMTYPE.TextArea]: !disabled ? (
@@ -112,8 +111,7 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
         disabled={disabled}
         placeholder={`请输入${content.title}`}
         rows={5}
-        {...props}
-        {...(content as any)}
+        {...(props_ as any)}
       />
     ) : (
       <pre>{value}</pre>
