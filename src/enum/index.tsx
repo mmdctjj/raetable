@@ -5,6 +5,7 @@ export enum OPERATION {
 }
 
 export enum FORMTYPE {
+  AutoComplete = 'AutoComplete',
   Cascader = 'Cascader',
   Checkbox = 'Checkbox',
   DATEPICKER = 'datePicker',

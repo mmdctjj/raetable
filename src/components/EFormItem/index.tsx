@@ -1,4 +1,5 @@
 import {
+  AutoComplete,
   Cascader,
   Checkbox,
   DatePicker,
@@ -10,6 +11,7 @@ import {
   Slider,
   Switch,
   TimePicker,
+  Transfer,
 } from 'antd';
 import { FORMTYPE, OPERATION } from 'raetable';
 import React from 'react';
@@ -27,12 +29,16 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
   const disabled = type === OPERATION.DISPLAY;
 
   const render: { [key in string]: JSX.Element } = {
+    [FORMTYPE.AutoComplete]: (
+      <AutoComplete disabled={disabled} {...(props_ as any)} />
+    ),
+
     [FORMTYPE.Cascader]: (
       <Cascader
         disabled={disabled}
         placeholder={`请输入${content.title}`}
         options={content.select}
-        {...(content as any)}
+        {...(props_ as any)}
       />
     ),
 
@@ -121,6 +127,8 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
     ) : (
       <pre>{value}</pre>
     ),
+
+    [FORMTYPE.Transfer]: <Transfer {...(props_ as any)} />,
   };
 
   const items: { [key: string]: (data: EFormItemProps<T>) => React.ReactNode } =

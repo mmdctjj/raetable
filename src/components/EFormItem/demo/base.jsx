@@ -3,6 +3,7 @@ import { EAnimation, EFormItem, FORMTYPE } from 'raetable';
 import { useEffect, useState } from 'react';
 
 const data = {
+  autoComplete: '牛肉',
   input: 'mmdctjj',
   number: 18,
   // time: moment(new Date().getTime()),
@@ -24,6 +25,24 @@ const data = {
 };
 
 const columns = [
+  {
+    dataIndex: 'autoComplete',
+    key: 'autoComplete',
+    title: 'autoComplete',
+    affairType: 'AutoComplete',
+    filterOption: (inputValue, option) =>
+      option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1,
+    options: [
+      {
+        value: '牛肉',
+        key: 1,
+      },
+      {
+        value: '鸡蛋',
+        key: 2,
+      },
+    ],
+  },
   {
     dataIndex: 'input',
     key: 'input',
@@ -144,6 +163,21 @@ const columns = [
         key: 3,
       },
     ],
+  },
+  {
+    dataIndex: 'transfer',
+    key: 'transfer',
+    title: 'transfer',
+    affairType: 'Transfer',
+    dataSource: Array.from({
+      length: 20,
+    }).map((_, i) => ({
+      key: i.toString(),
+      title: `content${i + 1}`,
+      description: `description of content${i + 1}`,
+    })),
+    targetKeys: ['1', '3', '5'],
+    render: (item) => item.title,
   },
 ];
 
