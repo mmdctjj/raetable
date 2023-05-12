@@ -1,6 +1,7 @@
 import {
   Cascader,
   Checkbox,
+  DatePicker,
   Input,
   InputNumber,
   Radio,
@@ -69,6 +70,10 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
     ),
 
     [FORMTYPE.Rate]: <Rate disabled={disabled} {...(props_ as any)} />,
+
+    [FORMTYPE.RangePicker]: (
+      <DatePicker.RangePicker disabled={disabled} {...(props_ as any)} />
+    ),
 
     [FORMTYPE.Switch]: (
       <Switch

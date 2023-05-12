@@ -6,6 +6,7 @@ const data = {
   input: 'mmdctjj',
   number: 18,
   // time: moment(new Date().getTime()),
+  rangePicker: [],
   rate: 3,
   slider: 50,
   switch: true,
@@ -35,18 +36,27 @@ const columns = [
     title: 'number',
     affairType: 'InputNumber',
   },
-  // {
-  //   dataIndex: 'time',
-  //   key: 'time',
-  //   title: 'time',
-  //   affairType: 'TimePicker',
-  //   format: 'HH:mm:ss'
-  // },
+  {
+    dataIndex: 'time',
+    key: 'time',
+    title: 'time',
+    affairType: 'TimePicker',
+    format: 'HH:mm:ss',
+  },
   {
     dataIndex: 'rate',
     key: 'rate',
     title: 'rate',
     affairType: 'Rate',
+  },
+  {
+    dataIndex: 'rangePicker',
+    key: 'rangePicker',
+    title: 'rangePicker',
+    affairType: 'RangePicker',
+    // showTime: true,
+    placeholder: ['请输入开始时间', '请输入结束时间'],
+    format: ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD HH:mm:ss'],
   },
   {
     dataIndex: 'slider',
