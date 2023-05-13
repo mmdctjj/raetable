@@ -141,11 +141,11 @@ export function RaeTable<T>({
       .filter((column) => !column.hiddenInTable)
       // 处理Select渲染
       .map((column) =>
-        column.select
+        column.options
           ? {
               ...column,
               render: (value: any) =>
-                column.select?.find((opt) => opt.value === value)?.label,
+                column.options?.find((opt) => opt.value === value)?.label,
             }
           : column,
       );

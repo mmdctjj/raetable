@@ -61,7 +61,7 @@ const columns = [
     title: 'admin',
     affairType: 'Select',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         key: 1,
         value: true,
@@ -80,7 +80,7 @@ const columns = [
     title: 'eat',
     affairType: 'Select',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -99,7 +99,7 @@ const columns = [
     title: 'gender',
     conditionType: 'Select',
     more: true,
-    select: [
+    options: [
       {
         value: 1,
         label: '男',

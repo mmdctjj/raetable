@@ -48,7 +48,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     affairType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -101,7 +101,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     affairType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',

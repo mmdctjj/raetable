@@ -33,7 +33,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     affairType: FORMTYPE.Checkbox,
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',

@@ -7,11 +7,12 @@ const data = {
   input: 'mmdctjj',
   number: 18,
   // time: moment(new Date().getTime()),
+  datePicker: undefined,
   rangePicker: [],
   rate: 3,
   slider: 50,
   switch: true,
-  select: 1,
+  options: 1,
   radio: 2,
   checkbox: [1, 2],
   textArea: JSON.stringify(
@@ -22,6 +23,7 @@ const data = {
     null,
     4,
   ),
+  treeSelect: 'leaf1',
 };
 
 const columns = [
@@ -54,6 +56,13 @@ const columns = [
     key: 'number',
     title: 'number',
     affairType: 'InputNumber',
+  },
+  {
+    dataIndex: 'datePicker',
+    key: 'datePicker',
+    title: 'datePicker',
+    affairType: 'DatePicker',
+    format: 'YYYY-MM-DD HH:mm:ss',
   },
   {
     dataIndex: 'time',
@@ -100,7 +109,7 @@ const columns = [
     key: 'checkbox',
     title: 'checkbox',
     affairType: FORMTYPE.Checkbox,
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -123,7 +132,7 @@ const columns = [
     key: 'radio',
     title: 'radio',
     affairType: 'Radio',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -146,7 +155,7 @@ const columns = [
     key: 'select',
     title: 'select',
     affairType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -178,6 +187,52 @@ const columns = [
     })),
     targetKeys: ['1', '3', '5'],
     render: (item) => item.title,
+  },
+  {
+    dataIndex: 'treeSelect',
+    key: 'treeSelect',
+    title: 'treeSelect',
+    affairType: 'TreeSelect',
+    treeData: [
+      {
+        value: 'parent 1',
+        title: 'parent 1',
+        children: [
+          {
+            value: 'parent 1-0',
+            title: 'parent 1-0',
+            children: [
+              {
+                value: 'leaf1',
+                title: 'leaf1',
+              },
+              {
+                value: 'leaf2',
+                title: 'leaf2',
+              },
+            ],
+          },
+          {
+            value: 'parent 1-1',
+            title: 'parent 1-1',
+            children: [
+              {
+                value: 'leaf3',
+                title: (
+                  <b
+                    style={{
+                      color: '#08c',
+                    }}
+                  >
+                    leaf3
+                  </b>
+                ),
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
 ];
 

@@ -12,6 +12,7 @@ import {
   Switch,
   TimePicker,
   Transfer,
+  TreeSelect,
 } from 'antd';
 import { FORMTYPE, OPERATION } from 'raetable';
 import React from 'react';
@@ -37,7 +38,7 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
       <Cascader
         disabled={disabled}
         placeholder={`请输入${content.title}`}
-        options={content.select}
+        options={content.options}
         {...(props_ as any)}
       />
     ),
@@ -45,9 +46,13 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
     [FORMTYPE.Checkbox]: (
       <Checkbox.Group
         disabled={disabled}
-        options={content.select}
+        options={content.options}
         {...(props_ as any)}
       />
+    ),
+
+    [FORMTYPE.DatePicker]: (
+      <DatePicker disabled={disabled} {...(props_ as any)} />
     ),
 
     [FORMTYPE.Input]: !disabled ? (
@@ -70,7 +75,7 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
     [FORMTYPE.Radio]: (
       <Radio.Group
         disabled={disabled}
-        options={content.select}
+        options={content.options}
         {...(props_ as any)}
       />
     ),
@@ -97,7 +102,7 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
       <Select
         style={{ minWidth: 100 }}
         allowClear
-        options={content.select}
+        options={content.options}
         onChange={(val) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           content.linked
@@ -110,7 +115,7 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
         {...(props_ as any)}
       ></Select>
     ) : (
-      <>{content.select?.find((item) => item.value === value)?.label}</>
+      <>{content.options?.find((item) => item.value === value)?.label}</>
     ),
 
     [FORMTYPE.TimePicker]: (
@@ -128,7 +133,11 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
       <pre>{value}</pre>
     ),
 
-    [FORMTYPE.Transfer]: <Transfer {...(props_ as any)} />,
+    [FORMTYPE.Transfer]: <Transfer disabled={disabled} {...(props_ as any)} />,
+
+    [FORMTYPE.TreeSelect]: (
+      <TreeSelect disabled={disabled} {...(props_ as any)} />
+    ),
   };
 
   const items: { [key: string]: (data: EFormItemProps<T>) => React.ReactNode } =

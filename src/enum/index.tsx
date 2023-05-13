@@ -8,7 +8,7 @@ export enum FORMTYPE {
   AutoComplete = 'AutoComplete',
   Cascader = 'Cascader',
   Checkbox = 'Checkbox',
-  DATEPICKER = 'datePicker',
+  DatePicker = 'DatePicker',
   Input = 'Input',
   InputNumber = 'InputNumber',
   Radio = 'Radio',

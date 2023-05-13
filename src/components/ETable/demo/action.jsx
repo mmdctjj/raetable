@@ -23,7 +23,7 @@ const columns = [
     title: 'admin',
     affairType: 'Switch',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         key: 1,
         value: true,
@@ -41,7 +41,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     affairType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -59,7 +59,7 @@ const columns = [
     key: 'gender',
     title: 'gender',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '男',

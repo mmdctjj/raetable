@@ -42,7 +42,7 @@ const columns = [
     key: 'admin',
     title: 'admin',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         key: 1,
         value: true,
@@ -60,7 +60,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -122,7 +122,7 @@ const columns = [
     key: 'admin',
     title: 'admin',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         key: 1,
         value: true,
@@ -140,7 +140,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -201,7 +201,7 @@ const columns = [
     key: 'admin',
     title: 'admin',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         key: 1,
         value: true,
@@ -219,7 +219,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',
@@ -238,7 +238,7 @@ const columns = [
     title: 'gender',
     conditionType: 'Select',
     more: true,
-    select: [
+    options: [
       {
         value: 1,
         label: '男',
@@ -319,7 +319,7 @@ const columns = [
     key: 'admin',
     title: 'admin',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         key: 1,
         value: true,
@@ -337,7 +337,7 @@ const columns = [
     key: 'eat',
     title: 'eat',
     conditionType: 'Select',
-    select: [
+    options: [
       {
         value: 1,
         label: '牛肉',

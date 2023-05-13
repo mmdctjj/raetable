@@ -89,7 +89,7 @@ const columns = [
     title: '食物',
     key: 'food',
     affairType: 'Select',
-    select: [
+    options: [
       { value: '1', lable: '牛肉', key: '1' },
       { value: '2', lable: '羊肉', key: '2' },
     ],

@@ -1,6 +1,6 @@
+import type { DefaultOptionType } from 'antd/es/Select';
 import { ButtonProps } from 'antd/es/button';
 import { FormItemProps, FormProps, Rule } from 'antd/es/form';
-import type { DefaultOptionType } from 'antd/es/Select';
 import type { ColumnType, TableProps } from 'antd/es/table';
 import { OPERATION } from 'raetable/enum';
 import type { Dispatch, ReactNode } from 'react';
@@ -57,7 +57,7 @@ export interface ETableColumnInterfaceProps {
   /**
    * 栏目类型为Select时，下拉框内容，也会在表格中作为render依据
    */
-  select?: ESelectProps[];
+  options?: ESelectProps[];
   /**
    * 表单规则
    */
