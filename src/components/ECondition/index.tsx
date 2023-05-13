@@ -1,7 +1,18 @@
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import {
+  CloseOutlined,
+  DownOutlined,
+  MenuOutlined,
+  UpOutlined,
+} from '@ant-design/icons';
 import { Button, Col, Form, Row, Space } from 'antd';
-import { EFormItem, ETableColumnProps, OPERATION, useTrigger } from 'raetable';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import {
+  EFormItem,
+  ETableColumnProps,
+  OPERATION,
+  useResize,
+  useTrigger,
+} from 'raetable';
+import React, { useCallback, useEffect } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 import EAnimation from '../EAnimation';
 
@@ -20,6 +31,10 @@ const ERow = styled(Row)`
   margin: 10px 0px;
 `;
 
+const Div = styled.div`
+  text-align: right;
+  color: #777;
+`;
 export interface EConditionProps<T> {
   /**
    * 是否开启动画
@@ -74,10 +89,9 @@ export function ECondition<T>({
 
   const [more, togger] = useTrigger();
 
-  const columns_ = useMemo(
-    () => columns?.filter((column) => more || !column.more),
-    [columns, more],
-  );
+  const width = useResize();
+
+  const [show, trogger] = useTrigger();
 
   // 监听动态条件
   const onChange = useCallback(
@@ -101,48 +115,29 @@ export function ECondition<T>({
       style={{ ...style, ...conditionContainerStyle }}
       className={conditionContainerClass}
     >
-      <Form
-        form={form}
-        labelCol={{ span: 6 }}
-        layout="inline"
-        onValuesChange={!showConditionOkBtn ? onChange : () => {}}
-        size={size}
-      >
-        <ERow>
-          {columns
-            ?.filter((column) => !column.more)
-            ?.map((item, idx) => (
-              <Col
-                key={item.key}
-                span={columns_.length < 4 ? 24 / columns_.length : 6}
-              >
-                <EAnimation animation={props.animation} index={idx}>
-                  <Form.Item
-                    key={item.key}
-                    name={item.dataIndex as any}
-                    label={item.title as string}
-                    style={{ margin: '10px 0' }}
-                  >
-                    <EFormItem
-                      content={item}
-                      size={size}
-                      typeKey="conditionType"
-                      type={OPERATION.EDIT}
-                      value=""
-                    />
-                  </Form.Item>
-                </EAnimation>
-              </Col>
-            ))}
-
-          {more &&
-            columns
-              ?.filter((column) => column.more)
+      <Div>
+        {width < 570 ? (
+          show ? (
+            <CloseOutlined onClick={trogger} />
+          ) : (
+            <MenuOutlined onClick={trogger} />
+          )
+        ) : (
+          ''
+        )}
+      </Div>
+      {show || width >= 570 ? (
+        <Form
+          form={form}
+          labelCol={{ xl: 6, md: 4, xs: 2 }}
+          onValuesChange={!showConditionOkBtn ? onChange : () => {}}
+          size={size}
+        >
+          <ERow>
+            {columns
+              ?.filter((column) => !column.more)
               ?.map((item, idx) => (
-                <Col
-                  key={item.key}
-                  span={columns_.length < 4 ? 24 / columns_.length : 6}
-                >
+                <Col key={item.key} md={12} xs={24} xl={8} xxl={8}>
                   <EAnimation animation={props.animation} index={idx}>
                     <Form.Item
                       key={item.key}
@@ -161,47 +156,85 @@ export function ECondition<T>({
                   </EAnimation>
                 </Col>
               ))}
-        </ERow>
 
-        <ERow justify="space-between">
-          <Col></Col>
-          <Col>
-            <Form.Item>
-              <EAnimation
-                animation={props.animation}
-                index={columns?.length ?? 5}
-              >
-                <Space style={{ marginRight: -15 }}>
-                  {columns.find((column) => column.more) ? (
+            {more &&
+              columns
+                ?.filter((column) => column.more)
+                ?.map((item, idx) => (
+                  <Col key={item.key} md={12} xs={24} xl={8} xxl={6}>
+                    <EAnimation animation={props.animation} index={idx}>
+                      <Form.Item
+                        key={item.key}
+                        name={item.dataIndex as any}
+                        label={item.title as string}
+                        style={{ margin: '10px 0' }}
+                      >
+                        <EFormItem
+                          content={item}
+                          size={size}
+                          typeKey="conditionType"
+                          type={OPERATION.EDIT}
+                          value=""
+                        />
+                      </Form.Item>
+                    </EAnimation>
+                  </Col>
+                ))}
+          </ERow>
+
+          <ERow justify="space-between">
+            <Col span={24} style={{ textAlign: 'right' }}>
+              <Form.Item>
+                <EAnimation
+                  animation={props.animation}
+                  index={columns?.length ?? 5}
+                >
+                  <Space
+                    direction={width < 570 ? 'vertical' : 'horizontal'}
+                    style={{
+                      width: width < 570 ? '100%' : undefined,
+                      textAlign: 'right',
+                    }}
+                  >
+                    {columns.find((column) => column.more) ? (
+                      <Button
+                        icon={more ? <DownOutlined /> : <UpOutlined />}
+                        onClick={togger}
+                        block={width < 570}
+                        type="link"
+                      >
+                        更多条件
+                      </Button>
+                    ) : (
+                      ''
+                    )}
+                    {showConditionOkBtn ? (
+                      <Button
+                        block={width < 570}
+                        onClick={() => onConditionChange(form.getFieldsValue())}
+                        type="primary"
+                      >
+                        确定
+                      </Button>
+                    ) : (
+                      ''
+                    )}
                     <Button
-                      icon={more ? <DownOutlined /> : <UpOutlined />}
-                      onClick={togger}
-                      type="link"
+                      onClick={() => clearCondition()}
+                      block={width < 570}
+                      danger
                     >
-                      更多条件
+                      清空
                     </Button>
-                  ) : (
-                    ''
-                  )}
-                  {showConditionOkBtn ? (
-                    <Button
-                      onClick={() => onConditionChange(form.getFieldsValue())}
-                      type="primary"
-                    >
-                      确定
-                    </Button>
-                  ) : (
-                    ''
-                  )}
-                  <Button onClick={() => clearCondition()} danger>
-                    清空
-                  </Button>
-                </Space>
-              </EAnimation>
-            </Form.Item>
-          </Col>
-        </ERow>
-      </Form>
+                  </Space>
+                </EAnimation>
+              </Form.Item>
+            </Col>
+          </ERow>
+        </Form>
+      ) : (
+        <></>
+      )}
     </ConditionContainer>
   );
 }

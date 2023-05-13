@@ -33,6 +33,7 @@ export {
   useForm,
   useFormItem,
   usePage,
+  useResize,
   useTable,
   useTitle,
   useTrigger,

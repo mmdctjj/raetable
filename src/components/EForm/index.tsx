@@ -1,10 +1,11 @@
-import { Button, Form, FormItemProps, FormProps, Input } from 'antd';
+import { Button, Form, FormItemProps, FormProps, Input, Space } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import {
   BottomToTop,
   EFormItem,
   ETableColumnProps,
   OPERATION,
+  useResize,
   useTrigger,
 } from 'raetable';
 import React, { ReactNode, useCallback, useEffect } from 'react';
@@ -86,6 +87,8 @@ export function EForm<T>({
 
   const [loading, setLoading] = useTrigger();
 
+  const width = useResize();
+
   const onSumbit = useCallback(() => {
     form.validateFields().then((value: T) => {
       setLoading();
@@ -156,21 +159,35 @@ export function EForm<T>({
                 ? 0
                 : affairWidth && affairWidth > 900
                 ? 2
+                : width < 570
+                ? 0
                 : 3,
             }}
           >
-            <>
-              <Button loading={loading} type="primary" onClick={onSumbit}>
+            <Space
+              style={{ width: width < 570 ? '100%' : undefined }}
+              direction={width < 570 ? 'vertical' : 'horizontal'}
+            >
+              <Button
+                loading={loading}
+                block={width < 570}
+                type="primary"
+                onClick={onSumbit}
+              >
                 确认
               </Button>
               {type !== OPERATION.DISPLAY ? (
-                <Button type="link" onClick={() => form.resetFields()}>
+                <Button
+                  block={width < 570}
+                  danger
+                  onClick={() => form.resetFields()}
+                >
                   清空
                 </Button>
               ) : (
                 ''
               )}
-            </>
+            </Space>
           </Form.Item>
         </BottomToTop>
       ) : (

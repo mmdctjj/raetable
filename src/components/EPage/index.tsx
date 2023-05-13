@@ -40,7 +40,7 @@ export function Epage<T>({
 
   const [addLoading, addFn, addRes] = useFetch(addAffair ?? initPromise<T>);
 
-  const [delLoading, delFn] = useFetch(delAffair ?? initPromise<T>);
+  const [delLoading, delFn, delRes] = useFetch(delAffair ?? initPromise<T>);
 
   const [editLoading, editFn, editRes] = useFetch(editAffair ?? initPromise<T>);
 
@@ -74,8 +74,8 @@ export function Epage<T>({
   }, [params]);
 
   useEffect(() => {
-    if (addRes || editRes) getFn(params);
-  }, [addRes, editRes]);
+    if (addRes || delRes || editRes) getFn(params);
+  }, [addRes, delRes, editRes]);
 
   return (
     <ETable

@@ -23,7 +23,7 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
   const { content, value, onChange, size, type, typeKey } = props;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { conditionType, affairType, dataIndex, ...props__ } = content;
+  const { conditionType, affairType, dataIndex, more, ...props__ } = content;
 
   const props_ = { value, onChange, size, ...props__ };
 

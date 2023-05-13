@@ -110,6 +110,7 @@ export const LeftToRight = styled.div<EAnimationProps>`
       : (props.index ?? 0) * (props.delay ?? 130)}ms;
 `;
 export const BottomToTop = styled.div<EAnimationProps>`
+  width: 100%;
   transform: ${(props) =>
     props.animation === false ? `translateY(0)` : `translateY(50%)`};
   opacity: 0;

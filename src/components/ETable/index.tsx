@@ -1,7 +1,13 @@
+import { LoadingOutlined } from '@ant-design/icons';
+import { Button, Drawer, Dropdown, Modal, Space, Table } from 'antd';
+import {
+  EForm,
+  OPERATION,
+  formatSearch,
+  useResize,
+  useTrigger,
+} from 'raetable';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-
-import { Button, Drawer, Modal, Popconfirm, Space, Table } from 'antd';
-import { EForm, OPERATION, formatSearch, useTrigger } from 'raetable';
 import styled from 'styled-components';
 import ECondition from '../ECondition';
 import { ETitle } from '../ETitle';
@@ -32,6 +38,10 @@ export function RaeTable<T>({
   ...props
 }: ETableProps<T>) {
   const [open, setOpen] = useTrigger();
+
+  const width = useResize();
+
+  const [modal, handle] = Modal.useModal();
 
   const TITLE = {
     [OPERATION.ADD]: '新增',
@@ -75,65 +85,96 @@ export function RaeTable<T>({
     formatSearch(window.location.href),
   );
 
-  const actionColumn: ETableColumnProps<T> = {
-    title: '操作',
-    dataIndex: 'action',
-    key: 'action',
-    width: 200,
-    fixed: 'right',
-    render: (_, recard: any) => (
-      <Space>
-        {props.editLoading !== undefined ? (
-          <Button
-            size={size}
-            onClick={() => onClickEdit(recard)}
-            type="primary"
-          >
-            编辑
-          </Button>
-        ) : (
-          ''
-        )}
-        {props.deleteLoading !== undefined ? (
-          <Popconfirm
-            cancelText="取消"
-            description={`您确认删除这条${affairName}数据吗？`}
-            okText="确定"
-            okButtonProps={{ loading: props.deleteLoading }}
-            onConfirm={() => onClickDelte([recard[props.rowKey as any]])}
-            title="删除"
-          >
-            <Button
-              danger
-              loading={window.localStorage
+  const operationBtms = (recard: any) =>
+    [
+      props.editLoading !== undefined
+        ? {
+            loading: false,
+            onClick: () => onClickEdit(recard),
+            size,
+            type: 'primary',
+            title: '编辑',
+          }
+        : undefined,
+      props.deleteLoading !== undefined
+        ? {
+            loading: window.localStorage
+              .getItem('deleteKeys')
+              ?.split(',')
+              ?.includes(recard[props.rowKey as any]),
+            onClick: () => {
+              modal.confirm({
+                okText: '确定',
+                cancelText: '取消',
+                onOk: () => onClickDelte([recard[props.rowKey as any]]),
+                title: `您确认删除这条${affairName}数据吗？`,
+              });
+              // onClickDelte([recard[props.rowKey as any]])
+            },
+            size,
+            danger: true,
+            title: '删除',
+            // cancelText="取消"
+            //   description={`您确认删除这条${affairName}数据吗？`}
+            //   okText="确定"
+            //   okButtonProps={{ loading: props.deleteLoading }}
+            //   onConfirm={() => onClickDelte([recard[props.rowKey as any]])}
+            //   title="删除"
+          }
+        : undefined,
+      {
+        onClick: () => onClickDetail(recard),
+        size,
+        title: '详情',
+      },
+      ...(props.extend ?? []),
+    ].filter((n) => n);
+
+  const actionColumn: ETableColumnProps<T> = useMemo(
+    () => ({
+      title: '操作',
+      dataIndex: 'action',
+      key: 'action',
+      width: width < 570 ? 50 : 250,
+      fixed: 'right',
+      render: (_, recard: any) => {
+        const btns = operationBtms(recard);
+
+        const items = btns.map(
+          (menu) =>
+            ({
+              label: menu?.title,
+              key: menu?.title,
+              onClick: () => menu?.onClick?.(recard),
+            } as any),
+        );
+
+        return width < 570 ? (
+          <Dropdown placement="bottomRight" menu={{ items }}>
+            <Button type="link">
+              {window.localStorage
                 .getItem('deleteKeys')
                 ?.split(',')
-                ?.includes(recard[props.rowKey as any])}
-              size={size}
-            >
-              删除
+                ?.includes(recard[props.rowKey as any]) ? (
+                <LoadingOutlined />
+              ) : (
+                `···`
+              )}
             </Button>
-          </Popconfirm>
+          </Dropdown>
         ) : (
-          ''
-        )}
-        <Button size={size} onClick={() => onClickDetail(recard)}>
-          详情
-        </Button>
-        {props.extend?.map((extend) => (
-          <Button
-            key={extend.title}
-            icon={extend.icon}
-            loading={extend.loading}
-            onClick={() => extend.onClick?.(recard)}
-            type={extend.type}
-          >
-            {extend.title}
-          </Button>
-        ))}
-      </Space>
-    ),
-  };
+          <Space>
+            {btns.map(({ title, ...btn }: any) => (
+              <Button key={title} {...(btn as any)}>
+                {title}
+              </Button>
+            ))}
+          </Space>
+        );
+      },
+    }),
+    [width],
+  );
 
   // 过滤掉需要在表格隐藏的栏目
   const tableColumns = useMemo(() => {
@@ -152,7 +193,7 @@ export function RaeTable<T>({
     return initColumns.find((column) => column.title === '操作')
       ? initColumns
       : initColumns.concat(actionColumn);
-  }, [columns]);
+  }, [actionColumn, columns]);
 
   // 过滤没有conditionType属性的栏目
   const conditionColumns = useMemo(
@@ -213,8 +254,15 @@ export function RaeTable<T>({
         className={props.tableContainerClass}
         style={{ ...style, ...tableContainerStyle }}
       >
-        <Table columns={tableColumns} size={size} {...(props as any)} />
+        <Table
+          columns={tableColumns}
+          size={size}
+          scroll={{ x: 500 }}
+          {...(props as any)}
+        />
       </TableContainer>
+
+      {handle}
 
       {affairContainerType === 'modal' ? (
         <Modal

@@ -1,11 +1,12 @@
-export { useAnimation } from './useAnimation'
-export { useCondition } from './useCondition'
-export { useForm } from './useForm'
-export { useFormItem } from './useFormItem'
-export { useFetch } from './useFetch'
-export { usePage } from './usePage'
-export { useTable } from './useTable'
-export { useTitle } from './useTitle'
-export { useTrigger } from './useTrigger'
-export { useExtendFormItem } from './useExtendFormItem'
-export type { Params, Responsed } from './useFetch'
+export { useAnimation } from './useAnimation';
+export { useCondition } from './useCondition';
+export { useExtendFormItem } from './useExtendFormItem';
+export { useFetch } from './useFetch';
+export type { Params, Responsed } from './useFetch';
+export { useForm } from './useForm';
+export { useFormItem } from './useFormItem';
+export { usePage } from './usePage';
+export { useResize } from './useResize';
+export { useTable } from './useTable';
+export { useTitle } from './useTitle';
+export { useTrigger } from './useTrigger';
