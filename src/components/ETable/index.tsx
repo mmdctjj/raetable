@@ -135,7 +135,7 @@ export function RaeTable<T>({
       title: '操作',
       dataIndex: 'action',
       key: 'action',
-      width: width < 570 ? 50 : 250,
+      width: width < 768 ? 50 : 250,
       fixed: 'right',
       render: (_, recard: any) => {
         const btns = operationBtms(recard);
@@ -149,7 +149,7 @@ export function RaeTable<T>({
             } as any),
         );
 
-        return width < 570 ? (
+        return width < 768 ? (
           <Dropdown placement="bottomRight" menu={{ items }}>
             <Button type="link">
               {window.localStorage
