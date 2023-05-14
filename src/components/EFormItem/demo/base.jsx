@@ -12,7 +12,7 @@ const data = {
   rate: 3,
   slider: 50,
   switch: true,
-  options: 1,
+  select: 1,
   radio: 2,
   checkbox: [1, 2],
   textArea: JSON.stringify(
