@@ -8,7 +8,7 @@ import {
   useResize,
   useTrigger,
 } from 'raetable';
-import React, { ReactNode, useCallback, useEffect } from 'react';
+import React, { ReactNode, useCallback, useEffect, useMemo } from 'react';
 
 export interface EFormProps<T> extends FormItemProps, FormProps {
   /**
@@ -85,6 +85,15 @@ export function EForm<T>({
 }: EFormProps<T>) {
   const [form] = Form.useForm();
 
+  const linkeds = useMemo(
+    () =>
+      columns
+        .filter((column) => !!column.linked)
+        .map((column) => column.linked) as string[],
+    [columns],
+  );
+  useEffect(() => console.log(linkeds), [linkeds]);
+
   const [loading, setLoading] = useTrigger();
 
   const width = useResize();
@@ -131,6 +140,7 @@ export function EForm<T>({
             rules={item.rules ?? []}
           >
             <EFormItem
+              linkeds={linkeds}
               value
               content={item as any}
               onChange={item.onChange}

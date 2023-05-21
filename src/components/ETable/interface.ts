@@ -63,10 +63,10 @@ export interface ETableColumnInterfaceProps {
    */
   rules?: Rule[];
   /**
-   * 这个栏目是否联动
-   * @default false
+   * 这个栏目联动到指定栏目
+   * @default undefined
    */
-  linked?: boolean;
+  linked?: string;
   /**
    *
    */

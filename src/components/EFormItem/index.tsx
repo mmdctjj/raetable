@@ -15,15 +15,26 @@ import {
   TreeSelect,
 } from 'antd';
 import { FORMTYPE, OPERATION } from 'raetable';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGetExtendFormItem } from '../../hooks/useExtendFormItem';
+import { useGetMediator, useMediator } from '../../hooks/useMediator';
 import type { EFormItemProps } from './interface';
 
 export function RaeFormItem<T>(props: EFormItemProps<T>) {
-  const { content, value, onChange, size, type, typeKey } = props;
+  const [isMouted, setIsMouted] = useState(false);
+
+  const { content, value, onChange, linkeds, size, type, typeKey } = props;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { conditionType, affairType, dataIndex, more, ...props__ } = content;
+  const { conditionType, affairType, dataIndex, linked, more, ...props__ } =
+    content;
+
+  useMediator(
+    linkeds?.includes(content.key as string)
+      ? (content.key as string)
+      : undefined,
+    value,
+  );
 
   const props_ = { value, onChange, size, ...props__ };
 
@@ -150,6 +161,18 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
       },
     });
   });
+
+  const isRender = useGetMediator(linked);
+
+  useEffect(() => {
+    if (isMouted) {
+      onChange?.(undefined);
+    }
+  }, [isRender]);
+
+  useEffect(() => {
+    setTimeout(() => setIsMouted(true), 1000);
+  }, []);
 
   if (!content?.[typeKey]) return <></>;
 

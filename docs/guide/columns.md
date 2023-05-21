@@ -72,7 +72,7 @@ const columns = [
 
 ### `Select`配置
 
-如果表单类型是`Select`，那么你还需要提供他的下拉框选项`Select`。类型是`SelectProps`。
+如果表单类型是`Select`，那么你还需要提供他的下拉框选项`option`。类型是`SelectProps`。
 
 ```js {5-8}
 const columns = [
@@ -95,5 +95,31 @@ const columns = [
     ],
   },
   { dataIndex: 'test', title: '测试字段', key: 'test', affairType: 'Input' },
+];
+```
+### 表单联动
+在日常的开发中，你可能会遇到，A栏目的值，需要和B栏目的值联动，最新的版本，已经支持这中需求。
+你可以使用`linked`指定一个字段，当指定栏目的触发`onChange`时，当前栏目会清空当前值，等待新的交互。
+```js {14}
+const columns = [
+  { dataIndex: 'name', title: '姓名', key: 'name', conditionType: 'Input' },
+  {
+    dataIndex: 'age',
+    title: '年龄',
+    key: 'age',
+    conditionType: 'Input',
+    affairType: 'Input',
+  },
+  {
+    dataIndex: 'food',
+    title: '食物',
+    key: 'food',
+    linked: 'age',
+    affairType: 'Select',
+    options: [
+      { value: '1', lable: '牛肉', key: '1' },
+      { value: '2', lable: '羊肉', key: '2' },
+    ],
+  },
 ];
 ```

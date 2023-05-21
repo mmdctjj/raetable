@@ -18,6 +18,10 @@ group: 基础组件
 :::
 <code src="./demo/extend.jsx"></code>
 
+### 表单联动
+你可以使用`linked`指定一个字段，当指定栏目的触发`onChange`时，当前栏目会清空当前值，等待新的交互。
+<code src="./demo/linked.jsx"></code>
+
 ### API
 
 <API EFormItem></API>
