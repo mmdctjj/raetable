@@ -11,11 +11,11 @@ import { ETableProps } from '../ETable/interface';
 
 export interface EPageProps<Record> extends ETableProps<Record> {
   reflash?: number;
-  delAffair?: (data?: Params) => Promise<Responsed<Record>>;
-  addAffair?: (data?: Params) => Promise<Responsed<Record>>;
-  editAffair?: (data?: Params) => Promise<Responsed<Record>>;
+  delAffair?: (data?: Params) => Promise<any>;
+  addAffair?: (data?: Params) => Promise<any>;
+  editAffair?: (data?: Params) => Promise<any>;
   formatList?: (data: Record[]) => Record[];
-  getLists: (data?: Params) => Promise<Responsed<Record[]>>;
+  getLists: (data?: Params) => Promise<any>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
