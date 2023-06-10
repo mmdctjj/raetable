@@ -239,16 +239,20 @@ export function RaeTable<T>({
         titleContainerStyle={titleContainerStyle}
       />
 
-      <ECondition
-        animation={props.animation}
-        columns={conditionColumns}
-        conditionContainerClass={props.conditionContainerClass}
-        conditionContainerStyle={props.conditionContainerStyle}
-        condition={condition}
-        size={size}
-        showConditionOkBtn={props.showConditionOkBtn}
-        onConditionChange={onConditionChange}
-      />
+      {conditionColumns.length ? (
+        <ECondition
+          animation={props.animation}
+          columns={conditionColumns}
+          conditionContainerClass={props.conditionContainerClass}
+          conditionContainerStyle={props.conditionContainerStyle}
+          condition={condition}
+          size={size}
+          showConditionOkBtn={props.showConditionOkBtn}
+          onConditionChange={onConditionChange}
+        />
+      ) : (
+        ''
+      )}
 
       <TableContainer
         className={props.tableContainerClass}
