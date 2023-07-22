@@ -11,6 +11,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import ECondition from '../ECondition';
 import { ETitle } from '../ETitle';
+import ResizeTable from '../ResizeTable';
 import type { ETableColumnProps, ETableProps } from './interface';
 
 const TableContainer = styled.div`
@@ -29,6 +30,7 @@ export function RaeTable<T>({
   backPath = '',
   columns,
   extendAffair,
+  resize = true,
   size = 'middle',
   pageTitle = '',
   onAffairSuccess = () => new Promise(() => {}),
@@ -258,12 +260,21 @@ export function RaeTable<T>({
         className={props.tableContainerClass}
         style={{ ...style, ...tableContainerStyle }}
       >
-        <Table
-          columns={tableColumns}
-          size={size}
-          scroll={{ x: 500 }}
-          {...(props as any)}
-        />
+        {resize ? (
+          <ResizeTable
+            columns={tableColumns}
+            size={size}
+            // scroll={{ x: 500 }}
+            {...(props as any)}
+          />
+        ) : (
+          <Table
+            columns={tableColumns}
+            size={size}
+            scroll={{ x: 500 }}
+            {...(props as any)}
+          />
+        )}
       </TableContainer>
 
       {handle}

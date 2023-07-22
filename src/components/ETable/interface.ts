@@ -72,6 +72,10 @@ export interface ETableColumnInterfaceProps {
    */
   more?: true;
   /**
+   * 是否开启表格宽度自适应
+   */
+  resize?: boolean;
+  /**
    * 监听栏目变化回调函数
    * @param val
    * @returns
@@ -193,6 +197,10 @@ export interface _ETableProps<Record> {
    * 页面标题
    */
   pageTitle?: string;
+  /**
+   * 是否开启表格宽度自适应
+   */
+  resize?: boolean;
   /**
    * 组件尺寸
    * @default middle

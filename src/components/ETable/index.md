@@ -49,6 +49,11 @@ const style = {
 如果你不满意默认的操作栏，可以在`columns`里增加`titile`为操作的栏目
 <code compact="true" src="./demo/action.jsx"></code>
 
+### 表格宽度自适应
+
+通过设置`resize`为`true`开启表格宽度自适应
+<code compact="true" src="./demo/resizeTable.jsx"></code>
+
 ### API
 
 #### ETableProps
