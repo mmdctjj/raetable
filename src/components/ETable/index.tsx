@@ -30,7 +30,7 @@ export function RaeTable<T>({
   backPath = '',
   columns,
   extendAffair,
-  resize = true,
+  resize = false,
   size = 'middle',
   pageTitle = '',
   onAffairSuccess = () => new Promise(() => {}),

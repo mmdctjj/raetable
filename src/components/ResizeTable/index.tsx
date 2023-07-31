@@ -1,12 +1,14 @@
 import { Table, TableProps } from 'antd';
 import React, { useState } from 'react';
-import { Resizable } from 'react-resizable';
+import { Resizable, ResizeCallbackData } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 
 const ResizableTitle = (props: {
   [x: string]: any;
-  onResize: any;
-  width: any;
+  onResize:
+    | ((e: React.SyntheticEvent, data: ResizeCallbackData) => any)
+    | undefined;
+  width: number;
 }) => {
   const { onResize, width, ...restProps } = props;
 
@@ -42,9 +44,9 @@ const ResizeTable = (
       });
     };
 
-  const resizableColumns = columns?.map((col: any, index: any) => ({
+  const resizableColumns = columns?.map((col: any, index: number) => ({
     ...col,
-    onHeaderCell: (column: { width: any }) => ({
+    onHeaderCell: (column: { width: number }) => ({
       width: column.width,
       onResize: handleResize(index),
     }),

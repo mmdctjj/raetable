@@ -28,3 +28,9 @@ features:
     description: 大量默认配置，开箱即用
 
 ---
+
+<p style="text-align: center">
+  个人创作不易，如果对您有帮助，可以请我喝杯可乐吗，大家的支持是我最大的动力
+  <br />
+  <img src="../public/mmdctjj_zsm.png" alt="zsm" width="300px">
+</p>
