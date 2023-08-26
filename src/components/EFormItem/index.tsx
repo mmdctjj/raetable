@@ -2,6 +2,7 @@ import {
   AutoComplete,
   Cascader,
   Checkbox,
+  ColorPicker,
   DatePicker,
   Input,
   InputNumber,
@@ -60,6 +61,10 @@ export function RaeFormItem<T>(props: EFormItemProps<T>) {
         options={content.options}
         {...(props_ as any)}
       />
+    ),
+
+    [FORMTYPE.ColorPicker]: (
+      <ColorPicker disabled={disabled} {...(props_ as any)} />
     ),
 
     [FORMTYPE.DatePicker]: (

@@ -23,4 +23,5 @@ export enum FORMTYPE {
   TimePicker = 'TimePicker',
   Transfer = 'Transfer',
   TreeSelect = 'TreeSelect',
+  ColorPicker = 'ColorPicker',
 }

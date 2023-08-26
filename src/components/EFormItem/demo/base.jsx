@@ -46,6 +46,13 @@ const columns = [
     ],
   },
   {
+    dataIndex: 'colorPicker',
+    key: 'colorPicker',
+    title: 'colorPicker',
+    affairType: 'ColorPicker',
+    showText: true,
+  },
+  {
     dataIndex: 'input',
     key: 'input',
     title: 'input',

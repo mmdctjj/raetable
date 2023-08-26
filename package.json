@@ -1,6 +1,6 @@
 {
   "name": "raetable",
-  "version": "0.7.30",
+  "version": "1.8.26",
   "description": "react antd easy table",
   "license": "MIT",
   "module": "dist/index.js",
@@ -48,7 +48,7 @@
     "@ant-design/icons": "^5.0.1",
     "@types/react-resizable": "^3.0.4",
     "ahooks": "^3.7.7",
-    "antd": "^5.4.6",
+    "antd": "^5.8.4",
     "react-resizable": "^3.0.5",
     "styled-components": "^5.3.10"
   },
