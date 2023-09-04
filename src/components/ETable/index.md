@@ -41,7 +41,7 @@ const style = {
 
 ### 扩展表格
 
-`extend`属性可以扩展表格的操作。你可以通过当前行的行数、行内容，决定显示的名称或者禁用时机
+`extend`属性可以扩展表格的操作。你可以通过当前行的行数、行内容，决定显示的名称或者禁用时机，详细请看`ExtendsProps`API属性。
 <code compact="true" src="./demo/extend.jsx"></code>
 
 ### 接管操作栏
@@ -79,6 +79,14 @@ const style = {
 <API id="_ESelect"></API>
 
 #### ExtendsProps
-<API id="ExtendsProps"></API>
+
+|属性|描述|类型|默认值|
+|---|---|---|---|
+|size|按钮大小|`'middle' \| 'small' \| 'large'`|`--`|
+|title|按钮对应的`htmlText`|`string \| ((recard: T, index: number) => string)`|`--`|
+|loading|按钮加载中状态|`boolean \| ((recard: T, index: number) => boolean)`|`false`|
+|disabled|按钮禁用状态|` ((recard: T, index: number) => boolean)`|`false`|
+|hidden|是否隐藏按钮|`(recard: T, index: number) => boolean`|`--`|
+|onClick|按钮点击事件|`(recard: T, index: number) => void`|``|
 
 
