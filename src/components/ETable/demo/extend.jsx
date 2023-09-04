@@ -189,8 +189,20 @@ export default () => {
       extend={[
         {
           title: '标记',
+          disabled: (_, idx) => idx % 2 === 0,
           onClick: tagRow,
-          loading: tagLoading,
+          loading: () => tagLoading,
+        },
+        {
+          title: (_, idx) => (idx % 2 === 0 ? '启用' : '关闭'),
+          disabled: () => false,
+          loading: () => tagLoading,
+        },
+        {
+          title: '测试',
+          disabled: () => false,
+          loading: () => tagLoading,
+          hidden: (_, idx) => idx % 2 !== 0,
         },
       ]}
       dataSource={dataSource}

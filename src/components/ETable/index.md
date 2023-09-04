@@ -41,7 +41,7 @@ const style = {
 
 ### 扩展表格
 
-`extend`属性可以扩展表格的操作
+`extend`属性可以扩展表格的操作。你可以通过当前行的行数、行内容，决定显示的名称或者禁用时机
 <code compact="true" src="./demo/extend.jsx"></code>
 
 ### 接管操作栏

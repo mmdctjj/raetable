@@ -91,9 +91,10 @@ export function RaeTable<T>({
     [
       props.editLoading !== undefined
         ? {
-            loading: false,
+            loading: () => false,
             onClick: () => onClickEdit(recard),
             size,
+            hidden: () => false,
             type: 'primary',
             title: '编辑',
           }
@@ -127,6 +128,8 @@ export function RaeTable<T>({
       {
         onClick: () => onClickDetail(recard),
         size,
+        loading: () => false,
+        hidden: () => false,
         title: '详情',
       },
       ...(props.extend ?? []),
@@ -139,15 +142,17 @@ export function RaeTable<T>({
       key: 'action',
       width: width < 768 ? 50 : 250,
       fixed: 'right',
-      render: (_, recard: any) => {
-        const btns = operationBtms(recard);
+      render: (_, recard: any, index: number) => {
+        const btns = operationBtms(recard).filter(
+          (n) => !n?.hidden?.(recard, index),
+        );
 
         const items = btns.map(
           (menu) =>
             ({
               label: menu?.title,
               key: menu?.title,
-              onClick: () => menu?.onClick?.(recard),
+              onClick: () => menu?.onClick?.(recard, index),
             } as any),
         );
 
@@ -167,8 +172,18 @@ export function RaeTable<T>({
         ) : (
           <Space>
             {btns.map(({ title, ...btn }: any) => (
-              <Button key={title} {...(btn as any)}>
-                {title}
+              <Button
+                key={btn.key}
+                {...(btn as any)}
+                loading={
+                  typeof btn.loading === 'boolean'
+                    ? btn.loading
+                    : btn.loading?.(recard, index)
+                }
+                hidden={btn.hidden?.(recard, index)}
+                disabled={btn.disabled?.(recard, index)}
+              >
+                {typeof title === 'function' ? title(recard, index) : title}
               </Button>
             ))}
           </Space>

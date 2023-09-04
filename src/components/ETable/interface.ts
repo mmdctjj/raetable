@@ -1,9 +1,9 @@
 import type { DefaultOptionType } from 'antd/es/Select';
-import { ButtonProps } from 'antd/es/button';
 import { FormItemProps, FormProps, Rule } from 'antd/es/form';
 import type { ColumnType, TableProps } from 'antd/es/table';
 import { OPERATION } from 'raetable/enum';
 import type { Dispatch, ReactNode } from 'react';
+import React from 'react';
 import { CSSProperties } from 'styled-components';
 import { ETitleProps } from '../ETitle';
 
@@ -100,6 +100,16 @@ export type ETableColumnProps<T> = ETableColumnInterfaceProps &
   FormItemProps &
   FormProps;
 
+export interface ExtendsProps<T> {
+  key?: React.Key;
+  size?: 'middle' | 'small' | 'large';
+  title?: string | ((recard: T, index: number) => string);
+  loading?: boolean | ((recard: T, index: number) => boolean);
+  disabled?: (recard: T, index: number) => boolean;
+  hidden?: (recard: T, index: number) => boolean;
+  onClick?: (recard: T, index: number) => void;
+}
+
 export interface _ETableProps<Record> {
   /**
    * 是否开启动画
@@ -158,7 +168,7 @@ export interface _ETableProps<Record> {
   /**
    * 表格编辑栏扩展
    */
-  extend?: ButtonProps[];
+  extend?: ExtendsProps<Record>[];
   /**
    * 业务扩展
    */
