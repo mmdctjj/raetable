@@ -19,6 +19,7 @@ export type {
   ESelectProps,
   ETableColumnProps,
   ETableProps,
+  ExtendsProps,
   _ETableProps,
 } from './components/ETable/interface';
 export { default as __ETableProps } from './components/ETableProps';
