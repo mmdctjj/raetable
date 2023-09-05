@@ -83,6 +83,7 @@ const style = {
 |属性|描述|类型|默认值|
 |---|---|---|---|
 |size|按钮大小|`'middle' \| 'small' \| 'large'`|`--`|
+|type|按钮类型|`primary \| dashed \| link \| text \| default`|`default`|
 |title|按钮对应的`htmlText`|`string \| ((recard: T, index: number) => string)`|`--`|
 |loading|按钮加载中状态|`boolean \| ((recard: T, index: number) => boolean)`|`false`|
 |disabled|按钮禁用状态|` ((recard: T, index: number) => boolean)`|`false`|
