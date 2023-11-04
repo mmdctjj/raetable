@@ -13,9 +13,11 @@ export interface EPageProps<Record> extends ETableProps<Record> {
   reflash?: number;
   delAffair?: (data?: Params) => Promise<any>;
   addAffair?: (data?: Params) => Promise<any>;
+  batchDelAffair?: (data?: Params) => Promise<any>;
   editAffair?: (data?: Params) => Promise<any>;
   formatList?: (data: Record[]) => Record[];
   getLists: (data?: Params) => Promise<any>;
+  onModalClose?: () => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,8 +31,10 @@ export function Epage<T>({
   addAffair,
   delAffair,
   editAffair,
+  batchDelAffair,
   formatList = (data: T[]) => data,
   getLists,
+  onModalClose,
   // formatList,
   ...props
 }: EPageProps<T>) {
@@ -39,6 +43,10 @@ export function Epage<T>({
   );
 
   const [addLoading, addFn, addRes] = useFetch(addAffair ?? initPromise<T>);
+
+  const [batchDelLoading, batchDelFn, batchDelRes] = useFetch(
+    batchDelAffair ?? initPromise<T>,
+  );
 
   const [delLoading, delFn, delRes] = useFetch(delAffair ?? initPromise<T>);
 
@@ -59,15 +67,15 @@ export function Epage<T>({
   };
   // 新增、编辑点击确认后的请求处理
   const onAffairSuccess = useCallback(
-    (value: T, type: OPERATION.ADD | OPERATION.EDIT) => FN[type](value),
+    (value: T, type: OPERATION.ADD | OPERATION.EDIT) =>
+      FN[type](value).then(() => onModalClose?.()),
     [getFn, params],
   );
 
   // 点击确认删除的请求处理
-  const onClickDeleteButton = useCallback(
-    (keys: any[]) => delFn(keys).then((res) => console.log(res)),
-    [],
-  );
+  const onClickDeleteButton = useCallback((keys: any[]) => delFn(keys), []);
+
+  const onBatchDelete = (keys: any[]) => batchDelFn(keys);
 
   useEffect(() => {
     getFn(params);
@@ -75,16 +83,19 @@ export function Epage<T>({
 
   useEffect(() => {
     if (addRes || delRes || editRes) getFn(params);
-  }, [addRes, delRes, editRes]);
+  }, [addRes, batchDelRes, delRes, editRes]);
 
   return (
     <ETable
       addLoading={addAffair ? addLoading : undefined}
+      batchDeleteLoading={delAffair ? batchDelLoading : undefined}
       deleteLoading={delAffair ? delLoading : undefined}
       editLoading={editAffair ? editLoading : undefined}
       dataSource={dataSource}
       loading={getLoading}
       onAffairSuccess={onAffairSuccess}
+      onBatchDelete={onBatchDelete}
+      onModalClose={onModalClose}
       onClickDeleteButton={onClickDeleteButton}
       onConditionChange={onConditionChange}
       {...props}

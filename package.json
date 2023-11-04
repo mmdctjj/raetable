@@ -1,6 +1,6 @@
 {
   "name": "raetable",
-  "version": "1.9.5",
+  "version": "1.11.4",
   "description": "react antd easy table",
   "license": "MIT",
   "module": "dist/index.js",

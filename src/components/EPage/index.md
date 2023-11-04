@@ -179,6 +179,8 @@ const editData = () => {
   });
 };
 
+const onModalClose = () => {console.log('closed')}
+
 export default () => (
   <EPage
     affairName="靓仔"
@@ -187,8 +189,14 @@ export default () => (
     delAffair={delData}
     editAffair={editData}
     getLists={getData}
+    showBatch={true}
+    batchDelAffair={delData}
+    onModalClose={onModalClose}
     pageTitle="靓仔管理"
     rowKey="name"
+    rowSelection={{
+      type: 'Checkbox',
+    }}
   />
 );
 ```
@@ -386,6 +394,7 @@ export default () => {
     getLists: getData,
     pageTitle: '靓仔管理',
     rowKey: 'name',
+    onModalClose: () => console.log('closed')
   });
 
   return <Dom />;
@@ -402,4 +411,5 @@ export default () => {
 |delAffair|删除业务接口|(data?: Params) => Promise<Responsed<any>>|
 |editAffair|编辑业务接口|(data?: Params) => Promise<Responsed<any>>|
 |formatList|格式化列表函数|(data: any[]) => []|
+|onModalClose|业务弹窗关闭时的回调函数|() => void|
 |getLists|获取列表接口|(data?: Params) => Promise<Responsed<any[]>>|

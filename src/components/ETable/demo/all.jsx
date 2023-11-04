@@ -188,6 +188,7 @@ export default () => {
       onConditionChange={fetch}
       onClickDeleteButton={onClickDeleteButton}
       pageTitle="靓仔管理"
+      showBatch={true}
       rowSelection={{
         type: 'Checkbox',
       }}

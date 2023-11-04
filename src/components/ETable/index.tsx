@@ -1,5 +1,15 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { Button, Drawer, Dropdown, Modal, Space, Table } from 'antd';
+import { useToggle } from 'ahooks';
+import {
+  Alert,
+  Button,
+  Drawer,
+  Dropdown,
+  Modal,
+  Popconfirm,
+  Space,
+  Table,
+} from 'antd';
 import {
   EForm,
   OPERATION,
@@ -18,6 +28,11 @@ const TableContainer = styled.div`
   background-color: @primary-color;
 `;
 
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: right;
+`;
+
 const style = {
   background: '#fff',
   padding: 15,
@@ -28,12 +43,16 @@ export function RaeTable<T>({
   affairContainerType = 'modal',
   affairName = '',
   backPath = '',
+  batchDeleteLoading,
   columns,
   extendAffair,
   resize = false,
   size = 'middle',
   pageTitle = '',
   onAffairSuccess = () => new Promise(() => {}),
+  onBatchDelete,
+  onModalClose = () => {},
+  showBatch,
   onConditionChange: onCondChange,
   tableContainerStyle = {},
   titleContainerStyle = {},
@@ -56,20 +75,27 @@ export function RaeTable<T>({
     OPERATION.ADD | OPERATION.EDIT | OPERATION.DISPLAY
   >(OPERATION.ADD);
 
+  const [rowSelects, setRowSelects] = useState([]);
+
+  const [openBatch, { toggle }] = useToggle();
+
   // 点击编辑按钮
   const onClickEdit = useCallback((recard: T) => {
+    toggle();
     setOperationType(OPERATION.EDIT);
     setOperationData(recard);
     setOpen();
   }, []);
 
   const onClickDetail = useCallback((recard: T) => {
+    toggle();
     setOperationType(OPERATION.DISPLAY);
     setOperationData(recard);
     setOpen();
   }, []);
 
   const onClickDelte = useCallback((keys: number[] | string[]) => {
+    toggle();
     window.localStorage.setItem('deleteKeys', keys.join(','));
     props
       .onClickDeleteButton?.(keys)
@@ -78,6 +104,7 @@ export function RaeTable<T>({
   }, []);
 
   const onClickAdd = useCallback(() => {
+    toggle();
     setOperationType(OPERATION.ADD);
     setOperationData({} as T);
     setOpen();
@@ -224,9 +251,15 @@ export function RaeTable<T>({
     [columns],
   );
 
-  const onCloseAffair = useCallback(() => setOpen(), []);
+  const onCloseAffair = useCallback(() => {
+    onModalClose?.();
+    setOpen();
+  }, []);
 
-  const onFinishAffair = useCallback(() => setOpen(), []);
+  const onFinishAffair = useCallback(() => {
+    onModalClose?.();
+    setOpen();
+  }, []);
 
   const onSuccessAffair = (value: T) => {
     return operationType === OPERATION.DISPLAY
@@ -275,12 +308,54 @@ export function RaeTable<T>({
         className={props.tableContainerClass}
         style={{ ...style, ...tableContainerStyle }}
       >
+        {rowSelects.length ? (
+          <Alert
+            style={{ marginBottom: 14 }}
+            type="error"
+            message={
+              <FlexContainer>
+                <Space>
+                  <>当前已选择 {rowSelects.length} 条数据</>
+                  <Popconfirm
+                    title={`确认删除所选${affairName}吗？`}
+                    onCancel={toggle}
+                    onPopupClick={toggle}
+                    okButtonProps={{
+                      loading: batchDeleteLoading,
+                      onClick: () =>
+                        onBatchDelete?.(rowSelects).then(() => {
+                          toggle();
+                          setRowSelects([]);
+                        }),
+                    }}
+                    open={openBatch}
+                  >
+                    <Button danger onClick={toggle}>
+                      删除
+                    </Button>
+                  </Popconfirm>
+                </Space>
+              </FlexContainer>
+            }
+          />
+        ) : (
+          ''
+        )}
         {resize ? (
           <ResizeTable
             columns={tableColumns}
             size={size}
             // scroll={{ x: 500 }}
             {...(props as any)}
+            rowSelection={
+              showBatch
+                ? {
+                    type: props.rowSelection?.type ?? 'checkbox',
+                    selectedRowKeys: rowSelects,
+                    onChange: setRowSelects,
+                  }
+                : undefined
+            }
           />
         ) : (
           <Table
@@ -288,6 +363,15 @@ export function RaeTable<T>({
             size={size}
             scroll={{ x: 500 }}
             {...(props as any)}
+            rowSelection={
+              showBatch
+                ? {
+                    type: props.rowSelection?.type ?? 'checkbox',
+                    selectedRowKeys: rowSelects,
+                    onChange: setRowSelects,
+                  }
+                : undefined
+            }
           />
         )}
       </TableContainer>

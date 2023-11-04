@@ -156,6 +156,16 @@ export interface _ETableProps<Record> {
    */
   addLoading?: boolean;
   /**
+   * 批量删除时的加载状态
+   * @default undefined
+   */
+  batchDeleteLoading?: boolean;
+  /**
+   * 控制批量删除提示的开关
+   * @default undefined
+   */
+  batchOpen?: boolean;
+  /**
    * 编辑时加载状态，如果缺失布尔类型时，则不会显示编辑按钮
    * @default undefined
    */
@@ -193,6 +203,12 @@ export interface _ETableProps<Record> {
     values: Record,
     type: OPERATION.ADD | OPERATION.EDIT,
   ) => Promise<any>;
+  onBatchDelete?: (keys: any[]) => Promise<any>;
+  /**
+   * 当点击弹窗的关闭按钮时的回调函数
+   * @returns
+   */
+  onModalClose?: () => void;
   /**
    * 条件触发时回调
    */
@@ -241,6 +257,10 @@ export interface _ETableProps<Record> {
    * @default true
    */
   showBack?: boolean;
+  /**
+   * 是否展示批量操作区域，你可以根据实际批量删除
+   */
+  showBatch?: boolean;
   // title?: string,
   /**
    * 表格容器类名
