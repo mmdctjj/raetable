@@ -28,6 +28,14 @@ order: 1
 
 现在大多数组件添加在 `Mcp` 服务 `tool` 了，方便快速添加到 `cursor` `vs code` 等支持 `Mcp` 服务的编辑器中！
 
+在本地运行时，可以添加启动地址：`http://localhost:8000/sse` 到编辑器 `Mcp` 服务中，然后就可以在编辑器里使用 对应的 `tool`
+
+![alt text](../../public/image1.png)
+
+再次询问之后：
+
+![alt text](../../public/image2.png)
+
 ### `raETable`适用场景
 
 这个组件库诞生的环境是 B 端业务场景，每个页面都是表格`Table`、条件`Form`、业务（新增、编辑，我们统称为业务）`Form`组成，虽然每个页面的数据不同，但是逻辑大都相似：

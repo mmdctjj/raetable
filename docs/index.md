@@ -11,7 +11,7 @@ features:
   - title: 继承性配置
     emoji: 💎
     description: 大多数配置项继承自antd，只有少量业务配置项，易学易用
-  - title: 继承性配置
+  - title: 内置 Mcp 服务
     emoji: 🚗
     description: 组件内置 Mcp 服务，方便对接 AI 编辑器
   - title: 低成本开发
