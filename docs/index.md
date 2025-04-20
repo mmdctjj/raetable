@@ -11,9 +11,12 @@ features:
   - title: 继承性配置
     emoji: 💎
     description: 大多数配置项继承自antd，只有少量业务配置项，易学易用
+  - title: 继承性配置
+    emoji: 🚗
+    description: 组件内置 Mcp 服务，方便对接 AI 编辑器
   - title: 低成本开发
     emoji: 🌈
-    description: 一个option可以生成一个B端页面，且包含增删改查基本功能
+    description: 一个option可以生成一个B端页面，包含增删改查基本功能
   - title: 支持使用hook生成component
     emoji: 🚀
     description: 所有组件支持使用对应的hook生成

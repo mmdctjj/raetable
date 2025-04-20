@@ -6,6 +6,8 @@ export default defineConfig({
   outputPath: 'docs-dist',
   apiParser: {},
   base: 'raetable',
+  // plugins: ['./plugins/mcp.ts'],
+  plugins: ['@components-mcp-plugins/dumi-plugin'],
   favicons: [isProd ? '/raetable/favicon.ico' : '/favicon.ico'],
   metas: [
     { name: 'keywords', content: 'raetable' },
